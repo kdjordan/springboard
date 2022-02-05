@@ -1,8 +1,8 @@
 let one = document.getElementById('container')
 let two = document.querySelector('#container')
 let three = document.querySelectorAll('second')
-let four = document.querySelector('ol>.third')
-let five = document.getElementById('container')
+let four = document.querySelector('ol .third')
+let five = document.getElementById('#container')
 // five.innerText =  'Hello'
 let six = document.querySelector('.footer')
 //six
