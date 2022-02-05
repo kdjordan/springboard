@@ -12,6 +12,6 @@ function countDown(limit) {
         }
     }, 1000)
 }
-countDown(0)
+countDown(4)
 
 
