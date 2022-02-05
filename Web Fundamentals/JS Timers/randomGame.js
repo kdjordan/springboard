@@ -1,3 +1,4 @@
+//to  execute function run node randomGame.js
 function  randomGame() {
     let counter = 0
     let randomInterval = setInterval(function() {

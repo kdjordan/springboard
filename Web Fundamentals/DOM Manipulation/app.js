@@ -1,18 +1,4 @@
-//Exercise 1
-// let counter = 40
-// console.log(counter)
-// function printNum() {
-//     if(counter == 0) {
-//         return
-//     } else {
-//         console.log(counter)
-//         counter--
-//     }
-// }
 
-// setInterval(printNum, 500)
-
-//Color generator
 let r, g, b, width = 510, height = 510
 
 onresize = function(e) {
