@@ -17,13 +17,13 @@
     max-width: 1200px;
     margin: 0 auto;
     margin-top: 5rem;
+    line-height: 1.5;
  }
 
  h1 {
      text-align: center;
      margin: 0 auto;
-     margin-bottom: 4rem;
-     padding-bottom: 1rem;;
+     /* margin-bottom: 4rem; */
      color: var(--secondary);
      border-bottom: 2px solid var(--secondary);
  }
@@ -63,12 +63,50 @@
      align-items: center;
  }
 
- section h3 {
-     margin: 2rem 0;
+ .todo-list {
+     border-top: 2px solid var(--secondary);
+ }
+
+ .todo-list__top {
      color: var(--secondary);
+     margin: 2rem;
+     text-align: center;
  }
 
  ul li {
-     list-style-type: none;
+    cursor: pointer;
+    list-style-type: none;
      margin: .2rem 0;
+ }
+
+ ul div {
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+     /* border: 1px solid red; */
+     min-width: 7rem;
+ }
+
+ ul {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: space-between;
+     /* border: 1px solid red; */
+ }
+
+ .completed {
+    text-decoration: line-through;
+    text-decoration-color: var(--secondary);
+    text-decoration-thickness: 3px;
+    color: var(--secondary);
+ }
+
+ span {
+     cursor: pointer;
+     transition: all .4s ease;
+ }
+
+ span:hover {
+    color: red;
  }
