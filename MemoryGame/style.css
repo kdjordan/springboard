@@ -1,0 +1,48 @@
+body {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.number-display {
+  font-size: 24px;
+  text-align: center;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.top-buttons {
+  margin: 0 auto;
+  margin-bottom: 2rem;
+}
+
+.top-stats {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#game {
+  display: flex;
+  max-width: 80rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#game div {
+  border: 1px solid black;
+  min-width: 15%;
+  height: 200px;
+  margin: 20px;
+}
+
+.rotate-div {
+  transform: rotateY(180deg);
+}
