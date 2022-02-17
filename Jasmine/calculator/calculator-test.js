@@ -1,14 +1,37 @@
+describe('Test loan calculator tests with set-up and teardown', () => {
+    beforeEach(() => {
+        document.getElementById("loan-amount").value = 250000
+        document.getElementById("loan-years").value = 30
+        document.getElementById("loan-rate").value = 3.8
+    }) 
 
-it('should calculate the monthly rate correctly', function () {
-  expect(calculateMonthlyPayment({rate: 3.8, years: 30, amount: 250000})).toEqual("79166.67");
-});
+    it('should update DOM with monthly payment', () => {
+        update()
+        expect(document.getElementById("monthly-payment").innerText).toEqual('$1164.89')
+    })
 
-it('should not pass and let user know that an input field is missing', function () {
-  expect(calculateMonthlyPayment({rate: '', years: 30, amount: 250000})).toEqual('An input field is blank');
-});
+    it('calculate monthly payment when values is fully populated', () => {
+        let values = getCurrentUIValues()
+        expect(calculateMonthlyPayment(values)).toEqual('1164.89')
+    })
 
-// it("should return a result with 2 decimal places", function() {
-//   // ..
-// });
+    it('calculate monthly payment when values is fully populated', () => {
+        let values = getCurrentUIValues()
+        values.rate = ''
+        expect(calculateMonthlyPayment(values)).toEqual('An input field is blank')
+    })
 
-/// etc
+    it('should retrieve values from form', () => {
+        expect(document.getElementById("loan-amount").value).toEqual('250000')
+        expect(document.getElementById("loan-years").value).toEqual('30')
+        expect(document.getElementById("loan-rate").value).toEqual('3.8')
+    })
+
+
+    afterEach(() => {
+        document.getElementById("loan-amount").value = 0
+        document.getElementById("loan-years").value = 0
+        document.getElementById("loan-rate").value = 0
+        document.getElementById("monthly-payment").innerText = ''
+    })
+})

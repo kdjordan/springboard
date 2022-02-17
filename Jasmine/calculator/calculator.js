@@ -1,7 +1,7 @@
 window.addEventListener('DOMContentLoaded', function() {
   const form = document.getElementById("calc-form");
   if (form) {
-    setupIntialValues();
+    // setupIntialValues();
     form.addEventListener("submit", function(e) {
       e.preventDefault();
       update();
@@ -42,15 +42,15 @@ function calculateMonthlyPayment(values) {
   if(values.rate === '' || values.years === '' || values.amount === '') {
     return 'An input field is blank'
   } else {
-    let i = values.rate/12
-    let n = values.years*12
-    let p = values.amount
-    return monthlyPayment = ((p * i)/(1-(Math.pow((1+i),-n)))).toFixed(2).toString()
+    let i = values.rate/100/12 
+    let n = values.years*12 
+    let p = values.amount 
+    return monthlyPayment = ((p * i)/(1-((1+i)**(-n)))).toFixed(2)
   }
 }
 
 // Given a string representing the monthly payment value,
 // update the UI to show the value.
 function updateMonthly(monthly) {
-  document.getElementById("monthly-payment").innerText = monthly
+  document.getElementById("monthly-payment").innerText = '$' + monthly
 }
