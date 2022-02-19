@@ -1,0 +1,30 @@
+ES5 Global Constants
+var PI = 3.14;
+PI = 42; // stop me from doing this!
+
+ES2015 Global Constants
+/* Write an ES2015 Version */
+//answer
+const PI = 3.14
+
+Quiz
+What is the difference between var and let?
+Var and let differ in how their scoping is handled. 
+With var the value is attached to the window object and thus is globally scoped if outside of a code block.
+Var is function scoped while let is block scoped.
+
+What is the difference between var and const?
+Var values can be reassigned and by default are fucntion scoped.
+Var values are also attached to the window object.
+Const values cannot be changed and are block scoped.
+
+What is the difference between let and const?
+Let values can be reassigned.
+Const values can never be changed or updated.
+Both are block scoped.
+
+What is hoisting?
+Hoisting is taking a variable definition and 'bringing it to the top of the page'.
+This allows you to refer to a variable before it has been written within the code (as long as it has been declared), when using var of course.
+It is important to note that only the declaration is hoisted, not any initailization.
+
