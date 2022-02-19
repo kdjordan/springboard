@@ -8,7 +8,7 @@ describe("Servers test (with setup and tear-down)", () => {
     expect(Object.keys(allServers).length).toEqual(1)
   })
 
-  it('will not add name to allServers object', () => {
+  it('will not add blank name to allServers object', () => {
     document.getElementById('serverName').value = ''
     submitServerInfo()
     expect(Object.keys(allServers).length).toEqual(0)

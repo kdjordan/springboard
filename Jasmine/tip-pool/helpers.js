@@ -8,7 +8,6 @@ function sumPaymentTotal(type) {
 
     total += Number(payment[type]);
   }
-
   return total;
 }
 

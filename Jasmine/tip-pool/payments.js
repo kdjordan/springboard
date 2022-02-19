@@ -15,12 +15,11 @@ function submitPaymentInfo(evt) {
   if (evt) evt.preventDefault(); // when running tests there is no event
 
   let curPayment = createCurPayment();
-
+  
   if (curPayment) {
     paymentId += 1;
 
     allPayments['payment' + paymentId] = curPayment;
-
     appendPaymentTable(curPayment);
     updateServerTable();
     updateSummary();

@@ -23,12 +23,10 @@ describe("Payments test (with setup and tear-down)", function() {
         let curPayment = createCurPayment()
         allPayments['payment1'] = curPayment
         appendPaymentTable(curPayment)
-        // console.log(allPayments)
         
         let paymentTable = document.querySelectorAll('#paymentTable tbody tr td')
         console.log(paymentTable)
         expect(paymentTable.length).toEqual(3)
-        // expect(paymentTable[0].innerText).toEqual('$100.00')
         
     });
 
