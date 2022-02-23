@@ -14,4 +14,4 @@ function solution(num){
     return roman;
   }
 
-  console.log(solution(8))
+  
