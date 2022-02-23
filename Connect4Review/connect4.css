@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+/*simple reset*/
+*, *:before, *:after {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(236,226,226);
+  background: radial-gradient(circle, rgba(236,226,226,1) 0%, rgba(113,115,120,1) 100%);
+  max-width: 1024px;
+  height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: 'Bubblegum Sans', cursive;
+  /* justify-content: center; */
+}
+
+#top {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4rem auto;
+}
+
+#top > div {
+  font-size: 1.5rem;
+}
+
+h1 {
+  color: black;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 4rem;
+  text-align: center;
+  margin-bottom: 2rem;;
+}
+
+#column-top {
+  cursor: pointer;
+}
+
+/* game board table */
+
+#board td {
+  width: 50px;
+  height: 50px;
+  /* border: solid 1px #666; */
+  border: solid 1px black;
+}
+
+/* pieces are div within game table cells: draw as colored circles */
+
+.piece {
+  /* TODO: make into circles */
+  margin: 5px;
+  width: 80%;
+  height: 80%;
+  display: block;
+  border-radius: 50%;
+}
+
+/* TODO: make pieces red/blue,  depending on player 1/2 piece */
+.player1 {
+  background-color: blue;
+}
+
+.player2 {
+  background-color: red;
+}
+
+/* column-top is table row of clickable areas for each column */
+
+#column-top td {
+  border: dashed 1px black;
+  transition: all .4s ease;
+}
+
+#column-top td:hover {
+  background-color: gold;
+}
