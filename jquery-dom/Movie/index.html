@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+  <link rel="stylesheet"
+        href="https://unpkg.com/bootstrap/dist/css/bootstrap.css">
+  <link rel="stylesheet"
+        href="style.css">
+
+</head>
+
+<body>
+<div class="container">
+  <h1 id="title" class="text-center">Movie Reviews</h1>
+  <div class="divider"></div>
+  <div class="row d-flex">
+    <form class="flex-column" id="movie-form">
+      <div>
+        <label for="movieName">MOVIE NAME 
+          <input type="text" id="movieName" />
+        </label>
+        </div>  
+        <div>
+          <label for="movieRating">RATING &bigstar;
+            <input id="movieRating" type="number" min="0" max="5" value="0">
+          </label>
+          <button id="addBtn">ADD MOVIE</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="container">
+    <div class="divider mt-3"></div>
+    <h3 class="mt-3 mb-3">CURRENT REVIEWS</h3>
+    <div class="divider"></div>
+    <table class="movie-list mt-5" >
+      <thead>
+        <tr>
+          <td>REMOVE</td>
+          <td>TITLE</td>
+          <td>RATING</td>
+        </tr>
+      </thead>
+      <tbody>
+      </tbody>
+    </table>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="app.js">
+  // Add your code here!
+  
+</script>
+</body>
+
+</html>
