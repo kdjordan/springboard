@@ -83,7 +83,6 @@ $("#search-form").on("submit", async function handleSearch (evt) {
   $("#episodes-area").hide();
 
   let shows = await searchShows(query);
-  console.log('click ran')
   populateShows(shows);
 });
 
@@ -114,6 +113,7 @@ function populateEpisodes(eps) {
 
 $("#shows-list").on("click", async function handleEpisodeClick (evt) {
   evt.preventDefault();
+  $('#search-query').val('')
   $('#episodes-list').empty()
   getEpisodes(evt.target.id)
 });
