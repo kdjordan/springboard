@@ -7,3 +7,5 @@ def list_check(lst):
         >>> list_check([[1], "nope"])
         False
     """
+    return all(isinstance(el, list) for el in lst)
+
