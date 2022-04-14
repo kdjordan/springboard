@@ -4,8 +4,6 @@ from wordfinder import *
 
 sp = SpecialWordFinder('special_words.txt')
 
-# for x in range(5):
-#     print(sp.random())
 
 # finder = WordFinder("words.txt")
 #

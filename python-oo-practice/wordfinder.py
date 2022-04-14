@@ -44,11 +44,14 @@ class WordFinder:
 
 
 class SpecialWordFinder(WordFinder):
+    """Use polluted file - clean out #s and blank lines
 
+    >>> special = SpecialWordFinder("special_words.txt")
+    11 words read
+    In special we read 5 cleaned words
+
+    """
     def __init__(self, file):
         super().__init__(file)
         self.word_list = clean_words(super().word_list())
-        print(f"In special we read {len(self.word_list)} words")
-
-
-
+        print(f"In special we read {len(self.word_list)} cleaned words")
