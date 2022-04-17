@@ -30,7 +30,6 @@ def div():
 
 @app.route('/math/<op>')
 def math(op):
-    print(op)
     maths = {
         'add': operations.add(int(request.args['a']), int(request.args['b'])),
         'sub': operations.sub(int(request.args['a']), int(request.args['b'])),
