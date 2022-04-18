@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect
+from flask import Flask, request, render_template, redirect, flash
 from flask_debugtoolbar import DebugToolbarExtension
 from surveys import *
 
@@ -27,7 +27,12 @@ def index():
 
 @app.route('/questions/<int:num>')
 def question(num):
-    """checks to see if we are at the end of the survey - if not renders the next question"""
+    """checks to see if we are at the end of the survey - if not renders the next question
+        also makes sure user isn't skipping any questions by tracking the q_index
+    """
+    if num != len(RESPONSES) and num != 0:
+        num = len(RESPONSES)
+        flash('Please advance one question at a time')
     if num <= len(questions)-1:
         return render_template('questions.html', num=num, q=questions[num].question, choices=questions[num].choices, length=len(questions))
     else:
@@ -46,7 +51,7 @@ def answers():
 @app.route('/thanks')
 def thanks():
     """redirects to thank you page at end of survey"""
-    return render_template('thanks.html')
+    return render_template('thanks.html', res=RESPONSES)
 
 
 

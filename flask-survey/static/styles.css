@@ -13,6 +13,12 @@ body {
     /* grid-auto-flow: column; */
     height: 40vh;
 }
+
+h2, h4 {
+    text-align: center;
+    margin: .5rem 0;
+}
+
 .q-form input {
     margin: .5rem 0;
 }
@@ -22,7 +28,20 @@ body {
     text-transform: uppercase;
 }
 
+.home-btn {
+    margin-top: 2rem;
+    margin-left: 40%;
+}
+
 a {
     text-decoration: none;
     color: black;
+}
+
+.msg {
+    color:white;
+    background-color:red;
+    padding: .2rem .4rem;
+    border-radius: 5px;
+
 }
