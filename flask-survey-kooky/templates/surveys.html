@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block title %}Welcome..{% endblock %}
+{% block heading %}<h1>Survey</h1>{% endblock %}
+
+{% block content %}
+<section class="main">
+    <h2>{{title}}</h2>
+    <h4>{{instruction}}</h4>
+    <div>
+        <button class="submit-btn home-btn"><a href="/questions/0">START</a></button>
+    </div>
+
+</section>
+{% endblock %}
