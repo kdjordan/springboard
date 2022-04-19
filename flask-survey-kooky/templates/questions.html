@@ -6,9 +6,9 @@
 <div>
     <p>{{q}}</p>
     <form action="/answers" method="post" class="q-form">
-        <input type="radio" id="q-{{choices[0]}}" name="q" value="{{choices[0]}}">
+        <input type="radio" id="q-{{choices[0]}}" name="answer" value="{{choices[0]}}">
         <label for="q-{{choices[0]}}">{{choices[0]}}</label><br>
-        <input type="radio" id="q-{{choices[1]}}" name="q" value="{{choices[1]}}">
+        <input type="radio" id="q-{{choices[1]}}" name="answer" value="{{choices[1]}}">
         <label for="q-{{choices[1]}}">{{choices[1]}}</label><br>
         <input type="hidden"  name="index" value="{{num}}">
         <input type="submit" value="Submit" class="submit-btn">
