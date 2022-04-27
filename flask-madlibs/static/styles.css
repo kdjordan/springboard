@@ -1,0 +1,46 @@
+*, *:before, *:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+section {
+    margin-top: 4rem;
+    margin-left: 4rem;
+}
+
+.navbar {
+    background-color: black;
+    padding: 14px 16px;
+}
+.navbar a {
+    text-decoration: none;
+    color: white;
+}
+
+p {
+    margin-top: 2rem;
+    font-size: 1.5rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+label {
+    margin: 1rem 0;
+}
+
+button {
+    width: 15%;
+    cursor: pointer;
+    transition: all .4s ease.
+}
+
+button:hover {
+    filter: opacity(50%);
+}
+
