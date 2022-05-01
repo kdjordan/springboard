@@ -36,7 +36,7 @@ INSERT INTO  doctors_patients (patientid, doctorid) VALUES (1, 2);
 INSERT INTO  doctors_patients (patientid, doctorid) VALUES (1, 3);
 INSERT INTO  doctors_patients (patientid, doctorid) VALUES (2, 3);
 
-SELECT CONCAT(p.first_name, p.last_name), dis.name
+SELECT CONCAT(p.first_name, ' ', p.last_name), dis.name
 FROM patients as p
 JOIN diseases_patients as d 
 ON p.id = d.patientid
