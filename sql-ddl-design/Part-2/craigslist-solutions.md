@@ -39,8 +39,13 @@ INSERT INTO categories (cat_name) VALUES ('for sale');
 INSERT INTO  posts_cats (post_id, cat_id) VALUES (1, 2);  
 INSERT INTO  posts_cats (post_id, cat_id) VALUES (1, 3);  
 INSERT INTO  posts_cats (post_id, cat_id) VALUES (2, 3);   
-
-### *Find every post and user*
-
- 
 ```
+### *Find name, title of post, body of post, location. and region of all posts*     
+```
+SELECT CONCAT(u.first_name, ' ', u.last_name), p.title, p.body, p.location, r.reg_name  
+FROM users as u    
+JOIN posts as p   
+ON p.user_id = u.id  
+JOIN regions as r   
+ON r.id = p.region;  
+ ```
