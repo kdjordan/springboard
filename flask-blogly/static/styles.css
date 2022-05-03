@@ -11,18 +11,53 @@ body {
     font-family: 'Nunito', sans-serif;
 }
 
+a {
+    text-decoration: none;
+    color: black;
+}
+
+ul {
+    list-style-position: inside;
+}
+
 .wrapper {
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;
+    margin-top: 2rem;
 }
 
-.create-user {
+
+.user {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    border: 1px solid red;
 }
+
+.user h2 {
+    align-self: flex-start;
+}
+
+.user button {
+    align-self: flex-end;
+}
+
+/* ALL USERS STYLES */
+.container {
+    display: flex;
+    flex-direction: column;    
+}
+
+/* ADD USER STYLES */
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid red;
+}
+
+
 
 form div {
     display: flex;
@@ -32,6 +67,8 @@ form div {
     margin: .8rem 0;
 }
 
-/* input[type='text'] {
-    margin: 1rem 0;
-}  */
+input[type='text'] {
+    margin-top: .2rem;
+    width: 15rem;
+    padding: .5rem;
+} 
