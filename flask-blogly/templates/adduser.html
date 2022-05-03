@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="create-user">
+        <h2>{{heading}}</h2>
+        <form action='/add_user' method='post'>
+            <div>
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" id="">
+            </div> 
+            <div>
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" id="">
+            </div>
+            <div>
+                <label for="avatar">Image URL</label>
+                <input type="text" name="avatar" id="">
+            </div>
+            <button type="submit">SUBMIT</button>
+        </form>
+    </div>
+{% endblock %}
