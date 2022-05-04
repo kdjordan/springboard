@@ -19,7 +19,7 @@ def home():
 def get_all_users():
     users = User.query.all()
     
-    return render_template('allusers.html', title='All Users', heading='Users', users=users, url='')
+    return render_template('allusers.html', title='All Users', heading='Users', users=users)
 
 @app.route('/users/new', methods=['POST', 'GET'])
 def add_user():
@@ -32,7 +32,7 @@ def add_user():
         db.session.add(user)
         db.session.commit()
         
-        return render_template('allusers.html', user=user)
+        return redirect('/users')
     if request.method == 'GET':
         return render_template('usermgmt.html', title='Add User', heading='Create a User', type='add')
 
@@ -40,7 +40,7 @@ def add_user():
 @app.route('/users/<int:id>')
 def get_user(id):
     """Show information about the given user."""
-    user = User.query.get(1)
+    user = User.query.get(id)
     return render_template('/userdetails.html', user=user)
 
 @app.route('/users/<int:id>/edit', methods=['POST', 'GET'])
@@ -63,7 +63,9 @@ def edit_user(id):
 def delete_user(id):
     """Delete the user."""
     print('deleting ', id)
-
+    user = User.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
     return redirect('/users')
 
 

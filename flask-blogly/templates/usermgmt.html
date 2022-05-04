@@ -26,18 +26,20 @@
             <h2>{{ heading }}</h2>
             <div>
                 <label for="first_name">First Name</label>
-                <input type="text" name="first_name" id="" placeholder="{{user.first_name}}">
+                <input type="text" name="first_name" id="" value="{{user.first_name}}">
             </div> 
             <div>
                 <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" id="" placeholder="{{user.last_name}}">
+                <input type="text" name="last_name" id="" value="{{user.last_name}}">
             </div>
             <div>
                 <label for="avatar">Image URL</label>
-                <input type="text" name="avatar" id="" placeholder="{{user.avatar}}">
+                <input type="text" name="avatar" id="" value="{{user.avatar}}">
             </div>
-            <button><a href="/users/{{user.id}}">CANCEL</a></button>
-            <button type="submit">SAVE</button>
+            <div class="btn-flex">
+                <button><a href="/users/{{user.id}}">CANCEL</a></button>
+                <button type="submit" style="margin-left: 1rem;">SAVE</button>
+            </div>
         </form>
     </div>
     {% endif %}
