@@ -1,4 +1,5 @@
 """Models for Blogly."""
+from typing_extensions import Self
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -31,3 +32,4 @@ class User(db.Model):
     avatar = db.Column(db.String(),
                     nullable=False,
                     unique=False)
+
