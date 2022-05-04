@@ -17,7 +17,10 @@
                 <label for="avatar">Image URL</label>
                 <input type="text" name="avatar" id="" placeholder="Provide and image of this user" required>
             </div>
-            <button>Add</button>
+            <div class="btn-flex">
+                <button class="delete-btn"><a href="/users">GO BACK</a></button>
+                <button type="submit" style="margin-left: 1rem;">ADD</button>
+            </div>
         </form>
     </div>
     {% elif type=='edit' %}
