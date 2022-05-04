@@ -33,6 +33,7 @@ def add_user():
         db.session.commit()
         
         return redirect('/users')
+
     if request.method == 'GET':
         return render_template('usermgmt.html', title='Add User', heading='Create a User', type='add')
 
@@ -45,11 +46,14 @@ def get_user(id):
 
 @app.route('/users/<int:id>/edit', methods=['POST', 'GET'])
 def edit_user(id):
+    """Show Edit or Add User form based on method"""
     user = User.query.get(id)
+
     if request.method == 'GET':
         """Show the edit page for a user."""
         return render_template('usermgmt.html', title='Edit User', heading='Edit a User', type='edit', 
             user=user)
+
     if request.method == 'POST':
         """Commit user changes to DB."""
         user.first_name = request.form['first_name']
@@ -62,7 +66,6 @@ def edit_user(id):
 @app.route('/users/<int:id>/delete')
 def delete_user(id):
     """Delete the user."""
-    print('deleting ', id)
     user = User.query.get(id)
     db.session.delete(user)
     db.session.commit()
