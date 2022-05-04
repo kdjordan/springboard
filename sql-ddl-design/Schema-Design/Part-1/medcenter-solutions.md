@@ -1,5 +1,6 @@
 ## Part One: Medical Center
-<img src="./med-ERD.png" width="500px">
+<img src="./med-ERD.png" width="500px">  
+
 ```
 DROP DATABASE IF EXISTS medical_center;  
 

@@ -1,22 +1,46 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    {% if type=='add' %}
     <div class="user">
         <form action='/users/new' method='post'>
-            <h2>{{heading}}</h2>
+            <h2>{{ heading }}</h2>
             <div>
                 <label for="first_name">First Name</label>
-                <input type="text" name="first_name" id="" placeholder="Enter a first name">
+                <input type="text" name="first_name" id="" placeholder="Enter a first name" required>
             </div> 
             <div>
                 <label for="last_name">Last Name</label>
-                <input type="text" name="last_name" id="" placeholder="Enter a last name">
+                <input type="text" name="last_name" id="" placeholder="Enter a last name" required>
             </div>
             <div>
                 <label for="avatar">Image URL</label>
-                <input type="url" name="avatar" id="" placeholder="Provide and image of this user">
+                <input type="text" name="avatar" id="" placeholder="Provide and image of this user" required>
             </div>
             <button>Add</button>
         </form>
     </div>
+    {% elif type=='edit' %}
+    <div class="user">
+        <form action='/users/{{user.id}}/edit' method='post'>
+            <h2>{{ heading }}</h2>
+            <div>
+                <label for="first_name">First Name</label>
+                <input type="text" name="first_name" id="" placeholder="{{user.first_name}}">
+            </div> 
+            <div>
+                <label for="last_name">Last Name</label>
+                <input type="text" name="last_name" id="" placeholder="{{user.last_name}}">
+            </div>
+            <div>
+                <label for="avatar">Image URL</label>
+                <input type="text" name="avatar" id="" placeholder="{{user.avatar}}">
+            </div>
+            <button><a href="/users/{{user.id}}">CANCEL</a></button>
+            <button type="submit">SAVE</button>
+        </form>
+    </div>
+    {% endif %}
+
+   
 {% endblock %}

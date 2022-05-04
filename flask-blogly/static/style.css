@@ -47,6 +47,14 @@ ul {
     list-style-position: inside;
 }
 
+li a {
+    color: var(--lemon-meringue);
+}
+
+li a:hover {
+    filter: opacity(50%);
+}
+
 .wrapper {
     width: 100%;
     max-width: 1120px;
