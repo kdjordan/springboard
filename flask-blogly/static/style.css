@@ -113,7 +113,7 @@ li a:hover {
     width: 100%;
 }
 
-#edit a, #delete a {
+#edit a, .delete-btn a {
     color: var(--lemon-meringue);
 }
 
@@ -121,7 +121,7 @@ li a:hover {
     background-color: hsl(247deg 69% 62%);
 }
 
-#delete {
+.delete-btn {
     background-color: hsl(0deg 73% 54%);
 }
 
