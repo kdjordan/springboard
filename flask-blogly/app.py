@@ -33,22 +33,26 @@ def add_user():
         db.session.commit()
         return render_template('base.html')
     if request.method == 'GET':
-        return render_template('adduser.html', title='Add User', heading='Create a User')
+        return render_template('usermgmt.html', title='Add User', heading='Create a User', function='add')
 
 
-@app.route('/users/<:id>')
+@app.route('/users/<int:id>')
 def get_user(id):
-    print('gettig id ', id)
-    return redirect('/users')
+    """Show information about the given user."""
+    # print('gettig id ', id)
+    user = User.query.get(1)
+    return render_template('/userdetails.html', user=user)
 
-@app.route('/users/<:id>/edit')
+@app.route('/users/<int:id>/edit')
 def edit_user(id):
+    """Show the edit page for a user."""
     print('editing ', id)
-    return redirect('/users')
+    return render_template('usermgmt.html', title='Edit User', heading='Edit a User', function='edit')
 
-@app.route('/users/<:id>/delete')
+@app.route('/users/<int:id>/delete')
 def delete_user(id):
-    print('deleting ' id)
+    """Delete the user."""
+    print('deleting ', id)
     return redirect('/users')
 
 

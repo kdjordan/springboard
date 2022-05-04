@@ -6,9 +6,36 @@
     box-sizing: border-box;
 }
 
+:root {
+    --prussian-blue: hsla(201, 100%, 14%, 1);
+    --maximum-red: hsla(0, 69%, 50%, 1);
+    --orange: hsla(31, 100%, 48%, 1);
+    --maximum-yellow-red: hsla(40, 97%, 64%, 1);
+    --lemon-meringue: hsla(51, 55%, 82%, 1);
+}
+
 body {
     line-height: 1.5;
     font-family: 'Nunito', sans-serif;
+    background-color: var(--prussian-blue);
+    color: var(--lemon-meringue);
+    letter-spacing: 1.5px;
+}
+
+button {
+    padding: .2rem .4rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    background-color: var(--orange);
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .4s ease;
+    margin-top: 1rem;
+    letter-spacing: 1.5px;
+}
+
+button:hover {
+    filter: opacity(50%);
 }
 
 a {
@@ -32,11 +59,12 @@ ul {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid red;
 }
 
 .user h2 {
     align-self: flex-start;
+    color: var(--maximum-yellow-red);
+    border-bottom: 1px solid var( --maximum-yellow-red);
 }
 
 .user button {
@@ -48,16 +76,44 @@ ul {
     display: flex;
     flex-direction: column;    
 }
+.all-users-list {
+    margin-top: 1rem;
+}
+
+/* EDIT USER STYLES */
+.display-user {
+    display: flex;
+    margin-top: 2rem;
+}
+
+.display-user img {
+    width: 6rem;
+    height: auto;
+}
+
+.display-user h2 {
+    border-bottom: none;
+}
+
+#edit a, #delete a {
+    color: var(--lemon-meringue);
+}
+
+#edit {
+    background-color: hsl(247deg 69% 62%);
+}
+
+#delete {
+    color: var(--lemon-meringue);
+}
+
 
 /* ADD USER STYLES */
 form {
     display: flex;
     flex-direction: column;
     align-items: center;
-    border: 1px solid red;
 }
-
-
 
 form div {
     display: flex;
@@ -67,7 +123,7 @@ form div {
     margin: .8rem 0;
 }
 
-input[type='text'] {
+input[type='text'], input[type='url'] {
     margin-top: .2rem;
     width: 15rem;
     padding: .5rem;
