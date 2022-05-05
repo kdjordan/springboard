@@ -12,6 +12,9 @@
     --orange: hsla(31, 100%, 48%, 1);
     --maximum-yellow-red: hsla(40, 97%, 64%, 1);
     --lemon-meringue: hsla(51, 55%, 82%, 1);
+    --red: hsl(0deg 66% 45%);
+    --blue: rgb(91, 71, 242);
+    --green:  hsl(120deg 53% 60%);
 }
 
 body {
@@ -26,7 +29,6 @@ button {
     padding: .2rem .4rem;
     border: 1px solid transparent;
     border-radius: 5px;
-    background-color: var(--orange);
     text-transform: uppercase;
     cursor: pointer;
     transition: all .4s ease;
@@ -59,7 +61,6 @@ li a:hover {
     width: 100%;
     max-width: 1120px;
     margin: 0 auto;
-    margin-top: 2rem;
 }
 
 
@@ -69,11 +70,6 @@ li a:hover {
     align-items: center;
 }
 
-.user h2 {
-    align-self: flex-start;
-    color: var(--maximum-yellow-red);
-    border-bottom: 1px solid var( --maximum-yellow-red);
-}
 
 .user button {
     align-self: flex-end;
@@ -91,10 +87,11 @@ li a:hover {
 /* EDIT USER STYLES */
 .display-user {
     display: flex;
+    flex-direction: column;
     margin-top: 2rem;
 }
 
-.display-user img {
+.avatar {
     width: 6rem;
     height: auto;
     margin-right: 1.5rem;
@@ -113,16 +110,21 @@ li a:hover {
     width: 100%;
 }
 
-#edit a, .delete-btn a {
-    color: var(--lemon-meringue);
-}
-
-#edit {
-    background-color: hsl(247deg 69% 62%);
+.add-btn {
+    background-color: var(--green);
 }
 
 .delete-btn {
-    background-color: hsl(0deg 73% 54%);
+    color: var(--red);
+    border: 2px solid var(--red);
+    background-color: transparent;
+}
+.delete-btn a, .edit-btn a {
+    color: var(--lemon-meringue);
+}
+
+.edit-btn {
+    background-color: var(--blue);
 }
 
 
@@ -146,3 +148,45 @@ input[type='text'], input[type='url'] {
     width: 15rem;
     padding: .5rem;
 } 
+
+.flex-row {
+    display: flex;
+
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+nav {
+    align-items: center; 
+    padding: 1rem 2rem;
+    justify-content: space-between;
+    border-bottom: 2px solid var(--lemon-meringue);
+    margin-bottom: 5vh;
+}
+
+nav li {
+    list-style-type: none;
+    margin: 0 2rem;
+}
+
+nav a {
+    color: var(--maximum-yellow-red);
+}
+nav ul {
+    justify-content: space-evenly;
+}
+
+.orange {
+    color: var(--maximum-yellow-red);
+}
+
+.yellow {
+    color: var(--lemon-meringue);    
+}
+
+.underline {
+    border-bottom: 2px solid var(--lemon-meringue);
+}

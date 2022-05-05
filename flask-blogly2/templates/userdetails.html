@@ -1,17 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="user">
-        <div class="container">
-            <div class="display-user">
-                <img src="{{user.avatar}}" alt="">
-                <div>
-                    <h2>{{user.first_name}} {{user.last_name}}</h2>
-                    <button id="edit"><a href="/users/{{user.id}}/edit">Edit</a></button>
+   <div class="flex-col" style="align-items: center;">
+       <div class="flex-row" style="align-items: flex-start;">
+           <div>
+            <img src="{{user.avatar}}" alt="" class="avatar">
+           </div>
+           <div class="flex-col">
+               <div style="margin-bottom:2rem;">
+                    <h2 class="underline orange">{{user.first_name}} {{user.last_name}}</h2>
+                    <button class="edit-btn"><a href="/users/{{user.id}}/edit">Edit</a></button>
                     <button class="delete-btn"><a href="/users/{{user.id}}/delete">Delete</a></button>
-                    <button class="delete-btn"><a href="/users">GO BACK</a></button>
                 </div>
-            </div>
-        </div>
-    </div>
+                <div>
+                    <h2 class="underline orange" style="margin-bottom: 1rem;">Posts</h2>
+                    <ul>
+                        {% for post in posts %}
+                            <li>{{post.title}}</li>
+                        {% endfor %}
+                    </ul>
+                    <button class="add-btn"><a href="/posts/new">ADD POST</a></button>
+                </div>
+           </div>
+
+       </div>
+   </div>
 {% endblock %}
+

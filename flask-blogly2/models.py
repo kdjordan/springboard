@@ -32,6 +32,8 @@ class User(db.Model):
                     nullable=False,
                     unique=False)
 
+    # posts = db.relationship('Post')
+
 
 
 class Post(db.Model):
@@ -48,5 +50,6 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, nullable=False, unique=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    user = db.relationship('User')
+    # user = db.relationship('User')
+    user = db.relationship('User', backref="posts")
 

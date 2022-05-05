@@ -9,7 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
 connect_db(app)
-db.create_all()
+# db.create_all()
 
 @app.route('/')
 def home():
@@ -42,7 +42,9 @@ def add_user():
 def get_user(id):
     """Show information about the given user."""
     user = User.query.get(id)
-    return render_template('/userdetails.html', user=user)
+    posts = user.posts
+    print(posts)
+    return render_template('/userdetails.html', user=user, posts=posts)
 
 @app.route('/users/<int:id>/edit', methods=['POST', 'GET'])
 def edit_user(id):
@@ -70,6 +72,14 @@ def delete_user(id):
     db.session.delete(user)
     db.session.commit()
     return redirect('/users')
+
+
+@app.route('/posts')
+def show_all_posts():
+    posts = Post.query.all()
+    print(posts)
+
+    return render_template('allposts.html', posts=posts)
 
 
 
