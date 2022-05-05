@@ -1,15 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="user">
-        <div class="container">
+    <div class="flex-col" style="align-items: center;">
+        <div>
             <h2 class="underline orange">{{heading}}</h2>
-            <ul class="all-users-list">
+            <ul style="margin-top: 1rem;">
                 {% for user in users %}
                 <li><a href="/users/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></li>
                 {% endfor %}
             </ul>
-            <button class="add-btn"><a href="/users/new">Add User</a></button>
+            <div class="flex-row" style="justify-content: flex-end;">
+                <button class="add-btn"><a href="/users/new">Add User</a></button>
+            </div>
         </div>
     </div>
 {% endblock %}

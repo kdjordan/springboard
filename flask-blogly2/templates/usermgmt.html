@@ -2,9 +2,9 @@
 
 {% block content %}
     {% if type=='add' %}
-    <div class="user">
+    <div class="flex-col" style="align-items: center;">
         <form action='/users/new' method='post'>
-            <h2>{{ heading }}</h2>
+            <h2 class="underline orange" style="align-self: flex-start;">{{ heading }}</h2>
             <div>
                 <label for="first_name">First Name</label>
                 <input type="text" name="first_name" id="" placeholder="Enter a first name" required>
@@ -17,15 +17,15 @@
                 <label for="avatar">Image URL</label>
                 <input type="text" name="avatar" id="" placeholder="Provide and image of this user" required>
             </div>
-            <div class="btn-flex">
-                <button type="submit" style="margin-left: 1rem;">ADD</button>
+            <div class="flex-row" style="justify-content: flex-end; width: 100%">
+                <button type="submit" style="margin-left: 1rem;" class="add-btn">ADD</button>
             </div>
         </form>
     </div>
     {% elif type=='edit' %}
-    <div class="user">
+    <div class="flex-col" style="align-items: center;">
         <form action='/users/{{user.id}}/edit' method='post'>
-            <h2>{{ heading }}</h2>
+            <h2 class="underline orange" style="align-self: flex-start;">{{ heading }}</h2>
             <div>
                 <label for="first_name">First Name</label>
                 <input type="text" name="first_name" id="" value="{{user.first_name}}">
@@ -38,9 +38,9 @@
                 <label for="avatar">Image URL</label>
                 <input type="text" name="avatar" id="" value="{{user.avatar}}">
             </div>
-            <div class="btn-flex">
-                <button class="delete-btn"><a href="/users/{{user.id}}">CANCEL</a></button>
-                <button type="submit" style="margin-left: 1rem;">SAVE</button>
+            <div class="flex-row" style="justify-content: flex-end; width: 100%">
+                <button class="cancel-btn"><a href="/users/{{user.id}}">CANCEL</a></button>
+                <button type="submit" style="margin-left: 1rem;" class="add-btn">SAVE</button>
             </div>
         </form>
     </div>

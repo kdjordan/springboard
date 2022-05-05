@@ -16,10 +16,10 @@
                     <h2 class="underline orange" style="margin-bottom: 1rem;">Posts</h2>
                     <ul>
                         {% for post in posts %}
-                            <li>{{post.title}}</li>
+                            <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
                         {% endfor %}
                     </ul>
-                    <button class="add-btn"><a href="/posts/new">ADD POST</a></button>
+                    <button class="add-btn"><a href="/users/{{user.id}}/posts/new">ADD POST</a></button>
                 </div>
            </div>
 

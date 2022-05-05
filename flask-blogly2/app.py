@@ -77,10 +77,40 @@ def delete_user(id):
 @app.route('/posts')
 def show_all_posts():
     posts = Post.query.all()
-    print(posts)
+    return render_template('allposts.html', posts=posts, heading="All Posts")
 
-    return render_template('allposts.html', posts=posts)
+@app.route('/posts/<int:id>')
+def get_post(id):
+    post = Post.query.get(id)
+    return render_template('postdetail.html', post=post)
 
 
+@app.route('/users/<int:id>/posts/new', methods=['POST', 'GET'])
+def add_post(id):
+    """Add New Post"""
+    if request.method == 'GET':
+        """Show the add post for a user."""
+        return render_template('addpost.html', title='Add Post', heading='Add a Post', type='edit', user_id=id
+            )
+
+    if request.method == 'POST':
+        """Add Post to DB."""
+        post = Post(title=request.form['post_title'], 
+                content=request.form['post_content'],
+                user_id=id)
+        db.session.add(post)
+        db.session.commit()
+        return redirect('/users')
+
+@app.route('/posts/<int:id>/delete')
+def delete_post(id):
+    post = Post.query.get(id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect('/users')
 
 
+@app.errorhandler(404)
+def page_not_found(e):
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
