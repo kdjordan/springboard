@@ -32,3 +32,21 @@ class User(db.Model):
                     nullable=False,
                     unique=False)
 
+
+
+class Post(db.Model):
+    """Tale definiton for posts - model"""
+    __tablename__ = 'posts'
+
+    def __repr__(self):
+        p = self
+        return f'Post id={p.id}'
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    title = db.Column(db.String(50), nullable=False, unique=False)
+    content = db.Column(db.Text, nullable=True, unique=True)
+    created_at = db.Column(db.DateTime, nullable=False, unique=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+
+    user = db.relationship('User')
+
