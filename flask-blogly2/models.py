@@ -52,5 +52,5 @@ class Post(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
     # user = db.relationship('User')
-    user = db.relationship('User', backref="posts")
+    user = db.relationship('User',  cascade="all,delete", backref="posts")
 
