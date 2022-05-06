@@ -4,7 +4,7 @@
     {% if type=='add' %}
     <div class="flex-col" style="align-items: center;">
         <form action='/users/new' method='post'>
-            <h2 class="underline orange" style="align-self: flex-start;">{{ heading }}</h2>
+            <h2 class="underline orange" style="align-self: flex-start;margin-bottom: 2rem;">{{ heading }}</h2>
             <div>
                 <label for="first_name">First Name</label>
                 <input type="text" name="first_name" id="" placeholder="Enter a first name" required>
@@ -16,9 +16,6 @@
             <div>
                 <label for="avatar">Image URL</label>
                 <input type="text" name="avatar" id="" placeholder="Provide and image of this user" required>
-            </div>
-            <div class="flex-row" style="justify-content: flex-end; width: 100%">
-                <button type="submit" style="margin-left: 1rem;" class="add-btn">ADD</button>
             </div>
         </form>
     </div>
