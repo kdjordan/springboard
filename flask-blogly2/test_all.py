@@ -1,11 +1,11 @@
 from unittest import TestCase
 from app import app
-from models import db,  User
+from models import db,  User, Post
 
 
 app.config['TESTING'] = True
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly_test'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly2_test'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
@@ -18,10 +18,15 @@ class FlaskTests(TestCase):
         User.query.delete()
 
         user = User(first_name="TestKevin", last_name="TestJordan", avatar="Testavatar")
+        post = Post(title='A Post Bout Nothing', content='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.', user_id=1)
         db.session.add(user)
+        db.session.commit()
+        db.session.commit(post)
+
         db.session.commit()
 
         self.user_id = user.id
+        self.post_id = post.id
         
     def tearDown(self):
         db.session.rollback()
@@ -42,7 +47,7 @@ class FlaskTests(TestCase):
             html = res.get_data(as_text=True)
 
             self.assertEqual(res.status_code, 200)
-            self.assertIn('<h2>TestKevin TestJordan</h2>', html)
+            self.assertIn('TestKevin TestJordan', html)
 
     def test_adduser_form(self):
         """Test showimg add user form on GET request"""

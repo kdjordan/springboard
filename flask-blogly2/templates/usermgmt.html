@@ -17,6 +17,9 @@
                 <label for="avatar">Image URL</label>
                 <input type="text" name="avatar" id="" placeholder="Provide and image of this user" required>
             </div>
+            <div class="flex-row" style="justify-content: flex-end; width: 100%">
+                <button type="submit" style="margin-left: 1rem;" class="add-btn">SAVE</button> 
+            </div>
         </form>
     </div>
     {% elif type=='edit' %}
@@ -36,8 +39,8 @@
                 <input type="text" name="avatar" id="" value="{{user.avatar}}">
             </div>
             <div class="flex-row" style="justify-content: flex-end; width: 100%">
-                <button class="cancel-btn"><a href="/users/{{user.id}}">CANCEL</a></button>
-                <button type="submit" style="margin-left: 1rem;" class="add-btn">SAVE</button>
+                <button class="button cancel-btn"><a href="/users/{{user.id}}">CANCEL</a></button>
+                <button type="submit" style="margin-left: 1rem;" class="add-btn">SAVE</button> 
             </div>
         </form>
     </div>

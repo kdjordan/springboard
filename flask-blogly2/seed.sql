@@ -1,16 +1,16 @@
--- DROP DATABASE IF EXISTS blogly2;
+-- DROP DATABASE IF EXISTS blogly2_test;
 
--- CREATE DATABASE blogly2;
+-- CREATE DATABASE blogly2_test;
 
--- \c blogly2
+-- \c blogly2_test
 
 -- CREATE TABLE users
 -- (
 --   id SERIAL PRIMARY KEY,
 --   first_name VARCHAR(20),
 --   last_name VARCHAR(20),
-
--- );
+--   avatar VARCHAR(40)
+--   );
 
 -- CREATE TABLE posts
 -- (
@@ -18,8 +18,7 @@
 --   title VARCHAR(50) NOT NULL,
 --   content TEXT NOT NULL,
 --   created_at DATETIME NOT NULL,
---   user_id INT REFERENCES users
--- );
+--   user_id INT REFERENCES users);
 
 
 

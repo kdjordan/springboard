@@ -55,7 +55,7 @@ li a:hover, a:hover {
 }
 
 /*********** BUTTONS *******************************************************/
-button {
+button, .button {
     padding: .2rem .4rem;
     border: 1px solid transparent;
     border-radius: 5px;
