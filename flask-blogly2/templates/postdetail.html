@@ -11,7 +11,7 @@
         </div>
         <hr style="margin: 1rem 0;" class="underline">
         <div>
-            <span class="orange">Posted By: </span>{{post.user.first_name}} {{post.user.last_name}} :: {{post.created_at}}
+            <span class="orange"><i>Posted By:</i> </span><a href="/users/{{post.user.id}}">{{post.user.first_name}} {{post.user.last_name}}</a>  <i>on</i> {{post.created_at}}
         </div>
     </div>
     <div class="flex-row" style="justify-content: flex-start; width: 80%;">
