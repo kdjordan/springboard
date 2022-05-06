@@ -18,7 +18,6 @@ def home():
 @app.route('/users')
 def get_all_users():
     users = User.query.all()
-    
     return render_template('allusers.html', title='All Users', heading='Users', users=users)
 
 @app.route('/users/new', methods=['POST', 'GET'])
@@ -31,7 +30,6 @@ def add_user():
         # insert into DB
         db.session.add(user)
         db.session.commit()
-        
         return redirect('/users')
 
     if request.method == 'GET':
@@ -73,25 +71,25 @@ def delete_user(id):
     db.session.commit()
     return redirect('/users')
 
+# POSTS ROUTES ################################################################################
 
 @app.route('/posts')
 def show_all_posts():
+    """Show all posts"""
     posts = Post.query.all()
     return render_template('allposts.html', posts=posts, heading="All Posts")
-
 @app.route('/posts/<int:id>')
 def get_post(id):
+    """Show individual post by ID"""
     post = Post.query.get(id)
     return render_template('postdetail.html', post=post)
 
 
 @app.route('/users/<int:id>/posts/new', methods=['POST', 'GET'])
 def add_post(id):
-    """Add New Post"""
     if request.method == 'GET':
         """Show the add post for a user."""
-        return render_template('addpost.html', title='Add Post', heading='Add a Post', type='edit', user_id=id
-            )
+        return render_template('addpost.html', title='Add Post', heading='Add a Post', user_id=id)
 
     if request.method == 'POST':
         """Add Post to DB."""
@@ -102,15 +100,37 @@ def add_post(id):
         db.session.commit()
         return redirect('/users')
 
+@app.route('/posts/<int:id>/edit', methods=['POST', 'GET'])
+def edit_post(id):
+    post = Post.query.get(id)
+
+    if request.method == 'GET':
+        """Show the edit post for a user."""
+        return render_template('editpost.html', title='Edit Post', heading='Edit a Post', post=post)
+
+    if request.method == 'POST':
+        """Update Post in DB."""
+        post.title = request.form['post_title']
+        post.content = request.form['post_content']
+        db.session.add(post)
+        db.session.commit()
+        return redirect('/users')
+
+
+
 @app.route('/posts/<int:id>/delete')
 def delete_post(id):
+    """Deletes post from DB."""
     post = Post.query.get(id)
     db.session.delete(post)
     db.session.commit()
     return redirect('/users')
 
 
+
+# HANDLE 404 ################################################################################
 @app.errorhandler(404)
 def page_not_found(e):
+    """Handle all routes with errors"""
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
