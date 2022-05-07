@@ -1,10 +1,10 @@
 """Blogly application."""
 
 from flask import Flask, request, render_template, redirect, flash, session
-from models import db, connect_db, User, Post
+from models import db, connect_db, User, Post, Tag, PostTag
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly3'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
@@ -15,6 +15,15 @@ connect_db(app)
 def home():
     return redirect('/users')
 
+# HANDLE 404 ################################################################################
+@app.errorhandler(404)
+def page_not_found(e):
+    """Handle all routes with errors"""
+    # note that we set the 404 status explicitly
+    return render_template('404.html'), 404
+
+
+# USERS ROUTES #################################################################
 @app.route('/users')
 def get_all_users():
     users = User.query.all()
@@ -35,14 +44,13 @@ def add_user():
     if request.method == 'GET':
         return render_template('usermgmt.html', title='Add User', heading='Create a User', type='add')
 
-
 @app.route('/users/<int:id>')
 def get_user(id):
     """Show information about the given user."""
     user = User.query.get(id)
     posts = user.posts
     print(posts)
-    return render_template('/userdetails.html', user=user, posts=posts)
+    return render_template('/userdetails.html', user=user, posts=posts, title='User Details')
 
 @app.route('/users/<int:id>/edit', methods=['POST', 'GET'])
 def edit_user(id):
@@ -78,6 +86,7 @@ def show_all_posts():
     """Show all posts"""
     posts = Post.query.all()
     return render_template('allposts.html', posts=posts, heading="All Posts")
+
 @app.route('/posts/<int:id>')
 def get_post(id):
     """Show individual post by ID"""
@@ -116,8 +125,6 @@ def edit_post(id):
         db.session.commit()
         return redirect('/users')
 
-
-
 @app.route('/posts/<int:id>/delete')
 def delete_post(id):
     """Deletes post from DB."""
@@ -126,11 +133,53 @@ def delete_post(id):
     db.session.commit()
     return redirect('/users')
 
+# TAGS ROUTES #################################################################
+
+@app.route('/tags')
+def get_all_tags():
+    tags = Tag.query.all()
+    return render_template('alltags.html', tags=tags, title='All Tags', heading='All Tags')
+
+@app.route('/tags/<int:id>')
+def get_tag(id):
+    tags = PostTag.query.filter(PostTag.post_id == id)
+    # tags = Tag.query.filter(PostTag.post_id == id)
+    # tags = PostTag.query.all()
+    return render_template('tagdetails.html', items=tags, title='Tag Detail', heading='Tag Detail', id=id)
+
+@app.route('/tags/new', methods=['POST', 'GET'])
+def add_tag():
+    if request.method == 'GET':
+        """Show the add tag form."""
+        return render_template('addtag.html', title='Create a Tag', heading='Create Tag')
+
+    if request.method == 'POST':
+        tag = Tag(tag_name=request.form['tag_name'])
+        db.session.add(tag)
+        db.session.commit()
+        return redirect('/tags')
 
 
-# HANDLE 404 ################################################################################
-@app.errorhandler(404)
-def page_not_found(e):
-    """Handle all routes with errors"""
-    # note that we set the 404 status explicitly
-    return render_template('404.html'), 404
+@app.route('/tags/<int:id>/edit', methods=['POST', 'GET'])
+def edit_tag(id):
+    tag = Tag.query.get(id)
+
+    if request.method == 'GET':
+        """Show the edit tag form."""
+        return render_template('edittag.html', title='Edit Tag', heading='Edit a Tag', tag=tag)
+
+    if request.method == 'POST':
+        """Update Tag in DB."""
+        tag.tag_name=request.form['tag_name']
+        db.session.add(tag)
+        db.session.commit()
+        return redirect('/tags')
+
+
+@app.route('/tags/<int:id>/delete')
+def delete_tag(id):
+    """Deletes tag from DB."""
+    tag = Tag.query.get(id)
+    db.session.delete(tag)
+    db.session.commit()
+    return redirect('/tags')
