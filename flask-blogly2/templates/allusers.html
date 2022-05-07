@@ -6,7 +6,7 @@
             <h2 class="underline orange" style="margin-bottom: 2rem;">{{heading}}</h2>
             <ul>
                 {% for user in users %}
-                <li><a href="/users/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></li>
+                <li style="margin: .3rem 0;"><a href="/users/{{user.id}}">{{user.first_name}} {{user.last_name}}</a></li>
                 {% endfor %}
             </ul>
             <div class="flex-row" style="justify-content: flex-end;">
