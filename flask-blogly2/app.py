@@ -110,8 +110,8 @@ def edit_post(id):
 
     if request.method == 'POST':
         """Update Post in DB."""
-        post.title = request.form['post_title']
-        post.content = request.form['post_content']
+        post.title=request.form['post_title']
+        post.content=request.form['post_content']
         db.session.add(post)
         db.session.commit()
         return redirect('/users')

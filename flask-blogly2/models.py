@@ -47,7 +47,7 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     title = db.Column(db.String(50), nullable=False, unique=False)
-    content = db.Column(db.Text, nullable=True, unique=True)
+    content = db.Column(db.Text, nullable=True, unique=False)
     created_at = db.Column(db.DateTime, default=datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 

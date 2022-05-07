@@ -62,6 +62,26 @@ class FlaskTests(TestCase):
 
             self.assertEquals(res.status_code, 200)
             self.assertIn('F-User2 L-User2', html)
-    
+            
+    def test_add_postform(self):
+        """Test adding new post via form and being shown on all posts list"""
+        with app.test_client() as client:
+            newpost = {'post_title':'Test Post', 'post_content':'Test Lorem ipsum dolor sit amet...', 'user_id':1}
+            res = client.post('/users/1/posts/new', data=newpost, follow_redirects=True)
+            html = res.get_data(as_text=True)
+            self.assertEquals(res.status_code, 200)
+            self.assertIn('TestKevin', html)
+
+
+    def test_editpost(self):
+        """Test editing post"""
+        with app.test_client() as client:
+            data = {'post_title': "Test Post", 'post_content': 'TEst post conetent...', 'user_id': 1}
+            res = client.post('/posts/1/edit', data=data, follow_redirects=True)
+            html = res.get_data(as_text=True)
+
+            self.assertEquals(1, 1)
+            self.assertIn('TestKevin', html)
+
 
     
