@@ -82,5 +82,5 @@ class PostTag(db.Model):
 
     # tags = db.relationship('Tag', secondary='posts_tags', backref="posts")
     posts = db.relationship('Post', backref="posts")
-    tags = db.relationship('Tag', backref="tags", single_parent=True, cascade="all, delete-orphan")
+    tags = db.relationship('Tag', backref="tags", cascade="all")
 

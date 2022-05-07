@@ -167,7 +167,7 @@ def edit_tag(id):
 
     if request.method == 'GET':
         """Show the edit tag form."""
-        return render_template('edittag.html', title='Edit Tag', heading='Edit a Tag', tag=tag)
+        return render_template('edittag.html', title='Edit Tag', heading='Edit Tag', tag=tag, id=id)
 
     if request.method == 'POST':
         """Update Tag in DB."""
@@ -180,9 +180,9 @@ def edit_tag(id):
 @app.route('/tags/<int:id>/delete')
 def delete_tag(id):
     """Deletes tag from DB."""
-    # tag = Tag.query.get(id)
-    tags = PostTag.query.filter(PostTag.tag_id == id).all()
-    for tag in tags:     
-        db.session.delete(tag)
-        db.session.commit()
+    db.session.query(PostTag).filter(PostTag.tag_id == id).delete()
+    db.session.commit()
+    tag = Tag.query.get(id)
+    db.session.delete(tag)
+    db.session.commit()
     return redirect('/tags')
