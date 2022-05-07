@@ -79,8 +79,6 @@ class FlaskTests(TestCase):
             data = {'post_title': "Test Post", 'post_content': 'TEst post conetent...', 'user_id': 1}
             res = client.post('/posts/1/edit', data=data, follow_redirects=True)
             html = res.get_data(as_text=True)
-
-            self.assertEquals(1, 1)
             self.assertIn('TestKevin', html)
 
 
