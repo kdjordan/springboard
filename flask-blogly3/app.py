@@ -91,7 +91,8 @@ def show_all_posts():
 def get_post(id):
     """Show individual post by ID"""
     post = Post.query.get(id)
-    return render_template('postdetail.html', post=post)
+    tags = PostTag.query.filter(PostTag.post_id == id).all()
+    return render_template('postdetail.html', post=post, tags=tags, title='Post Detail')
 
 
 @app.route('/users/<int:id>/posts/new', methods=['POST', 'GET'])
@@ -112,6 +113,7 @@ def add_post(id):
 @app.route('/posts/<int:id>/edit', methods=['POST', 'GET'])
 def edit_post(id):
     post = Post.query.get(id)
+    
 
     if request.method == 'GET':
         """Show the edit post for a user."""
@@ -142,10 +144,9 @@ def get_all_tags():
 
 @app.route('/tags/<int:id>')
 def get_tag(id):
-    tags = PostTag.query.filter(PostTag.post_id == id)
-    # tags = Tag.query.filter(PostTag.post_id == id)
-    # tags = PostTag.query.all()
-    return render_template('tagdetails.html', items=tags, title='Tag Detail', heading='Tag Detail', id=id)
+    tags = PostTag.query.filter(PostTag.tag_id == id).all()
+    tag = Tag.query.get(id)
+    return render_template('tagdetails.html', tags=tags, title='Tag Detail', heading='Tag Detail', id=id, tag=tag)
 
 @app.route('/tags/new', methods=['POST', 'GET'])
 def add_tag():
@@ -179,7 +180,9 @@ def edit_tag(id):
 @app.route('/tags/<int:id>/delete')
 def delete_tag(id):
     """Deletes tag from DB."""
-    tag = Tag.query.get(id)
-    db.session.delete(tag)
-    db.session.commit()
+    # tag = Tag.query.get(id)
+    tags = PostTag.query.filter(PostTag.tag_id == id).all()
+    for tag in tags:     
+        db.session.delete(tag)
+        db.session.commit()
     return redirect('/tags')

@@ -4,21 +4,18 @@
    <div class="flex-col" style="align-items: center;">
         <div>
         <div>
-            <h2 class="underline orange" style="margin-bottom: 1rem;"></h2> 
+            <h2 class="underline orange" style="margin-bottom: 1rem;">{{tag.tag_name}}</h2> 
         </div>
         <div style="margin-bottom: 1rem;">
-            {% for item in items %}
-                <!-- <li>{{item.posts.title}}</li> -->
-                <li>{{item.tag_id}}</li>
+            {% for tag in tags %}
+                <li>{{tag.posts.title}}</li>
             {% endfor %}
-
         </div>
         <hr style="margin: 1rem 0;" class="underline">
-        
     </div>
     <div class="flex-row" style="justify-content: flex-start;">
         <button class="cancel-btn"><a href="/tags">CANCEL</a></button>
-        <button class="add-btn" style="margin-left:1rem; margin-right: 1rem;"><a href="/posts">EDIT</a></button>
+        <button class="add-btn" style="margin-left:1rem; margin-right: 1rem;"><a href="posts">EDIT</a></button>
         <button class="delete-btn"><a href="/tags/{{id}}/delete">DELETE</a></button>
     </div>
 </div>

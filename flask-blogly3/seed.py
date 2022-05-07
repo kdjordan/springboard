@@ -28,6 +28,7 @@ pt1 = PostTag(post_id=1,tag_id=1)
 pt2 = PostTag(post_id=1,tag_id=2)
 pt3 = PostTag(post_id=2,tag_id=3)
 pt4 = PostTag(post_id=3,tag_id=4)
+pt5 = PostTag(post_id=2,tag_id=1)
 
 
 db.session.add(u1)
@@ -51,4 +52,5 @@ db.session.add(pt1)
 db.session.add(pt2)
 db.session.add(pt3)
 db.session.add(pt4)
+db.session.add(pt5)
 db.session.commit()

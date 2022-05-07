@@ -11,6 +11,15 @@
         </div>
         <hr style="margin: 1rem 0;" class="underline">
         <div>
+        <div class="flex-row" style="align-items: center;">
+            <div>TAGS:  </div>
+            <div>
+                {% for tag in tags %}
+                    <span class="button edit-btn" style="margin-left: .7rem;"><a href="/tags/{{tag.tags.id}}">{{tag.tags.tag_name}}</a></span>
+                {% endfor %}
+            </div>  
+        </div>
+        <hr style="margin: 1rem 0;" class="underline">
             <span class="orange"><i>Posted By:</i> </span><a href="/users/{{post.user.id}}">{{post.user.first_name}} {{post.user.last_name}}</a>  <i>on</i> {{post.friendly_date}}
         </div>
     </div>
