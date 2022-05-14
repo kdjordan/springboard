@@ -11,7 +11,16 @@
         </div>
         <div>
             <label for="post_content">Content</label>
-            <textarea name="post_content"  rows="20" cols="40" style="padding: .5rem" placeholder="Your Content Here..."></textarea>
+            <textarea name="post_content"  rows="10" cols="40" style="padding: .5rem" placeholder="Your Content Here..."></textarea>
+        </div>
+        <div style="width: 100%">
+            <h2 class="underline orange" style="align-self: flex-start;margin-bottom: 2rem;">TAGS</h2>
+            {% for tag in tags %}
+                <div class="flex-row" style="align-items:center; margin:.2rem 0;">
+                    <input type="checkbox" value="{{tag.tag_name}}" name="tag">
+                    <label for="{{tag.tag_name}}">&nbsp;&nbsp;{{tag.tag_name}}</label>
+                </div>
+            {% endfor %}
         </div>
         <div class="flex-row" style="justify-content: flex-end; width: 100%">
             <button class="delete-btn"><a href="/users/{{user_id}}">CANCEL</a></button>

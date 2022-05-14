@@ -72,6 +72,7 @@ class Tag(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     tag_name = db.Column(db.String(25), nullable=False, unique=True)
 
+    posts = db.relationship('Post', secondary="posts_tags", backref="tags")    
 
 class PostTag(db.Model):
     """Tale definiton for tags-posts join model"""
@@ -81,6 +82,6 @@ class PostTag(db.Model):
     tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
 
     # tags = db.relationship('Tag', secondary='posts_tags', backref="posts")
-    posts = db.relationship('Post', backref="posts")
-    tags = db.relationship('Tag', backref="tags", cascade="all")
+    # posts = db.relationship('Post', backref="posts")
+    # tags = db.relationship('Tag', backref="tags", cascade="all")
 

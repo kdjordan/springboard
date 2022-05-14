@@ -98,23 +98,25 @@ def get_post(id):
 @app.route('/users/<int:id>/posts/new', methods=['POST', 'GET'])
 def add_post(id):
     if request.method == 'GET':
+        tags = Tag.query.all()
         """Show the add post for a user."""
-        return render_template('addpost.html', title='Add Post', heading='Add a Post', user_id=id)
+        return render_template('addpost.html', title='Add Post', heading='Add a Post', user_id=id, tags=tags)
 
     if request.method == 'POST':
         """Add Post to DB."""
+        print("request", request.form)
         post = Post(title=request.form['post_title'], 
                 content=request.form['post_content'],
                 user_id=id)
-        db.session.add(post)
-        db.session.commit()
+        # db.session.add(post)
+        # db.session.commit()
         return redirect('/users')
 
 @app.route('/posts/<int:id>/edit', methods=['POST', 'GET'])
 def edit_post(id):
+    """Edit a Post on POST, show edit form on GET"""
     post = Post.query.get(id)
     
-
     if request.method == 'GET':
         """Show the edit post for a user."""
         return render_template('editpost.html', title='Edit Post', heading='Edit a Post', post=post)
@@ -139,11 +141,13 @@ def delete_post(id):
 
 @app.route('/tags')
 def get_all_tags():
+    """Gets and displays all tags"""
     tags = Tag.query.all()
     return render_template('alltags.html', tags=tags, title='All Tags', heading='All Tags')
 
 @app.route('/tags/<int:id>')
 def get_tag(id):
+    """Shows all posts a tag is associated with"""
     tags = PostTag.query.filter(PostTag.tag_id == id).all()
     tag = Tag.query.get(id)
     return render_template('tagdetails.html', tags=tags, title='Tag Detail', heading='Tag Detail', id=id, tag=tag)

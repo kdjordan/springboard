@@ -63,7 +63,6 @@ button, .button {
     text-transform: uppercase;
     cursor: pointer;
     transition: all .4s ease;
-    margin-top: 1rem;
     letter-spacing: 1.5px;
 }
 
@@ -73,6 +72,11 @@ button a, .button a {
 
 button:hover {
     filter: opacity(50%);
+}
+
+.btn-container button:nth-of-type(2){
+    margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .add-btn {
@@ -98,6 +102,14 @@ button:hover {
 .edit-btn {
     background-color: var(--blue);
     border: 2px solid var(--blue);
+}
+
+.tag-btn {
+    background-color: var(--orange);
+}
+
+.tag-btn a {
+    color: var(--lemon-meringue);
 }
 
 
@@ -126,6 +138,16 @@ input[type='textarea'] {
     width: 15rem;
     height: 10rem;
     padding: .5rem;
+}
+
+input[type="checkbox"] {
+    font: inherit;
+    accent-color:  var(--orange);
+    width: 1.15em;
+    height: 1.15em;
+    border: 0.15em solid  var(--orange);
+    border-radius: 0.15em;
+    transform: translateY(-0.075em);
 }
 
 textarea {
