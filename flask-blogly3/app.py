@@ -104,12 +104,14 @@ def add_post(id):
 
     if request.method == 'POST':
         """Add Post to DB."""
-        print("request", request.form)
+        checks = request.form.getlist('tag')
         post = Post(title=request.form['post_title'], 
                 content=request.form['post_content'],
                 user_id=id)
-        # db.session.add(post)
-        # db.session.commit()
+        db.session.add(post)
+        db.session.commit()
+        """Now get Post ID to add to posts_tags Table"""
+        add_post_tags(checks, post.id)
         return redirect('/users')
 
 @app.route('/posts/<int:id>/edit', methods=['POST', 'GET'])
@@ -190,3 +192,14 @@ def delete_tag(id):
     db.session.delete(tag)
     db.session.commit()
     return redirect('/tags')
+
+
+# UTILITIES #################################################################
+
+def add_post_tags(tags, post_id):
+    """Add tags to DB from add POST."""
+    for tag in tags:
+        tag_id = tag.split('-')[1]
+        post_tag = PostTag(post_id=post_id, tag_id=tag_id)
+        db.session.add(post_tag)
+        db.session.commit()

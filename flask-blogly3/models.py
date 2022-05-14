@@ -58,8 +58,6 @@ class Post(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.datetime.now())
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
 
-    
-    # tags = db.relationship('Tag', secondary='posts_tags', backref="posts")
 
 class Tag(db.Model):
     """Tale definiton for tags - model"""
@@ -81,7 +79,4 @@ class PostTag(db.Model):
     post_id = db.Column(db.Integer, db.ForeignKey('posts.id'), primary_key=True)
     tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)
 
-    # tags = db.relationship('Tag', secondary='posts_tags', backref="posts")
-    # posts = db.relationship('Post', backref="posts")
-    # tags = db.relationship('Tag', backref="tags", cascade="all")
 
