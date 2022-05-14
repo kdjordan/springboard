@@ -7,8 +7,8 @@
             <h2 class="underline orange" style="margin-bottom: 1rem;">{{tag.tag_name}}</h2> 
         </div>
         <div style="margin-bottom: 1rem;">
-            {% for tag in tags %}
-                <li><a href="/posts/{{tag.posts.id}}">{{tag.posts.title}}</a></li>
+            {% for post in tag.posts %}
+                <li><a href="/posts/{{post.id}}">{{post.title}}</a></li>
             {% endfor %}
         </div>
         <hr style="margin: 1rem 0;" class="underline">

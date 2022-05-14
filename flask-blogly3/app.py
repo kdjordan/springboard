@@ -156,9 +156,8 @@ def get_all_tags():
 @app.route('/tags/<int:id>')
 def get_tag(id):
     """Shows all posts a tag is associated with"""
-    tags = PostTag.query.filter(PostTag.tag_id == id).all()
-    tag = Tag.query.get(id)
-    return render_template('tagdetails.html', tags=tags, title='Tag Detail', heading='Tag Detail', id=id, tag=tag)
+    tag = Tag.query.get_or_404(id)
+    return render_template('tagdetails.html', title='Tag Detail', heading='Tag Detail', tag=tag)
 
 @app.route('/tags/new', methods=['POST', 'GET'])
 def add_tag():
