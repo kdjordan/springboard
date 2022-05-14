@@ -1,11 +1,11 @@
 from unittest import TestCase
 from app import app
-from models import db,  User, Post
+from models import db,  User, Post, Tag
 
 
 app.config['TESTING'] = True
 app.config['DEBUG_TB_HOSTS'] = ['dont-show-debug-toolbar']
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly2_test'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///blogly3_test'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
@@ -13,17 +13,22 @@ class FlaskTests(TestCase):
     def setUp(self):
         db.create_all();
         user = User(first_name="TestKevin", last_name="TestJordan", avatar="Testavatar")
-        post = Post(title='A Post Bout Nothing', content='Lorem ipsum dolor sit amet...', user_id=user.id)
+        post = Post(title='A Post Bout Nothing', content='Lorem ipsum dolor sit amet...', user_id=1)
+        tag = Tag(tag_name="New Tag")
 
         db.session.add(user)
         db.session.add(post)
+        db.session.add(tag)
+        
         db.session.commit()
-
+        
         self.user_id = user.id
         self.post_id = post.id
+        self.tag_id = tag.id
         
     def tearDown(self):
-        db.drop_all();
+        db.session.rollback()
+        db.drop_all()
     
 
     def test_list_users(self):
@@ -80,6 +85,23 @@ class FlaskTests(TestCase):
             res = client.post('/posts/1/edit', data=data, follow_redirects=True)
             html = res.get_data(as_text=True)
             self.assertIn('TestKevin', html)
+
+    def test_addtag(self):
+        """Test editing post"""
+        with app.test_client() as client:
+            data = {'tag_name': "Test Tag"}
+            res = client.post('/tags/new', data=data, follow_redirects=True)
+            html = res.get_data(as_text=True)
+            self.assertIn('Test Tag', html)
+
+    def test_deletetag(self):
+        """Test editing post"""
+        with app.test_client() as client:
+            res = client.get('/tags/{self.tag_id}', follow_redirects=True)
+            html = res.get_data(as_text=True)
+            self.assertNotIn('New Tag', html)
+
+
 
 
     

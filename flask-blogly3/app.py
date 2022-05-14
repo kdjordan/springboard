@@ -191,8 +191,6 @@ def edit_tag(id):
 @app.route('/tags/<int:id>/delete')
 def delete_tag(id):
     """Deletes tag from DB."""
-    db.session.query(PostTag).filter(PostTag.tag_id == id).delete()
-    db.session.commit()
     tag = Tag.query.get(id)
     db.session.delete(tag)
     db.session.commit()

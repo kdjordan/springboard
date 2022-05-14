@@ -16,6 +16,7 @@ class FlaskTests(TestCase):
         post = Post(title='A Post Bout Nothing', content='Lorem ipsum dolor sit amet...', user_id=user.id)
 
         db.session.add(user)
+        db.session.commit()
         db.session.add(post)
         db.session.commit()
 
