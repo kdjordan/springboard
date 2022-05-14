@@ -104,27 +104,33 @@ def add_post(id):
 
     if request.method == 'POST':
         """Add Post to DB."""
-        checks = request.form.getlist('tag')
-        post = Post(title=request.form['post_title'], 
-                content=request.form['post_content'],
-                user_id=id)
-        db.session.add(post)
-        db.session.commit()
-        """Now get Post ID to add to posts_tags Table"""
-        add_post_tags(checks, post.id)
+        user = User.query.get(id)
+        tag_ids = [int(num) for num in request.form.getlist("tag")]
+        tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+        new_post = Post(title=request.form['post_title'],
+                    content=request.form['post_content'],
+                    user=user,
+                    tags=tags)
+
+        db.session.add(new_post)
+        db.session.commit()    
         return redirect('/users')
 
 @app.route('/posts/<int:id>/edit', methods=['POST', 'GET'])
 def edit_post(id):
     """Edit a Post on POST, show edit form on GET"""
     post = Post.query.get(id)
-    
+    tags = Tag.query.all()
     if request.method == 'GET':
         """Show the edit post for a user."""
-        return render_template('editpost.html', title='Edit Post', heading='Edit a Post', post=post)
+
+        return render_template('editpost.html', title='Edit Post', heading='Edit a Post', post=post, tags=tags)
 
     if request.method == 'POST':
         """Update Post in DB."""
+        tag_ids = [int(num) for num in request.form.getlist("tag")]
+        post.tags = Tag.query.filter(Tag.id.in_(tag_ids)).all()
+
         post.title=request.form['post_title']
         post.content=request.form['post_content']
         db.session.add(post)
@@ -194,12 +200,3 @@ def delete_tag(id):
     return redirect('/tags')
 
 
-# UTILITIES #################################################################
-
-def add_post_tags(tags, post_id):
-    """Add tags to DB from add POST."""
-    for tag in tags:
-        tag_id = tag.split('-')[1]
-        post_tag = PostTag(post_id=post_id, tag_id=tag_id)
-        db.session.add(post_tag)
-        db.session.commit()
