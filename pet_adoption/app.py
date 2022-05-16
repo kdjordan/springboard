@@ -1,16 +1,20 @@
 """Blogly application."""
 
 from flask import Flask, request, render_template, redirect, flash, session
-# from models import db, connect_db, Pet, Post, Tag, PostTag
+from flask_debugtoolbar import DebugToolbarExtension
+from models import db, connect_db, Pet, Species
 from forms import AddPetForm
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///adoption'
+app.config['SECRET_KEY'] = 'secret_key'
+
+debug = DebugToolbarExtension(app)
+app.config['DEBUG_TB_INTERCEPT_REDIRECTS'] = False
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql:///adoption_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
-app.config['SECRET_KEY'] = "alkhjbdkajsbdf"
 
-# connect_db(app)
+connect_db(app)
 # db.create_all()
 
 @app.route('/')
