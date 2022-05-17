@@ -14,7 +14,7 @@ class Pet(db.Model):
 
     def __repr__(self):
         u = self
-        return f'<Pet id={u.id}, name={u.first_name}, species={u.last_name}, Avatar={u.avatar}'
+        return f'<Pet id={u.id}, name={u.name}'
 
     id = db.Column(db.Integer,
                     primary_key=True,
@@ -30,7 +30,8 @@ class Pet(db.Model):
     
     avatar = db.Column(db.String,
                     nullable=False,
-                    unique=False)
+                    unique=False,
+                    server_default='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRJZWDdK92HYaKt1xBZCIoef1lG8sE2dcO0C12CjRNGOefBTNS09GDhQLeL3njGBhTAy4U&usqp=CAU')
 
     age = db.Column(db.Integer,
                     nullable=False,

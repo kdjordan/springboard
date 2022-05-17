@@ -5,7 +5,7 @@ db.drop_all()
 db.create_all()
 
 u1 = Pet(name='Biggles', notes="Happy little guy", 
-    avatar="https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
+    avatar="https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=1200&height=1200&quality=85&auto=format&fit=crop&s=49ed3252c0b2ffb49cf8b508892e452d",
     age=5, species=1)
 
 u2 = Pet(name='Doc Barks', notes="Happier little guy", 

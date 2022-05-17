@@ -1,15 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 style="text-align: center;">All pets</h2>
-<div class="flex-row" style="align-items: center; justify-content: space-evenly;flex-wrap: wrap; gap:1rem'">
-  {% for pet in pets %}
-  <div class="flex-col">
-    <div class="card_name blue">{{pet.name}}</div>
-      <div class="card_image" style="background-image:url({{pet.avatar}})"></div>
-      <div>Pet is available: {{pet.available}}</div>
+<h2 class="blue" style="text-align: center; margin-bottom: 4rem;">ALL PETS</h2>
+<div class="flex-row allpets" style="align-items: center; justify-content: space-evenly;flex-wrap: wrap; gap:1rem">
+  
+{% for pet in pets %}
+  <a id="allpets" href="/pet/{{pet.id}}">
+  <div class="flex-col" style="align-items:center; margin-bottom: 2rem;">
+      <div class="available">{{pet.name}}</div>
+      <div class="card_image" style="background-image:url('{{pet.avatar}}');"></div>
+      <div>
+        {% if pet.available %}
+          <span class="available">AVAILABLE !</span>
+        {% else %}
+        <span class="red">NOT AVAILABLE</span> 
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </a>
   </div>
-  {% endfor %}
-</div>
 {% endblock %}
 

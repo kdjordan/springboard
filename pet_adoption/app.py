@@ -30,13 +30,12 @@ def add_pet():
     """Add Pet into DB route for POST and show pet signup form for GET"""
     form = AddPetForm()
     if form.validate_on_submit():
-        print('*********')
+        
         name = form.name.data
         notes = form.notes.data
         avatar = form.avatar.data
         age = form.age.data
         species = form.species.data
-        print('species ', species)
         #create pet object
         pet = Pet(name=name, notes=notes, avatar=avatar, age=age, species=species)
         #add pet into DB
@@ -46,9 +45,11 @@ def add_pet():
     else:
         return render_template('addpet.html', form=form)
 
-@app.route('/<int:id>')
+@app.route('/pet/<int:id>')
 def show_pet(id):
-    return render_template('petdetail.html', id=id)
+    pet = Pet.query.get(id)
+    print('pet****** ', pet)
+    return render_template('petdetails.html', pet=pet)
 
     
 # HANDLE 404 ################################################################################

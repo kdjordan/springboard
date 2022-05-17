@@ -2,7 +2,7 @@
 
 {% block content %}
 <div class="flex-col" style="align-items: center;">
-  <h2>Add pet</h2>
+  <h2 class="blue" style="text-align: center; margin-bottom: 4rem;">ADD PETS</h2>
   <form action="/add" method='POST'>
     {{ form.csrf_token }}
     {% for field in form %}

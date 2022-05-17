@@ -46,13 +46,18 @@ li a:hover, a:hover {
     filter: opacity(50%); 
 } 
 
+h2 {
+    font-size : clamp(2rem,4vw,12rem);
+}
+
+
 /*********** IMAGES *******************************************************/
 
 
 
 /*********** BUTTONS *******************************************************/
 button, .button {
-    padding: .2rem .4rem;
+    padding: .5rem;
     border: 1px solid transparent;
     border-radius: 5px;
     text-transform: uppercase;
@@ -163,6 +168,7 @@ nav li {
 nav a {
     color: var(--maximum-yellow-red);
     text-transform: uppercase;
+    font-size : clamp(1rem,1vw,5rem);
 }
 nav ul {
     justify-content: space-evenly;
@@ -176,13 +182,11 @@ nav ul {
     overflow: hidden;
     background-position: center;
     background-size: cover;
+    border-radius: 50%;
+    margin: 1rem 0;
+    border: 2px solid var(--orange);
 }
 
-.card {
-    width: 100%;
-    max-width: 250px;
-    height: auto;
-}
 
 /*********** COLOR HELPERS ***********/
 
@@ -198,7 +202,23 @@ nav ul {
     color: var(--red);
 }
 
+.blue {
+    color: var(--prussian-blue);
+}
+
 .underline {
     border-bottom: 2px solid var(--lemon-meringue);
 }
 
+.available {
+    color: var(--lemon-meringue);
+    border-radius: .4rem;
+    padding: .2rem .5rem;
+    background-color: var(--prussian-blue);
+}
+
+.pet_details {
+    font-size: clamp(1.3rem,2vw,5rem);
+    color: red;
+    align-items: center;
+}

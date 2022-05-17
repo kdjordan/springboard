@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="blue" style="text-align: center; margin-bottom: 2rem;">{{pet.name}}</h2>
+<div class="flex-row" style="align-items: center; justify-content: space-evenly;flex-wrap: wrap; gap:1rem">
+  <div class="flex-col" style="align-items:center;">
+      <div class="card_image" style="background-image:url('{{pet.avatar}}');"></div>
+    <div style="margin: 2rem 0;">
+        <div class="pet_details flex-col">
+            <span style="align-self:flex-start;">About Me:</span>
+            {{pet.notes}}
+        </div>
+    </div>
+        <button class="add-btn">EDIT</button>
+  </div>
+</div>
+{% endblock %}
+
