@@ -38,6 +38,10 @@ ul {
     list-style-position: inside;
 }
 
+li {
+    list-style-type: none;
+}
+
 li a {
    color: var(--lemon-meringue);
 }

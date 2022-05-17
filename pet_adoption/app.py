@@ -4,6 +4,7 @@ from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Pet, Species
 from forms import AddPetForm, EditPetForm
+from distutils.util import strtobool
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
@@ -45,23 +46,28 @@ def add_pet():
     else:
         return render_template('addpet.html', form=form)
 
-@app.route('/pet/<int:id>')
-def show_pet(id):
-    pet = Pet.query.get(id)
-    return render_template('petdetails.html', pet=pet)
 
-@app.route('/<int:id>')
+@app.route('/<int:id>', methods=['POST', 'GET'])
 def edit_pet(id):
-    form = EditPetForm()
     pet = Pet.query.get(id)
-    form.available.default = pet.available
-    form.process()
+    form = EditPetForm()
 
-    species = Species.query.get(pet.id)
-    form.notes.data = pet.notes
-    form.avatar.data = pet.avatar
-    
-    return render_template('editpet.html', form=form, pet=pet, species=species)
+    if form.validate_on_submit():
+        pet.notes = form.notes.data
+        pet.avatar = form.avatar.data
+        pet.available = strtobool(form.available.data)
+        db.session.add(pet)
+        db.session.commit()
+        return redirect('/')
+
+    else:
+        form.available.default = pet.available
+        form.process()
+        species = Species.query.get(pet.id)
+        form.notes.data = pet.notes
+        form.avatar.data = pet.avatar
+        
+        return render_template('editpet.html', form=form, pet=pet, species=species)
 
     
 # HANDLE 404 ################################################################################

@@ -5,7 +5,7 @@
 <div class="flex-row allpets" style="align-items: center; justify-content: space-evenly;flex-wrap: wrap; gap:1rem">
   
 {% for pet in pets %}
-  <a id="allpets" href="/pet/{{pet.id}}">
+  <a id="allpets" href="/{{pet.id}}">
   <div class="flex-col" style="align-items:center; margin-bottom: 2rem;">
       <div class="available">{{pet.name}}</div>
       <div class="card_image" style="background-image:url('{{pet.avatar}}');"></div>

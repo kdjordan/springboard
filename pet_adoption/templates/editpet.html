@@ -2,14 +2,15 @@
 
 {% block content %}
 <div class="flex-col" style="align-items: center;">
-  <h2 class="blue" style="text-align: center; margin-bottom: 4rem;">EDIT PETS</h2>
+  <h2 class="blue" style="text-align: center; margin-bottom: 4rem;">EDIT PET</h2>
   <div class="flex-col" style="align-items:center;">
     <h2 class="blue" style="text-align: center; margin-bottom: 2rem;">{{pet.name}}</h2>
     {{pet.age}}
     <div class="card_image" style="background-image:url('{{pet.avatar}}');"></div>
     <span class="blue">{{species.name}}</span> 
+    <span class="blue">{{pet.id}}</span> 
 </div>
-  <form action="/add" method='POST'>
+  <form action="/{{pet.id}}" method='POST'>
     {{ form.csrf_token }}
     {% for field in form %}
         {% if field.widget.input_type != 'hidden' %}
@@ -20,7 +21,7 @@
         {% endif %}
 
     {% endfor %}
-    <button>SUBMIT</button>
+    <button>UPDATE</button>
   </form>
 </div>
 
