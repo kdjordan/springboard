@@ -14,7 +14,7 @@ u2 = Pet(name='Doc Barks', notes="Happier little guy",
 
 u3 = Pet(name='Captain Pointy', notes="Nice but standoffish", 
     avatar="https://img.buzzfeed.com/buzzfeed-static/static/2016-03/29/23/enhanced/webdr07/enhanced-2872-1459308485-1.jpg?output-quality=auto&output-format=auto&downsize=640:*",
-    age=1, species=3)
+    age=1, species=3, available=False)
 
 
 p1 = Species(name='cat')

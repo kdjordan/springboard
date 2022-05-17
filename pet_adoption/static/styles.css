@@ -222,3 +222,7 @@ nav ul {
     color: red;
     align-items: center;
 }
+
+.pet_notes {
+    color: var(--prussian-blue);
+}

@@ -3,7 +3,7 @@
 from flask import Flask, request, render_template, redirect, flash, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Pet, Species
-from forms import AddPetForm
+from forms import AddPetForm, EditPetForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
@@ -48,8 +48,20 @@ def add_pet():
 @app.route('/pet/<int:id>')
 def show_pet(id):
     pet = Pet.query.get(id)
-    print('pet****** ', pet)
     return render_template('petdetails.html', pet=pet)
+
+@app.route('/<int:id>')
+def edit_pet(id):
+    form = EditPetForm()
+    pet = Pet.query.get(id)
+    form.available.default = pet.available
+    form.process()
+
+    species = Species.query.get(pet.id)
+    form.notes.data = pet.notes
+    form.avatar.data = pet.avatar
+    
+    return render_template('editpet.html', form=form, pet=pet, species=species)
 
     
 # HANDLE 404 ################################################################################
