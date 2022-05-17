@@ -3,9 +3,10 @@
 {% block content %}
 <div class="flex-col" style="align-items: center;">
   <h2>Add pet</h2>
-  <form action="" method='POST'>
+  <form action="/add" method='POST'>
+    {{ form.csrf_token }}
     {% for field in form %}
-        {% if field.widget.import_type != 'hidden' %}
+        {% if field.widget.input_type != 'hidden' %}
         <div>
             {{field.label}}
             {{field}}
@@ -13,6 +14,7 @@
         {% endif %}
 
     {% endfor %}
+    <button>SUBMIT</button>
   </form>
 </div>
 

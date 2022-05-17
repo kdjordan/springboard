@@ -35,6 +35,10 @@ class Pet(db.Model):
     age = db.Column(db.Integer,
                     nullable=False,
                     unique=False)
+    
+    available = db.Column(db.Boolean,
+                        nullable=False,
+                        default=True)
 
     species = db.Column(db.Integer, db.ForeignKey('species.id'), nullable=False)
 
@@ -46,7 +50,7 @@ class Species(db.Model):
 
     def __repr__(self):
         p = self
-        return f'Species id={p.id}'
+        return f'Species id={p.id} name={p.name}'
 
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     name = db.Column(db.String(), nullable= False, unique=True)

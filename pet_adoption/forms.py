@@ -4,8 +4,7 @@ from wtforms import StringField, URLField, IntegerField, SelectField, validators
 
 class AddPetForm(FlaskForm):
     name = StringField('Pet Name')
-    species = StringField('Species')
-    image = URLField('Profile Pic')
+    avatar = URLField('Profile Pic')
     age = IntegerField('Pet Age', [validators.NumberRange(min=1,max=30)])
-    pet_type = SelectField('Type of Pet', choices=['cat', 'dog', 'opossum'])
+    species = SelectField('Type of Pet', choices=[(1, 'cat'), (2, 'dog'), (3, 'opossum')])
     notes = TextAreaField('Notes', render_kw={"rows": 10, "cols": 28})

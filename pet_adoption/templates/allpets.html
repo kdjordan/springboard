@@ -1,8 +1,15 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="flex-col" style="align-items: center;">
-  <h2>All pets</h2>
+<h2 style="text-align: center;">All pets</h2>
+<div class="flex-row" style="align-items: center; justify-content: space-evenly;flex-wrap: wrap; gap:1rem'">
+  {% for pet in pets %}
+  <div class="flex-col">
+    <div class="card_name blue">{{pet.name}}</div>
+      <div class="card_image" style="background-image:url({{pet.avatar}})"></div>
+      <div>Pet is available: {{pet.available}}</div>
+  </div>
+  {% endfor %}
 </div>
 {% endblock %}
 

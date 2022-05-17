@@ -19,15 +19,32 @@ connect_db(app)
 
 @app.route('/')
 def home():
-    return render_template("allpets.html")
+    pets = Pet.query.all()
+    return render_template("allpets.html", pets=pets)
 
 
 
 # PETS ROUTES #################################################################
-@app.route('/add')
+@app.route('/add', methods=['POST', 'GET'])
 def add_pet():
+    """Add Pet into DB route for POST and show pet signup form for GET"""
     form = AddPetForm()
-    return render_template('addpet.html', form=form)
+    if form.validate_on_submit():
+        print('*********')
+        name = form.name.data
+        notes = form.notes.data
+        avatar = form.avatar.data
+        age = form.age.data
+        species = form.species.data
+        print('species ', species)
+        #create pet object
+        pet = Pet(name=name, notes=notes, avatar=avatar, age=age, species=species)
+        #add pet into DB
+        db.session.add(pet)
+        db.session.commit()
+        return redirect('/')
+    else:
+        return render_template('addpet.html', form=form)
 
 @app.route('/<int:id>')
 def show_pet(id):

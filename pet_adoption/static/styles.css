@@ -168,7 +168,21 @@ nav ul {
     justify-content: space-evenly;
 }
 
+/*********** PET CARD ***********/
+.card_image {
+    width: 250px;
+    height: 250px;
+    display: block;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+}
 
+.card {
+    width: 100%;
+    max-width: 250px;
+    height: auto;
+}
 
 /*********** COLOR HELPERS ***********/
 
