@@ -1,24 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2 class="blue" style="text-align: center; margin-bottom: 4rem;">ALL PETS</h2>
-<div class="flex-row allpets" style="align-items: center; justify-content: space-evenly;flex-wrap: wrap; gap:1rem">
-  
-{% for pet in pets %}
-  <a id="allpets" href="/{{pet.id}}">
-  <div class="flex-col" style="align-items:center; margin-bottom: 2rem;">
-      <div class="available">{{pet.name}}</div>
-      <div class="card_image" style="background-image:url('{{pet.avatar}}');"></div>
-      <div>
-        {% if pet.available %}
-          <span class="available">AVAILABLE !</span>
-        {% else %}
-        <span class="red">NOT AVAILABLE</span> 
-        {% endif %}
+<div class="flex-col" style="align-items: center;">
+<h2 class="pet_page_font" style="margin-bottom: 3rem;">ALL PETS</h2>
+<div class="flex-row" style="align-items: center; justify-content: space-evenly;flex-wrap: wrap; gap:1rem; width: 100%;">
+  {% for pet in pets %}
+    <a id="allpets" href="/{{pet.id}}">
+    <div class="flex-col" style="align-items:center; margin-bottom: 2rem;">
+        <div class="available">{{pet.name}}</div>
+        <div class="pet_image" style="background-image:url('{{pet.avatar}}');"></div>
+        <div>
+          {% if pet.available %}
+            <span class="available">AVAILABLE !</span>
+          {% else %}
+          <span class="not_available">NOT AVAILABLE</span> 
+          {% endif %}
+        </div>
       </div>
-    </div>
-    {% endfor %}
+  {% endfor %}
   </a>
   </div>
+</div>
 {% endblock %}
 

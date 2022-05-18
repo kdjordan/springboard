@@ -2,27 +2,25 @@
 
 {% block content %}
 <div class="flex-col" style="align-items: center;">
-  <h2 class="blue" style="text-align: center; margin-bottom: 4rem;">EDIT PET</h2>
-  <div class="flex-col" style="align-items:center;">
-    <h2 class="blue" style="text-align: center; margin-bottom: 2rem;">{{pet.name}}</h2>
-    {{pet.age}}
-    <div class="card_image" style="background-image:url('{{pet.avatar}}');"></div>
-    <span class="blue">{{species.name}}</span> 
-    <span class="blue">{{pet.id}}</span> 
-</div>
-  <form action="/{{pet.id}}" method='POST'>
-    {{ form.csrf_token }}
-    {% for field in form %}
-        {% if field.widget.input_type != 'hidden' %}
-        <div>
-            {{field.label}}
-            {{field}}
-        </div>
-        {% endif %}
+  <h2 class="pet_page_font" style="margin-bottom: 2rem;">EDIT PET</h2>
+    <h3 class="pet_detail_font--large" style="text-align: center; margin-bottom: 1rem;">{{pet.name}}</h3>
+    <div class="pet_image" style="background-image:url('{{pet.avatar}}');margin-bottom: 1.5rem;"></div>
+    <div class="pet_detail_font">AGE: {{pet.age}}</div> 
+    <div class="pet_detail_font">SPECIES: {{species.name}}</div>
+    <div class="underline"></div>
+    <form action="/{{pet.id}}" method='POST'>
+        {{ form.csrf_token }}
+        {% for field in form %}
+            {% if field.widget.input_type != 'hidden' %}
+            <div class="flex-col" style="align-items:center; margin-bottom: 1rem;">
+                {{field.label}}
+                {{field}}
+            </div>
+            {% endif %}
 
-    {% endfor %}
-    <button>UPDATE</button>
-  </form>
+        {% endfor %}
+        <button>UPDATE</button>
+    </form>
 </div>
 
 {% endblock %}

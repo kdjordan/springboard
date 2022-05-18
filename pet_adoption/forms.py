@@ -12,4 +12,4 @@ class AddPetForm(FlaskForm):
 class EditPetForm(FlaskForm):
     avatar = URLField('Profile Pic')
     notes = TextAreaField('Notes', render_kw={"rows": 10, "cols": 28})
-    available = RadioField('Avaialble', choices=[('True','True'), ('False', 'False')])
+    available = RadioField('Avaialable', choices=[('True','True'), ('False', 'False')])

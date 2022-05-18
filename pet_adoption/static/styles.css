@@ -54,6 +54,11 @@ h2 {
     font-size : clamp(2rem,4vw,12rem);
 }
 
+label {
+    color: var(--prussian-blue);
+    margin-bottom: 1rem;
+}
+
 
 /*********** IMAGES *******************************************************/
 
@@ -103,20 +108,6 @@ button:hover {
     color: var(--lemon-meringue);
 }
 
-.edit-btn {
-    background-color: var(--blue);
-    border: 2px solid var(--blue);
-}
-
-.tag-btn {
-    background-color: var(--orange);
-}
-
-.tag-btn a {
-    color: var(--lemon-meringue);
-}
-
-
 /*********** FORMS *******************************************************/
 form {
     display: flex;
@@ -137,6 +128,11 @@ input, select {
     width: 15rem;
     padding: .5rem;
 } 
+
+input[type='radio'] {
+    accent-color:var(--orange);
+    width: 2rem;
+}
 
 /*********** LAYOUT HELPERS *******************************************************/
 
@@ -178,8 +174,14 @@ nav ul {
     justify-content: space-evenly;
 }
 
-/*********** PET CARD ***********/
-.card_image {
+/*********** PETS ***********/
+.pet_page_font {
+    font-size : clamp(2rem,4vw,12rem);
+    color: var(--prussian-blue);
+    border-bottom: 2px solid var(--prussian-blue);
+}
+
+.pet_image {
     width: 250px;
     height: 250px;
     display: block;
@@ -191,6 +193,25 @@ nav ul {
     border: 2px solid var(--orange);
 }
 
+.pet_notes {
+    color: var(--prussian-blue);
+}
+
+.pet_detail_font {
+    color: var(--prussian-blue);
+    font-size: clamp(1.2rem, 2.1vw, 7rem);
+}
+
+.pet_detail_font--large {
+    color: var(--prussian-blue);
+    font-size: clamp(2rem, 3vw, 8rem);
+}
+
+#available {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+}
 
 /*********** COLOR HELPERS ***********/
 
@@ -211,8 +232,11 @@ nav ul {
 }
 
 .underline {
-    border-bottom: 2px solid var(--lemon-meringue);
+    border: 1px solid var(--prussian-blue);
+    width: 50%;
+    margin: 1rem auto;
 }
+
 
 .available {
     color: var(--lemon-meringue);
@@ -221,12 +245,10 @@ nav ul {
     background-color: var(--prussian-blue);
 }
 
-.pet_details {
-    font-size: clamp(1.3rem,2vw,5rem);
-    color: red;
-    align-items: center;
+.not_available {
+    color: var(--red);
+    border: 2px solid var(--red);
+    border-radius: .4rem;
+    padding: .2rem .5rem;
 }
 
-.pet_notes {
-    color: var(--prussian-blue);
-}
