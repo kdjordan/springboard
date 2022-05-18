@@ -1,6 +1,6 @@
 """Blogly application."""
 
-from flask import Flask, request, render_template, redirect, flash, session
+from flask import Flask, render_template, redirect
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, Pet, Species
 from forms import AddPetForm, EditPetForm
@@ -20,6 +20,7 @@ connect_db(app)
 
 @app.route('/')
 def home():
+    """Show all pets listing on home page"""
     pets = Pet.query.all()
     return render_template("allpets.html", pets=pets)
 
@@ -49,6 +50,7 @@ def add_pet():
 
 @app.route('/<int:id>', methods=['POST', 'GET'])
 def edit_pet(id):
+    """Route handler for showing edit form on GET or handling the edit on POST"""
     pet = Pet.query.get(id)
     form = EditPetForm()
 

@@ -10,6 +10,7 @@ def connect_db(app):
 
 # MODELS
 class Pet(db.Model):
+    """Tale definiton for Pet - model"""
     __tablename__ = 'pets'
 
     def __repr__(self):
@@ -46,7 +47,7 @@ class Pet(db.Model):
 
 
 class Species(db.Model):
-    """Tale definiton for posts - model"""
+    """Tale definiton for species - model"""
     __tablename__ = 'species'
 
     def __repr__(self):

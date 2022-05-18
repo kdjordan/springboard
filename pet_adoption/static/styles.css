@@ -42,14 +42,6 @@ li {
     list-style-type: none;
 }
 
-li a {
-   color: var(--lemon-meringue);
-}
-
-li a:hover, a:hover {
-    filter: opacity(50%); 
-} 
-
 h2 {
     font-size : clamp(2rem,4vw,12rem);
 }
@@ -62,7 +54,17 @@ label {
 
 /*********** IMAGES *******************************************************/
 
-
+.pet_image {
+    width: 250px;
+    height: 250px;
+    display: block;
+    overflow: hidden;
+    background-position: center;
+    background-size: cover;
+    border-radius: 50%;
+    margin: 1rem 0;
+    border: 2px solid var(--orange);
+}
 
 /*********** BUTTONS *******************************************************/
 button, .button {
@@ -75,36 +77,13 @@ button, .button {
     letter-spacing: 1.5px;
 }
 
-button a, .button a {
-    color: var(--prussian-blue);
-}
-
 button:hover {
     filter: opacity(50%);
 }
 
-.btn-container button:nth-of-type(2){
-    margin-left: 1rem;
-    margin-right: 1rem;
-}
-
 .add-btn {
-    background-color: var(--green);
-    border: 2px solid var(--green);
-}
-
-.cancel-btn {
-    color: var(--red);
-    border: 2px solid var(--red);
-    background-color: transparent;
-}
-
-.delete-btn {
-    color: var(--red);
-    border: 2px solid var(--red);
-    background-color: var(--red);
-}
-.delete-btn a, .edit-btn a, .cancel-btn a {
+    background-color: var(--orange);
+    border: 2px solid var(--orange);
     color: var(--lemon-meringue);
 }
 
@@ -181,17 +160,7 @@ nav ul {
     border-bottom: 2px solid var(--prussian-blue);
 }
 
-.pet_image {
-    width: 250px;
-    height: 250px;
-    display: block;
-    overflow: hidden;
-    background-position: center;
-    background-size: cover;
-    border-radius: 50%;
-    margin: 1rem 0;
-    border: 2px solid var(--orange);
-}
+
 
 .pet_notes {
     color: var(--prussian-blue);
@@ -207,11 +176,28 @@ nav ul {
     font-size: clamp(2rem, 3vw, 8rem);
 }
 
+/********** FOR EDIT PET ********/
+
 #available {
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
 }
+
+.available {
+    color: var(--lemon-meringue);
+    border-radius: .4rem;
+    padding: .2rem .5rem;
+    background-color: var(--prussian-blue);
+}
+
+.not_available {
+    color: var(--red);
+    border: 2px solid var(--red);
+    border-radius: .4rem;
+    padding: .2rem .5rem;
+}
+
 
 /*********** COLOR HELPERS ***********/
 
@@ -237,18 +223,4 @@ nav ul {
     margin: 1rem auto;
 }
 
-
-.available {
-    color: var(--lemon-meringue);
-    border-radius: .4rem;
-    padding: .2rem .5rem;
-    background-color: var(--prussian-blue);
-}
-
-.not_available {
-    color: var(--red);
-    border: 2px solid var(--red);
-    border-radius: .4rem;
-    padding: .2rem .5rem;
-}
 
