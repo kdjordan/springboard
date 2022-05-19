@@ -1,4 +1,4 @@
-"""Blogly application."""
+"""Cupcake application."""
 
 from flask import Flask, render_template, redirect, jsonify, request
 from flask_debugtoolbar import DebugToolbarExtension
@@ -19,10 +19,7 @@ connect_db(app)
 @app.route('/')
 def home():
     """Show all Cupcakes on home page"""
-    cupcakes = Cupcake.query.all()
     return render_template("index.html")
-
-
 
 # CUPCAKES ROUTES #################################################################
 
@@ -44,7 +41,7 @@ def create_cupcake():
     new_cupcake = Cupcake(flavor=request.json['flavor'],
                             size=request.json['size'],
                             rating=request.json['rating'],
-                            image=request.json['image'])
+                            image=request.json.get('image'))
     db.session.add(new_cupcake)
     db.session.commit()
     response_json = jsonify(cupcake=new_cupcake.serialize())

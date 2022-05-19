@@ -1,3 +1,4 @@
+// GRAB GLOBALS FOR REFERENCE
 let cupDiv = document.querySelector('.cupcakes')
 let form = document.querySelector('form')
 let images = document.querySelectorAll('.image')
@@ -8,6 +9,7 @@ let deleteBtn = document.querySelector('#deleteBtn')
 let editId
 let mode 
 
+// GET CUCPCAKES FROM DB ON LOAD
 window.onload = () => getCupcakes()
 
 async function getCupcakes() {
@@ -15,6 +17,7 @@ async function getCupcakes() {
     makeCupcakeList(cupcakes.data.cupcakes)
 }
 
+// CREATE AND APPEND CUCAKE DIVS FOR DISPLAY ON HOMEPAGE
 function makeCupcakeList(arr) {
     arr.forEach(el => {
         let div = document.createElement('div')
@@ -33,6 +36,7 @@ function makeCupcakeList(arr) {
     });
 }
 
+// LISTENER FOR CLICK ON ADD BUTTON TO REVEAL ADD CUPCAKE FORM
 addBtn.addEventListener('click', ()=> {
     modeNotification.innerText = 'ADD CUPCAKE'
     mode = ''
@@ -41,54 +45,43 @@ addBtn.addEventListener('click', ()=> {
     form.reset()
 })
 
+// LISTENER FOR FORM SUBMIT THAT DELEGATES ADD OR EDIT CUCAKE FN
 form.addEventListener('submit', async (e)=> {
     e.preventDefault()
-    console.log('submitting', e.submitter.id)
     if(e.submitter.id == 'deleteBtn') {
         let res = await axios.delete(`/api/cupcakes/${editId}`)
             if(res.status == 200) {
                 getCupcakes()
                 location.reload(true)
             }
-        } else if(e.submitter.id == 'submitBtn' && mode == '') {
-            let flavor = document.getElementById('flavor').value
-            let size = document.getElementById('size').value
-            let rating = document.getElementById('rating').value
-            let image = document.getElementById('image').value
-            if(image == '') {
-                image = 'https://tinyurl.com/demo-cupcake'
+        } else if(e.submitter.id == 'submitBtn') {
+            data = {
+                flavor: document.getElementById('flavor').value,
+                size: document.getElementById('size').value,
+                rating: document.getElementById('rating').value,
+                image :document.getElementById('image').value
             }
-            let res = await axios.post('/api/cupcakes', data = {
-                flavor,
-                size,
-                rating,
-                image
-            })
-            if(res.status == 201) {
-                getCupcakes()
-                location.reload(true)
+            if(data['image']== '') {
+                delete data.image
             }
-        } else if(e.submitter.id == 'submitBtn' && mode == 'edit') {
-            let flavor = document.getElementById('flavor').value
-            let size = document.getElementById('size').value
-            let rating = document.getElementById('rating').value
-            let image = document.getElementById('image').value
-            if(image == '') {
-                image = 'https://tinyurl.com/demo-cupcake'
-            }
-            let res = await axios.patch(`/api/cupcakes/${editId}`, data = {
-                flavor,
-                size,
-                rating,
-                image
-            })
-            if(res.status == 200) {
-                getCupcakes()
-                location.reload(true)
-            }
+            if(mode == 'edit') {
+                let res = await axios.patch(`/api/cupcakes/${editId}`, data)
+                if(res.status == 200) {
+                    getCupcakes()
+                    location.reload(true)
+                }
+            } else {
+                console.log('adding cupcake', data)
+                let res = await axios.post('/api/cupcakes', data)
+                if(res.status == 201) {
+                    getCupcakes()
+                    location.reload(true)
+                }
+            }            
         }
 })
 
+// GETS CUPCAKE BY ID FOR FORM POPULATION TO EDIT CUPCAKE DETAILS
 async function getCupcakeDetails(id) {
     modeNotification.innerText = 'EDIT CUPCAKE'
     formContainer.style.display="block"
