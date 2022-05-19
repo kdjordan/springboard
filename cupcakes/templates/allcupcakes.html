@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex-col" style="align-items: center;">
+<div class="flex-row" style="align-items: center; justify-content: space-evenly;flex-wrap: wrap; gap:1rem; width: 100%;">
+  {% for cupcake in cupcakes %}
+  <div class="flex-col" style="align-items: center;">
+    {{cupcake.flavor}}
+    {{cupcake.size}}
+    {{cupcake.rating}}
+  </div>
+  {% endfor %}
+  </a>
+  </div>
+</div>
+{% endblock %}
+

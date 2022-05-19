@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@500&display=swap');
+
+
+/*********** QUICK AND DIRTY RESET *******************************************************/
+*, *:before, *:after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/*********** COLOR VARS *******************************************************/
+:root {
+    --prussian-blue: hsla(201, 100%, 14%, 1);
+    --orange: hsla(31, 100%, 48%, 1);
+    --maximum-yellow-red: hsla(40, 97%, 64%, 1);
+    --lemon-meringue: hsla(51, 55%, 82%, 1);
+    --blue: rgb(91, 71, 242);
+    --green:  hsl(120deg 53% 60%);
+    --red: hsla(0, 69%, 50%, 1);
+}
+
+/*********** BASE STYLES *******************************************************/
+body {
+    line-height: 1.5;
+    font-family: 'Nunito', sans-serif;
+    
+    color: var(--orange);
+    letter-spacing: 1.5px;
+}
+
+a {
+    text-decoration: none;
+    transition: all .4s ease;
+    color: var(--maximum-yellow-red);
+}
+
+ul {
+    list-style-position: inside;
+}
+
+li {
+    list-style-type: none;
+}
+
+h2 {
+    font-size : clamp(2rem,4vw,12rem);
+}
+
+label {
+    color: var(--prussian-blue);
+    margin-bottom: 1rem;
+}
+
+
+/*********** IMAGES *******************************************************/
+
+.cupcake > img {
+    width: 250px;
+    height: 250px;
+    border-radius: 5px;
+    display: block;
+    scale:1;
+    transition: all .4s ease;
+    cursor: pointer;
+}
+
+.cupcake > img:hover {
+    transform: scale(1.2);
+    opacity: 80%;
+}
+
+/*********** BUTTONS *******************************************************/
+button, .button {
+    padding: .5rem;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all .4s ease;
+    letter-spacing: 1.5px;
+}
+
+button:hover {
+    filter: opacity(50%);
+}
+
+.add-btn {
+    background-color: var(--orange);
+    border: 2px solid var(--orange);
+    color: var(--lemon-meringue);
+}
+
+.del-btn {
+    color: var(--red);
+    border: 2px solid var(--red);
+    background-color: transparent;
+}
+
+
+
+/*********** FORMS *******************************************************/
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+form div {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    margin: .8rem 0;
+}
+
+input, select {
+    margin-top: .2rem;
+    width: 15rem;
+    padding: .5rem;
+} 
+
+input[type='radio'] {
+    accent-color:var(--orange);
+    width: 2rem;
+}
+
+/*********** LAYOUT HELPERS *******************************************************/
+
+.wrapper {
+    width: 100%;
+    max-width: 1120px;
+    margin: 0 auto;
+}
+
+.flex-row {
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col {
+    display: flex;
+    flex-direction: column;
+}
+
+/*********** NAV HELPERS ***********/
+
+nav {
+    padding: 1rem 2rem;
+    border-bottom: 2px solid var(--lemon-meringue);
+    margin-bottom: 5vh;
+}
+
+nav li {
+    list-style-type: none;
+    margin: 0 2rem;
+}
+
+nav a {
+    color: var(--maximum-yellow-red);
+    text-transform: uppercase;
+    font-size : clamp(1rem,1vw,5rem);
+}
+nav ul {
+    justify-content: space-evenly;
+}
+
+/*********** PETS ***********/
+
+
+/********** FOR EDIT PET ********/
+
+
+/*********** COLOR HELPERS ***********/
+
+.orange {
+    color: var(--maximum-yellow-red);
+}
+
+.yellow {
+    color: var(--lemon-meringue);    
+}
+
+.red {
+    color: var(--red);
+}
+
+.blue {
+    color: var(--prussian-blue);
+}
+
+.underline {
+    border: 1px solid var(--prussian-blue);
+    width: 50%;
+    margin: 1rem auto;
+}
+
+

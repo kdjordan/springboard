@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Cupcakes</title>
+</head>
+<body>
+    <div class="wrapper">
+        <h1 style="text-align:center; margin: 2rem;border-bottom: 2px solid var(--orange)">CUPCAKES</h1>
+        <div class="flex-row" style="align-items: center;justify-content: center;">
+       <form action="">
+           <div>
+               <label for="flavor">Flavor</label>
+               <input type="text" name="flavor">
+           </div>
+           <div>
+               <label for="size">Size</label>
+               <input type="text" name="size">
+           </div>
+           <div>
+               <label for="rating">Rating</label>
+               <input type="number" name="rating" min="0" max="5">
+           </div>
+           <div>
+               <label for="image">Image</label>
+               <input type="text" name="image">
+           </div>
+       </form>
+
+    </div>
+</div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./static/cupcakes.js"></script>
+</body>
+</html>

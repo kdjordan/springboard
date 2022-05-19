@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>Cupcakes</title>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="flex-row" style="align-items: center; justify-content: center;border-bottom: 2px solid var(--orange);margin: 2rem;">
+            <h1><a href="/">CUPCAKES</a></h1>
+        </div>
+        <div class= "cupcakes flex-row" style="align-items: center;justify-content: space-around;width: 100%;padding-bottom:2rem; flex-wrap:wrap;">
+            
+        </div>
+        <div class="flex-col"  style="align-items: center;justify-content: space-around;width: 100%;padding-bottom:2rem;">
+            <div style="margin-bottom:.7rem;">(click cupcake image to edit)</div>
+            <button id="addBtn">ADD</button>
+        </div>
+        <div class="form_container" class="flex-col" style="display:none;">
+            <h1 style="text-align:center; margin: 2rem;border-bottom: 2px solid var(--orange);" id="modeNotification">ADD CUPCAKE</h1>
+            <form action="">
+                <div class="flex-row" style="justify-content: space-evenly;width: 80%; flex-wrap: wrap;">
+                    <div>
+                        <label for="flavor">Flavor</label>
+                        <input type="text" name="flavor" id="flavor">
+                        <label for="size">Size</label>
+                        <input type="text" name="size" id="size">
+                    </div>
+                    <div>
+                        <label for="rating">Rating</label>
+                        <input type="number" name="rating" min="0" max="10" id="rating">
+                    
+                        <label for="image">Image</label>
+                        <input type="url" name="image" id="image">
+                    </div>    
+                </div>
+                <div class="flex-row" style="justify-content: center;width: 80%;">
+                    <button id="submitBtn">SUBMIT</button>
+                    <button id="deleteBtn" style="margin-left: 1rem;" class="del-btn">DELETE</button>
+                    
+                </div>
+            </form>
+            
+            
+        </div>
+
+    
+</div>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="./static/cupcakes.js"></script>
+</body>
+</html>
