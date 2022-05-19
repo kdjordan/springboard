@@ -1,4 +1,4 @@
-"""Models for Adoption."""
+"""Models for Feedback-Auth."""
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
@@ -9,43 +9,41 @@ def connect_db(app):
     
 
 # MODELS
-class Cupcake(db.Model):
-    """Tale definiton for Pet - model"""
-    __tablename__ = 'cupcakes'
+class User(db.Model):
+    """Tale definiton for User - model"""
+    __tablename__ = 'users'
 
     def __repr__(self):
         u = self
-        return f'<Cupcake id={u.id}, flavor={u.flavor}'
+        return f'<User id={u.username}, email={u.email}'
 
     def serialize(self):
         return {
-            'id': self.id,
-            'flavor': self.flavor,
-            'size': self.size,
-            'rating': self.rating,
-            'image': self.image
+            'username': self.username,
+            'password': self.password,
+            'email': self.email,
+            'first_name': self.first_name,
+            'last_name': self.last_name
         }
 
-    id = db.Column(db.Integer,
-                    primary_key=True,
-                    autoincrement=True)
+    username = db.Column(db.String(20),
+                    primary_key=True)
 
-    flavor = db.Column(db.Text,
+    password = db.Column(db.String(20),
                     nullable=False,
                     unique=False)
 
-    size = db.Column(db.Text,
+    email = db.Column(db.String(50),
                     nullable=False,
-                    unique=False)
+                    unique=True)
 
-    rating = db.Column(db.Float,
+    first_name = db.Column(db.String(50),
                     nullable=False,
                     unique=False)
     
-    image = db.Column(db.Text,
+    last_name = db.Column(db.String(50),
                     nullable=False,
-                    unique=False,
-                    server_default='https://tinyurl.com/demo-cupcake')
+                    unique=False)
 
     
    
