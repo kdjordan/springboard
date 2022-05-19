@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <div class="flex-col" style="align-items: center;">
+        <div style="width: 80%;">
+        <div>
+            <h2 class="underline orange" style="margin-bottom: 1rem;">{{post.title}}</h2> 
+        </div>
+        <div style="margin-bottom: 1rem;">
+            {{post.content}}
+        </div>
+        <hr style="margin: 1rem 0;" class="underline">
+        <div>
+        <div class="flex-row" style="align-items: center;">
+            <div>TAGS:  </div>
+            <div>
+                {% for tag in post.tags %}
+                    <button class="button tag-btn" style="margin-left: .7rem;"><a href="/tags/">{{tag.tag_name}}</a></button>
+                {% endfor %}
+            </div>  
+        </div>
+        <hr style="margin: 1rem 0;" class="underline">
+            <span class="orange"><i>Posted By:</i> </span><a href="/users/{{post.user.id}}">{{post.user.first_name}} {{post.user.last_name}}</a>  <i>on</i> {{post.friendly_date}}
+        </div>
+    </div>
+    <div class="flex-row btn-container" style="justify-content: flex-start; width: 80%; margin-top: 1rem;">
+        <button class="cancel-btn"><a href="/users/{{post.user.id}}">CANCEL</a></button>
+        <button class="add-btn"><a href="/posts/{{post.id}}/edit">EDIT</a></button>
+        <button class="delete-btn"><a href="/posts/{{post.id}}/delete">DELETE</a></button>
+    </div>
+</div>
+{% endblock %}
+

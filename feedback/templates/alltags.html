@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex-col" style="align-items: center;">
+    <div>
+        <h2 class="underline orange" style="margin-bottom: 2rem;">{{heading}}</h2>
+        <ul>
+            {% for tag in tags %}
+            <li style="margin: .3rem 0;"><a href="/tags/{{tag.id}}">{{tag.tag_name}}</a></li>
+            {% endfor %}
+        </ul>
+        <div class="flex-row" style="justify-content: flex-start; margin-top: 1rem;">
+            <button class="add-btn"><a href="/tags/new">Add Tag</a></button>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
