@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex-col" style="align-items: center; margin-bottom:1rem;">
+    <h2 class="pet_page_font" style="margin-bottom: 2rem;">LOGIN</h2>
+        <form action="/login" method='POST'>
+            {{ form.csrf_token }}
+            {% for field in form %}
+                {% if field.widget.input_type != 'hidden' %}
+                <div>
+                    {{field.label}}
+                    {{field}}
+                </div>
+                {% endif %}
+        
+            {% endfor %}
+            <button class="add-btn">LOGIN</button>
+          </form>
+</div>
+{% endblock %}

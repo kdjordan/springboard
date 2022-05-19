@@ -3,7 +3,7 @@
 from flask import Flask, render_template, redirect, jsonify, request
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User
-from forms import AddUserForm
+from forms import AddUserForm, LoginForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
@@ -22,13 +22,46 @@ def home():
     """Show all Cupcakes on home page"""
     return redirect('/register')
 
+@app.route('/secret')
+def secret():
+    """Show all Cupcakes on home page"""
+    return render_template('/secret.html')
+
+
+
 # USERS ROUTES #################################################################
 
-@app.route('/register')
+@app.route('/register', methods=['POST', 'GET'])
 def register():
     """Show Register User Form on home page"""
     form = AddUserForm()
-    return render_template('register.html', form=form)
+    if form.validate_on_submit():
+        """Create USER by POST request via form Body params"""
+        new_user = User(
+            username=form.username.data,
+            password=form.password.data,
+            first_name=form.first_name.data,
+            last_name=form.last_name.data,
+            email=form.email.data
+        )
+        db.session.add(new_user)
+        db.session.commit()
+        return redirect('/secret')
+    else:
+        return render_template('register.html', form=form)
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    """Show Login Form"""
+    form = LoginForm()
+    if form.validate_on_submit():
+        """Create USER by POST request via form Body params"""
+       
+        # db.session.add(new_user)
+        # db.session.commit()
+        return redirect('/secret')
+    else:
+        return render_template('login.html', form=form)
 
 
 # @app.route('/api/cupcakes')
