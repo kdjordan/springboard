@@ -1,7 +1,6 @@
 """Cupcake application."""
 
-from flask import Flask, render_template, redirect, session, request
-from flask_bcrypt import Bcrypt
+from flask import Flask, render_template, redirect, session
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User, Feedback
 from forms import AddUserForm, LoginForm, AddFeedbackForm
@@ -60,10 +59,9 @@ def login():
     if form.validate_on_submit():
         """Check user credientials by using auth @classmethod"""
         u = User.auth(form.username.data, form.password.data)
-
+        print('user is ', u)
         if u:
             session['username'] = u.username
-            print('user is ', u.username)
         return redirect(f'/users/{u.username}')
     else:
         return render_template('login.html', form=form)
@@ -84,7 +82,42 @@ def logout():
     session.clear()
     return redirect('/')
 
+@app.route('/users/<username>/delete', methods=['POST'])
+def delete_user_account(username):
+    """Delete user account and all feedback from user"""
+    user = User.query.get_or_404(username)
+    Feedback.query.filter_by(username=username).delete()
+    db.session.delete(user)
+    db.session.commit()
+    session.clear()
+    return redirect('/')
+
+
+
+
 # FEEDBACK ROUTES ############################################################################
+
+@app.route('/feedback/<int:id>/update', methods=['GET', 'POST'])
+def edit_feedback(id):
+    """Show feedback from for GET and process feedback form on POST"""
+    form = AddFeedbackForm()
+    fb = Feedback.query.get_or_404(id)
+    username = session.get('username')
+    if is_logged_in(username):
+        if form.validate_on_submit():
+            """Create Feedback by POST request via form data params"""
+            fb.title = form.title.data
+            fb.content = form.content.data
+            db.session.add(fb)
+            db.session.commit()
+            return redirect(f'/users/{username}')
+        else:
+            form.title.data = fb.title
+            form.content.data = fb.content
+            return render_template('editfeedback.html', form=form, id=id)
+    else:
+        return redirect('/')
+
 
 @app.route('/users/<username>/feedback/add', methods=['GET', 'POST'])
 def add_feedback(username):
@@ -92,19 +125,32 @@ def add_feedback(username):
     form = AddFeedbackForm()
     if form.validate_on_submit():
         """Create Feedback by POST request via form data params"""
-        feedback = Feedback(
-            title = form.title.data,
-            content = form.content.data,
-            username = username
-        )
-        db.session.add(feedback)
-        db.session.commit()
-        return redirect(f'/users/{username}')
+        if is_logged_in(username):
+            feedback = Feedback(
+                title = form.title.data,
+                content = form.content.data,
+                username = username
+            )
+            db.session.add(feedback)
+            db.session.commit()
+            return redirect(f'/users/{username}')
+        else:
+            return redirect('/')
     else:
         return render_template('feedback.html', form=form, username=username)
 
-    session.clear()
-    return redirect('/')
+
+@app.route('/feedback/<int:id>/delete')
+def delete_feedback(id):
+    """Delete feedback by id using DELETE request"""
+    username = session.get('username')
+    if is_logged_in(username):
+        feedback = Feedback.query.get_or_404(id)
+        db.session.delete(feedback)
+        db.session.commit()
+        return redirect(f'/users/{username}')
+    else:
+        return redirect('/')
 
 
 # HANDLE 404 ################################################################################
@@ -112,13 +158,16 @@ def add_feedback(username):
 def page_not_found(e):
     """Handle all routes with errors"""
     # note that we set the 404 status explicitly
-    return render_template('404.html'), 404
+    return redirect('/')
 
 
 # UTILITIES ################################################################################
 
 def is_logged_in(username):
-    if session.get('username') == username:
+    user = User.query.get(username)
+    if user is None:
+        return False
+    elif session.get('username') == user.username:
         return True
     else:
         return False

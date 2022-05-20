@@ -21,9 +21,14 @@
                 {% endfor %}
             </ul>
         </div>
-        <form action="/users/{{user.username}}/feedback/add">
-            <button id="addFeedBtn">ADD FEEDBACK</button>
-        </form>
+        <div class="flex-row" style="align-items: center;justify-content: space-around; width: 50%;flex-wrap:wrap;">
+            <form action="/users/{{user.username}}/feedback/add" style="margin: 1rem;">
+                <button>ADD FEEDBACK</button>
+            </form>
+            <form action="/users/{{user.username}}/delete" method="POST" style="margin: 1rem;"> 
+                <button class="del-btn">DELETE ACCOUNT</button>
+            </form>
+        </div>
 </div>
 {% endblock %}
 

@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="flex-col" style="align-items: center; margin-bottom:1rem;">
+    <h2 class="pet_page_font" style="margin-bottom: 2rem;">EDIT FEEDBACK</h2>
+    <form action="/feedback/{{id}}/update" method='POST'>
+        {{ form.csrf_token }}
+        {% for field in form %}
+            {% if field.widget.input_type != 'hidden' %}
+            <div>
+                {{field.label}}
+                {{field}}
+            </div>
+            {% endif %}
+    
+        {% endfor %}
+        <button class="add-btn">SUBMIT</button>
+    </form>
+    <form action="/feedback/{{id}}/delete">
+        <button class="add-btn">DELETE</button>
+    </form>
+</div>
+{% endblock %}

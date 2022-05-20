@@ -19,15 +19,6 @@ class User(db.Model):
         u = self
         return f'<User id={u.username}, email={u.email}'
 
-    @classmethod
-    def serialize(self):
-        return {
-            'username': self.username,
-            'password': self.password,
-            'email': self.email,
-            'first_name': self.first_name,
-            'last_name': self.last_name
-        }
     @classmethod 
     def register(cls, username, password, first_name, last_name, email):
         hashed_pass = bcrypt.generate_password_hash(password)

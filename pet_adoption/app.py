@@ -1,4 +1,4 @@
-"""Blogly application."""
+"""Adoption application."""
 
 from flask import Flask, render_template, redirect
 from flask_debugtoolbar import DebugToolbarExtension
