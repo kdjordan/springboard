@@ -183,9 +183,7 @@ nav ul {
 }
 
 .underline {
-    border: 1px solid var(--prussian-blue);
-    width: 50%;
-    margin: 1rem auto;
+    border-bottom: 1px solid var(--orange);
 }
 
 

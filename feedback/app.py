@@ -3,8 +3,8 @@
 from flask import Flask, render_template, redirect, session, request
 from flask_bcrypt import Bcrypt
 from flask_debugtoolbar import DebugToolbarExtension
-from models import db, connect_db, User
-from forms import AddUserForm, LoginForm
+from models import db, connect_db, User, Feedback
+from forms import AddUserForm, LoginForm, AddFeedbackForm
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret_key'
@@ -24,9 +24,10 @@ def home():
 
 @app.route('/secret')
 def secret():
-    """Show all Cupcakes on home page"""
+    """Show secret page for logged in accounts"""
     if session.get('username'):
-        return render_template('/secret.html')
+        username = session.get('username')
+        return redirect(f'/users/{username}')
     else: 
         return redirect('/')
 
@@ -62,15 +63,20 @@ def login():
 
         if u:
             session['username'] = u.username
-        return redirect('/secret')
+            print('user is ', u.username)
+        return redirect(f'/users/{u.username}')
     else:
         return render_template('login.html', form=form)
 
 @app.route('/users/<username>')
 def user_details(username):
-    user = User.query.get_or_404(username)
-    
-    return render_template('/userdetail.html', user=user)
+    """Show logged in users their details - if not redirect to register"""
+    if is_logged_in(username):
+        user = User.query.get_or_404(username)
+        feedback = Feedback.query.filter_by(username=username).all()
+        return render_template('/userdetail.html', user=user, feedback=feedback)
+    else: 
+        return redirect('/')
 
 @app.route('/logout')
 def logout():
@@ -78,53 +84,27 @@ def logout():
     session.clear()
     return redirect('/')
 
+# FEEDBACK ROUTES ############################################################################
 
-# @app.route('/api/cupcakes')
-# def get_all_cupcakes():
-#     """Get all cupcakes on GET respond from GET"""
-#     all_cupcakes = [cupcake.serialize() for cupcake in Cupcake.query.all()]
-#     return jsonify(cupcakes=all_cupcakes)
+@app.route('/users/<username>/feedback/add', methods=['GET', 'POST'])
+def add_feedback(username):
+    """Show feedback from for GET and process feedback form on POST"""
+    form = AddFeedbackForm()
+    if form.validate_on_submit():
+        """Create Feedback by POST request via form data params"""
+        feedback = Feedback(
+            title = form.title.data,
+            content = form.content.data,
+            username = username
+        )
+        db.session.add(feedback)
+        db.session.commit()
+        return redirect(f'/users/{username}')
+    else:
+        return render_template('feedback.html', form=form, username=username)
 
-# @app.route('/api/cupcakes/<int:id>')
-# def get_cupcake(id):
-#     """Get cupcakes by ID respond from GET"""
-#     cupcake = Cupcake.query.get_or_404(id)
-#     return jsonify(cupcake=cupcake.serialize())
-
-# @app.route('/api/cupcakes', methods=['POST'])
-# def create_cupcake():
-#     """Create cupcakes by POST request via JSON Body params"""
-#     new_cupcake = Cupcake(flavor=request.json['flavor'],
-#                             size=request.json['size'],
-#                             rating=request.json['rating'],
-#                             image=request.json.get('image'))
-#     db.session.add(new_cupcake)
-#     db.session.commit()
-#     response_json = jsonify(cupcake=new_cupcake.serialize())
-#     return (response_json, 201)
-
-# @app.route('/api/cupcakes/<int:id>', methods=['PATCH'])
-# def patch_cupcake(id):
-#     """PATCH cupcakes by ID via JSON Body params"""
-#     cupcake = Cupcake.query.get_or_404(id)
-#     cupcake.flavor = request.json.get('flavor', cupcake.flavor)
-#     cupcake.size = request.json.get('size', cupcake.size)
-#     cupcake.rating = request.json.get('rating', cupcake.rating)
-#     cupcake.image = request.json.get('image', cupcake.image)
-
-#     db.session.commit()
-#     response_json = jsonify(cupcake=cupcake.serialize())
-#     return (response_json, 200)
-
-
-# @app.route('/api/cupcakes/<int:id>', methods=['DELETE'])
-# def delete_cupcake(id):
-#     """Delete cupcakes by id using DELETE request"""
-#     cupcake = Cupcake.query.get_or_404(id)
-#     print(cupcake)
-#     db.session.delete(cupcake)
-#     db.session.commit()
-#     return ({'message':'DELETED'}, 200)
+    session.clear()
+    return redirect('/')
 
 
 # HANDLE 404 ################################################################################
@@ -133,3 +113,12 @@ def page_not_found(e):
     """Handle all routes with errors"""
     # note that we set the 404 status explicitly
     return render_template('404.html'), 404
+
+
+# UTILITIES ################################################################################
+
+def is_logged_in(username):
+    if session.get('username') == username:
+        return True
+    else:
+        return False

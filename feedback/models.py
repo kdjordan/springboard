@@ -70,7 +70,7 @@ class Feedback(db.Model):
 
     def __repr__(self):
         u = self
-        return f'<Feedback id={u.username}, email={u.email}'
+        return f'<Feedback id={u.username}'
     
     id = db.Column(db.Integer,
                     primary_key=True,

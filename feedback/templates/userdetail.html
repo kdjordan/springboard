@@ -1,13 +1,29 @@
 {% extends 'base.html' %}
 
 {% block content %}
-   <div class="flex-col" style="align-items: center;">
+   <div class="flex-col" style="align-items: center;gap: 1rem;">
         <div>
             <h2>{{user.username}}</h2> 
         </div>
-        <div style="margin-bottom: 1rem;">
-            {{user.first_name}}
+        <hr style="border-top:3px solid var(--orange);width:50%;">
+        <div>
+            Name: {{user.first_name}} {{user.last_name}}
         </div>
+        <div>
+            Email: {{user.email}}
+        </div>
+        <hr style="border-top:3px solid var(--orange);width:50%;">
+        <div class="flex-col" style="align-items: center;gap: 1rem;">
+            <h3 class="underline">YOUR FEEDBACK</h3>
+            <ul>
+                {% for fb in feedback %}
+                    <li><a href="/feedback/{{fb.id}}/update">{{fb.title}}</a></li>
+                {% endfor %}
+            </ul>
+        </div>
+        <form action="/users/{{user.username}}/feedback/add">
+            <button id="addFeedBtn">ADD FEEDBACK</button>
+        </form>
 </div>
 {% endblock %}
 
