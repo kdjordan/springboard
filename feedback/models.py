@@ -1,6 +1,8 @@
 """Models for Feedback-Auth."""
 from flask_sqlalchemy import SQLAlchemy
+from flask_bcrypt import Bcrypt
 
+bcrypt = Bcrypt()
 db = SQLAlchemy()
 
 def connect_db(app):
@@ -17,6 +19,7 @@ class User(db.Model):
         u = self
         return f'<User id={u.username}, email={u.email}'
 
+    @classmethod
     def serialize(self):
         return {
             'username': self.username,
@@ -25,11 +28,26 @@ class User(db.Model):
             'first_name': self.first_name,
             'last_name': self.last_name
         }
+    @classmethod 
+    def register(cls, username, password, first_name, last_name, email):
+        hashed_pass = bcrypt.generate_password_hash(password)
+        pass_decode = hashed_pass.decode('utf-8')
+        return cls(username=username, password=pass_decode, first_name=first_name, last_name=last_name, email=email)
+
+    @classmethod 
+    def auth(cls, username, password):
+        u = User.query.filter_by(username=username).first()
+        if u and bcrypt.check_password_hash(u.password, password):
+            return u
+        else:
+            return False
+        
 
     username = db.Column(db.String(20),
-                    primary_key=True)
+                    primary_key=True,
+                    unique=True)
 
-    password = db.Column(db.String(20),
+    password = db.Column(db.String,
                     nullable=False,
                     unique=False)
 

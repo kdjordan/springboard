@@ -1,6 +1,7 @@
 """Cupcake application."""
 
-from flask import Flask, render_template, redirect, jsonify, request
+from flask import Flask, render_template, redirect, session
+from flask_bcrypt import Bcrypt
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User
 from forms import AddUserForm, LoginForm
@@ -15,7 +16,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_ECHO'] = True
 
 connect_db(app)
-# db.create_all()
 
 @app.route('/')
 def home():
@@ -25,9 +25,10 @@ def home():
 @app.route('/secret')
 def secret():
     """Show all Cupcakes on home page"""
-    return render_template('/secret.html')
-
-
+    if session.get('username'):
+        return render_template('/secret.html')
+    else: 
+        return redirect('/')
 
 # USERS ROUTES #################################################################
 
@@ -37,15 +38,16 @@ def register():
     form = AddUserForm()
     if form.validate_on_submit():
         """Create USER by POST request via form Body params"""
-        new_user = User(
-            username=form.username.data,
-            password=form.password.data,
-            first_name=form.first_name.data,
-            last_name=form.last_name.data,
-            email=form.email.data
-        )
-        db.session.add(new_user)
+        user = User.register(
+            form.username.data, 
+            form.password.data,
+            form.first_name.data,
+            form.last_name.data,
+            form.email.data)
+
+        db.session.add(user)
         db.session.commit()
+        session['username'] = user.username
         return redirect('/secret')
     else:
         return render_template('register.html', form=form)
@@ -55,13 +57,20 @@ def login():
     """Show Login Form"""
     form = LoginForm()
     if form.validate_on_submit():
-        """Create USER by POST request via form Body params"""
-       
-        # db.session.add(new_user)
-        # db.session.commit()
+        """Check user credientials by using auth @classmethod"""
+        u = User.auth(form.username.data, form.password.data)
+
+        if u:
+            session['username'] = u.username
         return redirect('/secret')
     else:
         return render_template('login.html', form=form)
+
+@app.route('/logout')
+def logout():
+    """Logout User by clearing session data"""
+    session.clear()
+    return redirect('/')
 
 
 # @app.route('/api/cupcakes')
