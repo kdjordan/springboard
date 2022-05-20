@@ -1,6 +1,6 @@
 """Cupcake application."""
 
-from flask import Flask, render_template, redirect, session
+from flask import Flask, render_template, redirect, session, request
 from flask_bcrypt import Bcrypt
 from flask_debugtoolbar import DebugToolbarExtension
 from models import db, connect_db, User
@@ -37,14 +37,14 @@ def register():
     """Show Register User Form on home page"""
     form = AddUserForm()
     if form.validate_on_submit():
-        """Create USER by POST request via form Body params"""
+        """Create USER by POST request via form data params"""
         user = User.register(
-            form.username.data, 
+            form.username.data,
             form.password.data,
             form.first_name.data,
             form.last_name.data,
-            form.email.data)
-
+            form.email.data
+        )
         db.session.add(user)
         db.session.commit()
         session['username'] = user.username
@@ -65,6 +65,12 @@ def login():
         return redirect('/secret')
     else:
         return render_template('login.html', form=form)
+
+@app.route('/users/<username>')
+def user_details(username):
+    user = User.query.get_or_404(username)
+    
+    return render_template('/userdetail.html', user=user)
 
 @app.route('/logout')
 def logout():

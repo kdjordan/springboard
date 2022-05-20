@@ -53,7 +53,7 @@ class User(db.Model):
 
     email = db.Column(db.String(50),
                     nullable=False,
-                    unique=True)
+                    unique=False)
 
     first_name = db.Column(db.String(50),
                     nullable=False,
@@ -63,5 +63,27 @@ class User(db.Model):
                     nullable=False,
                     unique=False)
 
+
+class Feedback(db.Model):
+    """Tale definiton for User - model"""
+    __tablename__ = 'feedback'
+
+    def __repr__(self):
+        u = self
+        return f'<Feedback id={u.username}, email={u.email}'
     
-   
+    id = db.Column(db.Integer,
+                    primary_key=True,
+                    unique=True)
+
+    title = db.Column(db.String(100),
+                    nullable=False,
+                    unique=False)
+
+    content = db.Column(db.Text,
+                    nullable=False,
+                    unique=False)
+
+    username = db.Column(db.String,
+                    db.ForeignKey('users.username'),
+                    unique=False)

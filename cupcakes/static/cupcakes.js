@@ -10,7 +10,7 @@ let editId
 let mode 
 
 // GET CUCPCAKES FROM DB ON LOAD
-window.onload = () => getCupcakes()
+
 
 async function getCupcakes() {
     let cupcakes = await axios.get('/api/cupcakes')

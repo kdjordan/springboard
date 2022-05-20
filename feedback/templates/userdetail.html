@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   <div class="flex-col" style="align-items: center;">
+        <div>
+            <h2>{{user.username}}</h2> 
+        </div>
+        <div style="margin-bottom: 1rem;">
+            {{user.first_name}}
+        </div>
+</div>
+{% endblock %}
+
