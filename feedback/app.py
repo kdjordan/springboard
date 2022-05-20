@@ -59,7 +59,6 @@ def login():
     if form.validate_on_submit():
         """Check user credientials by using auth @classmethod"""
         u = User.auth(form.username.data, form.password.data)
-        print('user is ', u)
         if u:
             session['username'] = u.username
         return redirect(f'/users/{u.username}')
