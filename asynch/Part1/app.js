@@ -13,7 +13,6 @@ form.addEventListener('submit', async (e)=> {
     let res4 = axios.get(`http://numbersapi.com/${number}`)
 
     let allRes = await Promise.all([res1, res2, res3, res4])
-    console.log(allRes)
     showResults(allRes)
 })
 
@@ -21,7 +20,6 @@ form.addEventListener('submit', async (e)=> {
 function showResults(results) {
     
     for (res of results) {
-        console.log(res.data)
         let p = document.createElement('p')
         let text = document.createTextNode(res.data)
         p.appendChild(text)

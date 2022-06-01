@@ -8,13 +8,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Hello</h1>
-    <form action="">
-        <label for="favNumber">Enter Your Favorite Number</label>
-        <input type="number" name="favNumber" id="fav-number">
-        <button>GO</button>
-    </form>
-    <div id="results"></div>
+    <div class="wrapper" style="margin-top: 5rem;">
+        <h2>Enter Your Favorite Number</h2>
+        
+        <form>
+            <input type="number" name="favNumber" id="fav-number">
+            <button id="btn-go">GO</button>
+        </form>
+        <h3 style="margin-top: 2rem;">Fun facts about your favorite number !</h3>
+        <div id="results"></div>
+    </div>
 
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="app.js"></script>
