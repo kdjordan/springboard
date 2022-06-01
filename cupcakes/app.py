@@ -65,7 +65,6 @@ def patch_cupcake(id):
 def delete_cupcake(id):
     """Delete cupcakes by id using DELETE request"""
     cupcake = Cupcake.query.get_or_404(id)
-    print(cupcake)
     db.session.delete(cupcake)
     db.session.commit()
     return ({'message':'DELETED'}, 200)
