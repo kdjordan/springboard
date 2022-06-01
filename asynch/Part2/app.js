@@ -1,8 +1,13 @@
 let getCardButton = document.querySelector('#getCardButton')
+let cardDisplayDiv = document.querySelector('#card-display')
+let deckFinished = document.querySelector('#deck-finished')
+let cardCount = 0
+let displayDeck_id
+
 
 window.onload = () => {
-    console.log('ready')
     getDeck()
+    getDisplayDeck()
   };
 
 async function getDeck() {
@@ -14,11 +19,6 @@ async function getDeck() {
     printCards(allCards)
 }
 
-getCardButton.addEventListener('click', ()=> {
-    console.log('getting card')
-})
-
-
 async function getCard(deck_id) {
     let card = await axios.get(`http://deckofcardsapi.com/api/deck/${deck_id}/draw/?count=1`)
     return card.data
@@ -27,5 +27,30 @@ async function getCard(deck_id) {
 function printCards(cards) {
     for (card of cards) {
         console.log(`The card is the ${card.cards[0].value} of ${card.cards[0].suit}`)
+    }
+}
+
+
+async function getDisplayDeck() {
+    let res = await axios.get('http://deckofcardsapi.com/api/deck/new/shuffle/?deck_count=1')
+    displayDeck_id = res.data.deck_id
+}
+
+
+getCardButton.addEventListener('click', async ()=> {
+    let displayCard = await axios.get(`http://deckofcardsapi.com/api/deck/${displayDeck_id}/draw/?count=1`)
+    addCardImage(displayCard.data.cards[0].image)
+})
+
+function addCardImage(img) {
+    cardCount++
+    if (cardCount <= 52) {
+        const image = document.createElement('img')
+        image.src  = `${img}`
+        let roatateAngle =  Math.random() * (45 - -45) + -45;
+        image.style.transform = `rotate(${roatateAngle}deg)`
+        cardDisplayDiv.appendChild(image)
+    } else {
+        deckFinished.style.visibility = 'visible'
     }
 }

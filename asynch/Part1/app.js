@@ -4,6 +4,7 @@ let resultsDiv = document.querySelector('#results')
 
 
 
+
 form.addEventListener('submit', async (e)=> {
     e.preventDefault()
     let number = favNumberInput.value
