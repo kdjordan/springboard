@@ -6,8 +6,8 @@ let displayDeck_id
 
 
 window.onload = () => {
-    getDeck()
-    getDisplayDeck()
+    // getDeck()
+    // getDisplayDeck()
   };
 
 async function getDeck() {
