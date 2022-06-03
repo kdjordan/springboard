@@ -13,64 +13,63 @@ form.addEventListener('submit', async (e)=> {
     numMssg.innerText = 'Random Facts about Your Favorite Number !'
     let number = favNumberInput.value
     favoriteFacts(number).then((res) => {
-        console.log('received from ', res)
-        showArrResults(res)
+        resultsDiv.innerHTML = ''
+        res.forEach(el => {
+            let p = document.createElement('p')
+            let text = document.createTextNode(el.data.text)
+            p.appendChild(text)
+            resultsDiv.appendChild(p)
+        })
+        
     })
     .catch(e => {
         console.log(`Error ${e}`)
     })
-
-    // let allRes = await Promise.all([res1, res2, res3, res4])
 })
 
-function showArrResults(results) {
-    resultsDiv.innerHTML = ''
-    console.log('showing arr results ****', results)
-    // console.log('****' , results[1])
-    results.forEach(res => {
-        console.log('showing')
-        // let p = document.createElement('p')
-        // let text = document.createTextNode(value)
-        // p.appendChild(text)
-        // resultsDiv.appendChild(p)
-    })
-
-    // for (const [key,value] of Object.entries(results)) {
-    //     console.log('in here ')
-    //     let p = document.createElement('p')
-    //     let text = document.createTextNode(value)
-    //     p.appendChild(text)
-    //     resultsDiv.appendChild(p)
-    // }
-}
 
 function favoriteFacts(number) {
     return new Promise((resolve, reject) => {
-        let returnArr = []
-        axios.get(`http://numbersapi.com/${number}?json`)
-            .then((res) => {
-                returnArr.push(res.data.text)
-                return axios.get(`http://numbersapi.com/${number}?json`)
-            }) 
-            .then((res) => {
-                returnArr.push(res.data.text)
-                return axios.get(`http://numbersapi.com/${number}?json`)
-            })
-            .then((res) => {
-                returnArr.push(res.data.text)
-                return axios.get(`http://numbersapi.com/${number}?json`)
-            })
-            .then((res) => {
-                returnArr.push(res.data.text)
-                
-            })
-            .catch((err) => {
-                console.log(`Error in fetch ${err}`)
-            })
-        resolve(returnArr)
-        
+        axios.all([
+            axios.get(`http://numbersapi.com/${number}?json`),
+            axios.get(`http://numbersapi.com/${number}?json`),
+            axios.get(`http://numbersapi.com/${number}?json`),
+            axios.get(`http://numbersapi.com/${number}?json`)
+        ]).then((res)=> {
+            resolve(res)
+        }).catch((e) => {
+            console.log(`Error ${e}`)
+            reject()
+        })
     })
 }
+// function favoriteFacts(number) {
+//     return new Promise((resolve, reject) => {
+//         let returnArr = []
+//         axios.get(`http://numbersapi.com/${number}?json`)
+//             .then((res) => {
+//                 returnArr.push(res.data.text)
+//                 return axios.get(`http://numbersapi.com/${number}?json`)
+//             }) 
+//             .then((res) => {
+//                 returnArr.push(res.data.text)
+//                 return axios.get(`http://numbersapi.com/${number}?json`)
+//             })
+//             .then((res) => {
+//                 returnArr.push(res.data.text)
+//                 return axios.get(`http://numbersapi.com/${number}?json`)
+//             })
+//             .then((res) => {
+//                 returnArr.push(res.data.text)
+//             })
+//             .catch((err) => {
+//                 console.log(`Error in fetch ${err}`)
+//                 reject()
+//             })
+//         resolve(returnArr)
+        
+//     })
+// }
 
 // on windpw load this function generates 3 random numbers and gets facts in one call
 function randomBatchRequest() {
