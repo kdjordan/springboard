@@ -7,9 +7,9 @@ window.onload = () => {
     randomBatchRequest()
   };
 
+  //event listener for favorite number submit
 form.addEventListener('submit', async (e)=> {
     e.preventDefault()
-    
     numMssg.innerText = 'Random Facts about Your Favorite Number !'
     let number = favNumberInput.value
     favoriteFacts(number).then((res) => {
@@ -27,7 +27,7 @@ form.addEventListener('submit', async (e)=> {
     })
 })
 
-
+//get 4 facts about the favorite number
 function favoriteFacts(number) {
     return new Promise((resolve, reject) => {
         axios.all([
@@ -43,33 +43,6 @@ function favoriteFacts(number) {
         })
     })
 }
-// function favoriteFacts(number) {
-//     return new Promise((resolve, reject) => {
-//         let returnArr = []
-//         axios.get(`http://numbersapi.com/${number}?json`)
-//             .then((res) => {
-//                 returnArr.push(res.data.text)
-//                 return axios.get(`http://numbersapi.com/${number}?json`)
-//             }) 
-//             .then((res) => {
-//                 returnArr.push(res.data.text)
-//                 return axios.get(`http://numbersapi.com/${number}?json`)
-//             })
-//             .then((res) => {
-//                 returnArr.push(res.data.text)
-//                 return axios.get(`http://numbersapi.com/${number}?json`)
-//             })
-//             .then((res) => {
-//                 returnArr.push(res.data.text)
-//             })
-//             .catch((err) => {
-//                 console.log(`Error in fetch ${err}`)
-//                 reject()
-//             })
-//         resolve(returnArr)
-        
-//     })
-// }
 
 // on windpw load this function generates 3 random numbers and gets facts in one call
 function randomBatchRequest() {
@@ -92,10 +65,7 @@ function randomBatchRequest() {
         console.log('error ', e)
     })
 }
-
-
-
-
+// adds results to DOM
 function showResults(results) {
     resultsDiv.innerHTML = ''
     for (const [key,value] of Object.entries(results)) {
