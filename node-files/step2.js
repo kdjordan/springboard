@@ -32,6 +32,4 @@ async function webCat(url) {
     }   
 }
 
-
-
 controller(process.argv[2])
