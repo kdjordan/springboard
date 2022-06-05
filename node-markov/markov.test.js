@@ -10,12 +10,8 @@ describe('test mm here', ()=> {
         output = mm.makeText(numWords=10)
         
     })
-    // afterEach(()=> {
-    //     output = []
-    //     keys = []
-    //     mm = null
-    // })
-    test('first test', ()=> {
+
+    test('first test for init', ()=> {
         expect(mm).not.toBeUndefined()
         expect(keys).toBeInstanceOf(Array)
     })

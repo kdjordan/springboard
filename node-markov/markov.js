@@ -41,7 +41,6 @@ class MarkovMachine {
       returnArr.push(key)
       key = MarkovMachine.makeRandom(keys)
     }
-    console.log(returnArr)
     return returnArr.join(' ')
   }
 
