@@ -1,6 +1,6 @@
 const express = require('express')
 const ExpressError = require('./expressError')
-const {checkInput, getMean, getMidpoint, getMode} = require('./functions')
+o
 
 const app = express()
 
