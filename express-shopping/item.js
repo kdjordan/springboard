@@ -39,12 +39,10 @@ class Item {
 
     static removeItem(name) {
         let itemIndex = items.findIndex(el => el.name === name)
-        console.log('itemIndex ', itemIndex)
         if(itemIndex === -1) {
             throw {message: 'NOT FOUND', status: 404}
         } else {
             items.splice(itemIndex, 1)
-            console.log('items ', items)
         }
     }
 }

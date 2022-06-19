@@ -34,10 +34,9 @@ router.post('', (req, res, next) => {
 
 
 //UPDATE ITEM IN LIST
-router.patch('/:name', (req, res) => {
+router.patch('/:name', (req, res, next) => {
     try {
         let response = Item.updateItem(req.params.name, req.body)
-        console.log('response ', response)
         return res.json({'updated': response})
     } catch(e) {
         return next(e)
@@ -45,7 +44,7 @@ router.patch('/:name', (req, res) => {
 })
 
 //DELETE ITEM FROM LIST
-router.delete('/:name', (req, res) => {
+router.delete('/:name', (req, res, next) => {
     try {
         let response = Item.removeItem(req.params.name, req.body)
         return res.status(200).json({"message":"deleted"})
