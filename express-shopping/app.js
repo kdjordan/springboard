@@ -24,7 +24,6 @@ app.use((error, req, res, next)=> {
     }
 })
 
-app.listen(3000, ()=> {
-    console.log('App listening on PORT 3000')
-})
 
+
+module.exports = app
