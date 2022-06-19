@@ -1,47 +1,58 @@
 const express = require('express')
 const router = new express.Router()
+const Item = require('./item')
 
-const ITEMS = require('./fakeDB.js')
 
-//GET ALL ITEMS IN LIST
+//GET ALL ITEMS FROM LIST
 router.get('/', (req, res) => {
-    console.log('getting index in router')
-    return res.json(ITEMS)
+    try {
+        return res.json({items: Item.findAll()})
+    } catch(e) {
+        return next(e)
+    }
 })
 
-//GET A SPECIFIC ITEM IN LIST
+//GET A SPECIFIC ITEM FROM LIST
 router.get('/:product', (req, res, next) => {
-    let {product} = req.params
-    console.log('finding', product)
-    let retObj = ITEMS.find(pro => {
-        return pro.name === product
-    })
-    if(!retObj){
-        return new Error(`${product} not found`)
-    } else {
-        return res.json(retObj)
+    try {
+        return res.json(Item.findOne(req.params.product))
+    } catch(e) {
+        return next(e)
     }
 })
 
 
-//ADD ITEM TN LIST
-router.post('/', (req, res) => {
-    console.log('received', req.body)
-    ITEMS.push(req.body)
-    console.log(ITEMS)
-    return res.status(200).json({
-        "added": req.body
-    })
+//ADD ITEM TO LIST
+router.post('', (req, res, next) => {
+    try {
+        let newItem = new Item(req.body.name, req.body.price)
+        return res.json({item: newItem})
+    } catch(e) {
+        return next(e)
+    }
 })
 
 
 //UPDATE ITEM IN LIST
-router.patch('/items:name', (req, res) => {
-    console.log('patching', req.params.name)
-    return res.sendStatus(200)
+router.patch('/:name', (req, res) => {
+    try {
+        let response = Item.updateItem(req.params.name, req.body)
+        console.log('response ', response)
+        return res.json({'updated': response})
+    } catch(e) {
+        return next(e)
+    }
 })
 
-router.delete('itmes')
+//DELETE ITEM FROM LIST
+router.delete('/:name', (req, res) => {
+    try {
+        let response = Item.removeItem(req.params.name, req.body)
+        return res.status(200).json({"message":"deleted"})
+    } catch(e) {
+        return next(e)
+    }
+})
 
 module.exports = router
 

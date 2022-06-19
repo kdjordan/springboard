@@ -1,5 +1,4 @@
 const express = require('express')
-const bodyParser = require('body-parser')
 const ExpressError = require('./expressError')
 const itemsRoutes = require('./itemsRoutes')
 
@@ -7,11 +6,7 @@ const itemsRoutes = require('./itemsRoutes')
 const app = express()
 
 app.use(express.json())
-app.use(bodyParser.urlencoded({extended: true}))
-
 app.use('/items', itemsRoutes)
-
-
 
 //404 handler
 app.use((req, res, next)=> {
