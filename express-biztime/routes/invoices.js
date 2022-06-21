@@ -6,7 +6,7 @@ const db = require("../db");
 router.get('/', async (req, res, next) => {
     try {
         const results = await db.query('SELECT * FROM invoices')
-        return res.status(200).json({companies: results.rows})
+        return res.status(200).json({invoice: results.rows})
     } catch(e) {
         next(e)
     }
@@ -19,21 +19,21 @@ router.get('/:id', async (req, res, next) => {
         if (results.rows.length === 0) {
             throw new ExpressError(`Can't find invoice with id of ${id}`, 404)
           }
-        return res.status(200).json({company: results.rows[0]})
+        return res.status(200).json({invoice: results.rows[0]})
     } catch(e) {
         next(e)
     }
 })
 
-router.put('/:code', async (req, res, next) => {
+router.put('/:id', async (req, res, next) => {
     try {
-        let code = req.params.code
-        let { name, description } = req.body
-        const results = await db.query(`UPDATE companies SET name=$2, description=$3 WHERE code=$1 RETURNING code, name, description`, [code, name, description])
+        let { id } = req.params
+        let { amt } = req.body
+        const results = await db.query(`UPDATE invoices SET amt=$1 WHERE id=$2 RETURNING id, comp_code, amt, paid, add_date, paid_date`, [amt, id])
         if (results.rows.length === 0) {
             throw new ExpressError(`Company cannot be found ${id}`, 404)
           }
-        return res.status(201).json({company: results.rows[0]})
+        return res.status(201).json({invoice: results.rows[0]})
     } catch(e) {
         next(e)
     }
@@ -42,8 +42,8 @@ router.put('/:code', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
     try {
         let { comp_code, amt } = req.body
-        const results = await db.query('INSERT INTO invoices (cmp_code, amt) VALUES ($1, $2) RETURNING code, name, description', [comp_code, amt ])
-        return res.status(201).json({company: results.rows[0]})
+        const results = await db.query('INSERT INTO invoices (comp_code, amt) VALUES ($1, $2) RETURNING id, comp_code, amt, paid, add_date, paid_date', [comp_code, amt ])
+        return res.status(201).json({invoice: results.rows[0]})
     } catch(e) {
         next(e)
     }
