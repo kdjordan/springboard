@@ -6,10 +6,10 @@ const slugify = require('../slugify')
 
 router.get('/', async (req, res, next) => {
     try {
-        const results = await db.query('SELECT * FROM companies')
+        const results = await db.query('SELECT * FROM companies ORDER BY name')
         return res.status(200).json({companies: results.rows})
     } catch(e) {
-        next(e)
+        return next(e)
     }
 })
 
@@ -20,9 +20,16 @@ router.get('/:code', async (req, res, next) => {
         if (results.rows.length === 0) {
             throw new ExpressError(`Can't find company with code of ${code}`, 404)
           }
-        return res.status(200).json({company: results.rows[0]})
+        let company = results.rows[0]
+
+        const invResults = await db.query(`SELECT id FROM invoices WHERE comp_code = $1`, [code])
+        
+        if(invResults.rows.length > 0) {
+            company.invoices = invResults.rows.map(inv => inv.id)
+        }
+        return res.status(200).json({company: company})
     } catch(e) {
-        next(e)
+        return next(e)
     }
 })
 
@@ -36,7 +43,7 @@ router.put('/:code', async (req, res, next) => {
           }
         return res.status(201).json({company: results.rows[0]})
     } catch(e) {
-        next(e)
+        return next(e)
     }
 })
 
@@ -47,7 +54,7 @@ router.post('/', async (req, res, next) => {
         const results = await db.query('INSERT INTO companies (code, name, description) VALUES ($1, $2, $3) RETURNING code, name, description', [code, name, description])
         return res.status(201).json({company: results.rows[0]})
     } catch(e) {
-        next(e)
+        return next(e)
     }
 })
 
@@ -56,11 +63,11 @@ router.delete('/:code', async (req, res, next) => {
         let { code } = req.params
         const results = await db.query('DELETE from companies WHERE code=$1 RETURNING code', [code])
         if (results.rowCount === 0) {
-            throw new ExpressError(`Company code cannot be found ${id}`, 404)
+            throw new ExpressError(`Company code cannot be found ${code}`, 404)
           }
         return res.status(201).json({status: 'DELETED'})
     } catch(e) {
-        next(e)
+        return next(e)
     }
 })
 
