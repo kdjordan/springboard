@@ -18,7 +18,7 @@ router.get('/:code', async (req, res, next) => {
         let { code } = req.params
         const results = await db.query('SELECT * FROM companies WHERE code=$1', [code])
         if (results.rows.length === 0) {
-            throw new ExpressError(`Can't find user with id of ${id}`, 404)
+            throw new ExpressError(`Can't find company with code of ${code}`, 404)
           }
         return res.status(200).json({company: results.rows[0]})
     } catch(e) {
@@ -32,7 +32,7 @@ router.put('/:code', async (req, res, next) => {
         let { name, description } = req.body
         const results = await db.query(`UPDATE companies SET name=$2, description=$3 WHERE code=$1 RETURNING code, name, description`, [code, name, description])
         if (results.rows.length === 0) {
-            throw new ExpressError(`Company cannot be found ${id}`, 404)
+            throw new ExpressError(`Company cannot be found ${code}`, 404)
           }
         return res.status(201).json({company: results.rows[0]})
     } catch(e) {
