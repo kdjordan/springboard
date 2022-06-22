@@ -1,12 +1,12 @@
-DROP DATABASE IF EXISTS biztime_db;
+-- DROP DATABASE IF EXISTS biztime_db;
 
-CREATE DATABASE biztime_db;
+-- CREATE DATABASE biztime_db;
 
+\c biztime_db;
 
 DROP TABLE IF EXISTS companies;
 DROP TABLE IF EXISTS invoices;
 
-\c biztime_db;
 
 CREATE TABLE companies (
     code text PRIMARY KEY,
