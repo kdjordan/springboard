@@ -25,38 +25,6 @@ router.get('/:code', async (req, res, next) => {
     }
 })
 
-// router.put('/:id', async (req, res, next) => {
-//     try {
-//         let { id } = req.params
-//         let { amt, paid } = req.body
-//         let paidDate = null
-//         const currResult = await db.query('SELECT * FROM invoices WHERE id=$1', [id])
-//         if (currResult.rows.length === 0) {
-//             throw new ExpressError(`No such invoice: ${id}`, 404);
-//           }
-//         const currPaidDate = currResult.rows[0].paid_date      
-
-//         if(paid && !currPaidDate) {
-//            paidDate = new Date()
-//         } else if (!paid) {
-//             paidDate = null
-//         } else {
-//             paidDate = currPaidDate
-//         }
-
-//         const updateResult = await db.query(
-//             `UPDATE invoices
-//              SET amt=$1, paid=$2, paid_date=$3
-//              WHERE id=$4
-//              RETURNING id, comp_code, amt, paid, add_date, paid_date`,
-//           [amt, paid, paidDate, id]);
-//         return res.status(200).send({ 'invoice': updateResult.rows[0]})
-
-//     } catch(e) {
-//         return next(e)
-//     }
-// })
-
 router.post('/', async (req, res, next) => {
     try {
         let { code, industry } = req.body
@@ -67,11 +35,18 @@ router.post('/', async (req, res, next) => {
     }
 })
 
-router.post('/add/:comp_code', async (req, res, next) => {
+router.post('/add/:code', async (req, res, next) => {
+    console.log('hittint')
     try {
         let { code } = req.params
         let { industry } = req.body
-        const results = await db.query('INSERT INTO company_industries (company_code, industry_code) VALUES ($1, $2) RETURNING code, industry', [code, industry ])
+        console.log('hittint', code, industry)
+        const results = await db.query(
+            `INSERT INTO company_industries (company_code, industry_code)
+                VALUES ($1, $2) 
+                RETURNING company_code, industry_code`,
+            [code, industry])
+            console.log('done')
         if (results.rows.length === 0) {
             throw new ExpressError(`Error associating ${code} with ${industry}`, 404)
           }
