@@ -72,7 +72,6 @@ router.get("/:id/edit/", async function(req, res, next) {
   try {
     const customer = await Customer.get(req.params.id);
     customer.fullName = Customer.fullName(customer)
-    console.log(customer)
 
     res.render("customer_edit_form.html", { customer });
   } catch (err) {
