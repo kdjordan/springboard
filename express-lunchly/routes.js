@@ -23,6 +23,21 @@ router.get("/", async function(req, res, next) {
   }
 });
 
+/** Form to search for a customer. */
+
+router.get("/search", async function(req, res, next) {
+  try {
+    const customers = await Customer.search(req.query.name)
+    customers.map(cust => {
+      cust.fullName = Customer.fullName(cust)
+    })
+    return res.render("customer_list.html", { customers });
+  } catch (err) {
+    return next(err);
+  }
+});
+
+
 /** Form to add a new customer. */
 
 router.get("/add/", async function(req, res, next) {
