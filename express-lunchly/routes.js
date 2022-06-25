@@ -11,13 +11,13 @@ const router = new express.Router();
 
 router.get("/", async function(req, res, next) {
   try {
-    const customers = await Customer.all();
+    let customers = await Customer.all();
     
     customers.map(cust => {
       cust.fullName = Customer.fullName(cust)
     })
     
-    return res.render("customer_list.html", { customers });
+    return res.render("customer_list.html", { customers} );
   } catch (err) {
     return next(err);
   }
@@ -31,7 +31,7 @@ router.get("/search", async function(req, res, next) {
     customers.map(cust => {
       cust.fullName = Customer.fullName(cust)
     })
-    return res.render("customer_list.html", { customers });
+    return res.render("customer_list.html", { customers, type:"search" } );
   } catch (err) {
     return next(err);
   }

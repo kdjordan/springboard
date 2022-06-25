@@ -85,7 +85,6 @@ class Customer {
   }
 
   static async search(name) {
-    console.log('searching for ', name)
     const results = await db.query(`SELECT id, 
       first_name AS "firstName",  
       last_name AS "lastName", 

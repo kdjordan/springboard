@@ -4,7 +4,15 @@
 
 <a class="btn btn-primary" style="float: right" href="/add/">Add a Customer</a></p>
 
-<h1>Customers</h1>
+
+
+<h1>
+  {% if type==='search' %}
+    Search Results
+  {% else %}  
+    Customers
+  {% endif %}
+</h1> 
 
 <ul style="column-count: 4">
   {% for customer in customers %}
