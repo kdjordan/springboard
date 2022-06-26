@@ -97,6 +97,18 @@ class Customer {
 
       return results.rows.map(c => new Customer(c))
     }
+
+  static async topten() {
+    const results = await db.query(`
+    SELECT count(*) as the_count, r.customer_id
+    FROM reservations as r
+    group by r.customer_id
+    order by the_count desc
+    LIMIT 10
+    `)
+    let ids = results.rows.map(id => id.customer_id)    
+    return ids
   }
+}
 
 module.exports = Customer;

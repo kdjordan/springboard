@@ -1,6 +1,8 @@
 /** Routes for Lunchly */
 
 const express = require("express");
+const { isDuration } = require("moment");
+const { topten } = require("./models/customer");
 
 const Customer = require("./models/customer");
 const Reservation = require("./models/reservation");
@@ -35,6 +37,38 @@ router.get("/search", async function(req, res, next) {
   } catch (err) {
     return next(err);
   }
+});
+
+/** Show Top 10 Customers. */
+
+router.get("/show", async function(req, res, next) {
+  console.log('showing 10')
+  let topTenIds = await topten()
+  // console.log('got back ', topTenIds)
+  let customers = []
+  for (let i=0; i<topTenIds.length-1; i++) {
+    const customer = await Customer.get(topTenIds[i]);
+    customer.fullName = Customer.fullName(customer)
+    customers.push(customer)
+  }
+
+  // topTenIds.forEach(id => {
+  //   const customer = await Customer.get(id);
+  //   customer.fullName = Customer.fullName(customer)
+  // })
+
+
+  return res.render("customer_list.html", { customers, type:"topTen" } );
+  //need to get 10 customers based on reservations
+  // try {
+  //   const customers = await Customer.search(req.query.name)
+  //   customers.map(cust => {
+  //     cust.fullName = Customer.fullName(cust)
+  //   })
+  //   return res.render("customer_list.html", { customers, type:"search" } );
+  // } catch (err) {
+  //   return next(err);
+  // }
 });
 
 

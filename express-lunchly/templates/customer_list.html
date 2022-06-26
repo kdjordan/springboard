@@ -4,12 +4,12 @@
 
 <a class="btn btn-primary" style="float: right" href="/add/">Add a Customer</a></p>
 
-
-
 <h1>
   {% if type==='search' %}
     Search Results
-  {% else %}  
+    {% elseif type==="topTen" %}  
+    Top 10 Customers
+      {% else %}
     Customers
   {% endif %}
 </h1> 
@@ -19,5 +19,10 @@
   <li><a href="/{{ customer.id }}/">{{ customer.fullName }}</a></li>
   {% endfor %}
 </ul>
+{% if type!=="topTen" %}
+<div>
+  <a class="btn btn-primary" href="/show">Show Top 10 Customers</a></p>
+</div>
+{% endif %}
 
 {% endblock %}
