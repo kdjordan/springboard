@@ -8,7 +8,7 @@ const DB_URI = (process.env.NODE_ENV === "test")
   ? "postgresql:///messagely_test"
   : "postgresql:///messagely";
 
-const SECRET_KEY = process.env.SECRET_KEY || "secret";
+const SECRET_KEY = process.env.SECRET_KEY || "adkahfd98P*&Y*&afalj";
 
 const BCRYPT_WORK_FACTOR = 12;
 
