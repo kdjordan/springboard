@@ -2,48 +2,66 @@
 
 const db = require("../db");
 const ExpressError = require("../expressError");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
 
 /** User of the site. */
 
 class User {
-  constructor({username, password, first_name, last_name, phone}) {
-    this.username = username
-    this.password = password
-    this.firstName = first_name
-    this.lastName = last_name
-    this.phone = phone
-  }
   /** register new user -- returns
    *    {username, password, first_name, last_name, phone}
    */
 
   static async register({username, password, first_name, last_name, phone}) { 
-    console.log('registering ', username, password, first_name, last_name, phone)
     const joinDate = new Date().toISOString()
-    const lastLogin = new Date().toISOString()
+    const hashedPassword = await bcrypt.hash(password, BCRYPT_WORK_FACTOR)
     const results = await db.query(
-      `INSERT INTO users (username, password, first_name, last_name, phone, join_at, last_login_at)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
+      `INSERT INTO users (username, password, first_name, last_name, phone, join_at)
+      VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING username, password, first_name, last_name, phone`,
-      [username, password, first_name, last_name, phone, joinDate, lastLogin])
-    
-      console.log(results)
+      [username, hashedPassword, first_name, last_name, phone, joinDate])
+  
+      if(!results) {
+        throw new ExpressError(`Error registering User`, 404);
+      }
+
       return results.rows[0]
   }
 
   /** Authenticate: is this username/password valid? Returns boolean. */
 
-  static async authenticate(username, password) { }
+  static async authenticate(username, password) {
+    const results = await db.query(
+      `SELECT username, password 
+      FROM users
+      WHERE username = $1`,
+      [username]);
+      
+      if(!results) {
+        return false
+      } else if (await bcrypt.compare(password, results.rows[0].password)) {
+        return true
+      } else {
+        return false
+      }
+   }
 
   /** Update last_login_at for user */
 
-  static async updateLoginTimestamp(username) { }
+  static async updateLoginTimestamp(username) { 
+    const loginDate = new Date().toISOString()
+    const results = await db.query(
+      `UPDATE users 
+      SET last_login_at = $1
+      WHERE username = $2`, [loginDate, username])
+      //TODO check for results ?
+  }
 
   /** All: basic info on all users:
    * [{username, first_name, last_name, phone}, ...] */
 
   static async all() { 
-    console.log('getting all users')
       const results = await db.query(
         `SELECT username,
         first_name AS "firstName", 
@@ -52,7 +70,7 @@ class User {
         FROM users 
         ORDER BY last_name, first_name`
       )
-      return results.rows.map(c => new User(c))
+      return results.rows
   }
 
   /** Get: get user by username
@@ -71,8 +89,7 @@ class User {
       last_name AS "lastName",
       phone
       FROM users 
-      WHERE username = $1
-      ORDER BY last_name, first_name`, [username])
+      WHERE username = $1`, [username])
 
       const user = results.rows[0];
 
@@ -81,7 +98,7 @@ class User {
         err.status = 404;
         throw err;
       }
-      return new User(user);
+      return user;
    }
 
   /** Return messages from this user.
@@ -102,14 +119,9 @@ class User {
       WHERE username = $1
       ORDER BY last_name, first_name`, [username])
 
-      const user = results.rows[0];
+      const mssgs = results.rows[0];
 
-      if (user === undefined) {
-        const err = new Error(`No such user: ${username}`);
-        err.status = 404;
-        throw err;
-      }
-      return new User(user);
+      return mssgs;
    }
 
   /** Return messages to this user.

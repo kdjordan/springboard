@@ -1,11 +1,9 @@
 const express = require("express");
 const router = new express.Router();
 const ExpressError = require("../expressError");
-const db = require("../db");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken");
 const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
-const { ensureLoggedIn, ensureAdmin } = require("../middleware/auth");
 const User = require('../models/user')
 
 /** POST /login - login: {username, password} => {token}
@@ -14,8 +12,25 @@ const User = require('../models/user')
  *
  **/
 
-router.post('/login', (req, res, next) => {
-    console.log('getting auth')
+router.post('/login', async (req, res, next) => {
+    try {
+        const { username, password } = req.body
+        if (!username || !password) {
+            throw new ExpressError("Username and password required", 400);
+            }
+
+        if(await User.authenticate(username, password)){
+             //create token from username and password 
+             const _token = jwt.sign({ username:username, password:password }, SECRET_KEY)
+             //update last login
+             await User.updateLoginTimestamp(username)
+             //return user object to front end
+             return res.json({ message: `Logged in!`, _token })
+        }
+
+    } catch (e) {
+        return next(e)
+    }
 })
 
 
@@ -28,16 +43,21 @@ router.post('/login', (req, res, next) => {
 
  router.post('/register', async (req, res, next) => {
     try {
-        console.log(req.body)
-        const { username, password, first_name, last_name, phone } = req.body
+        let { username, password, first_name, last_name, phone } = req.body
         if(!username || !password || ! first_name || !last_name || !phone) {
             throw new ExpressError('Invalid Input !')
         }
-        const hashedPassword = await bcrypt.hash(username, BCRYPT_WORK_FACTOR)
-        const results = await User.register({ username, password:`${hashedPassword}`, first_name, last_name, phone })
 
-        console.log('results ', results)
-        return res.json(results)
+        const user = await User.register({ username, password, first_name, last_name, phone })
+
+        if(user && await User.authenticate(username, password)) {
+            //create token from username and password 
+            const _token = jwt.sign({ username:username, password:password }, SECRET_KEY)
+            //update last login
+            await User.updateLoginTimestamp(user.username)
+            //return user object to front end
+            return res.json({ message: `Registered and logged in!`, _token })
+        }
         
     } catch (e) {
         if (e.code === '23505') {

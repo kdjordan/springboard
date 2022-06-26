@@ -13,7 +13,7 @@ const router = new express.Router();
 
 router.get("/", async function(req, res, next) {
   try {
-    let customers = await Customer.all();
+    let customers = await Customer.all(); 
     
     customers.map(cust => {
       cust.fullName = Customer.fullName(cust)
