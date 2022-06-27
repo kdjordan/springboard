@@ -19,3 +19,6 @@ CREATE TABLE messages (
     sent_at timestamp with time zone NOT NULL,
     read_at timestamp with time zone
 );
+
+
+-- insert into messages (from_username, to_username, body, sent_at) values ('kevinj', 'kevinj2', 'A test message', '2022-06-27T01:47:13.560Z') 

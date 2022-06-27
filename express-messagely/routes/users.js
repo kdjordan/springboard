@@ -27,8 +27,8 @@ router.get('/', async (req, res, next) => {
 
  router.get('/:username', async (req, res, next) => {
     try {
-        const users = await User.get(req.params.username)
-        return res.json({ users })
+        const user = await User.get(req.params.username)
+        return res.json({ user })
     } catch (e) {
         return next(e)
     }
@@ -45,6 +45,21 @@ router.get('/', async (req, res, next) => {
  *
  **/
 
+ router.get('/:username/to', ensureLoggedIn,  async (req, res, next) => {
+    try {
+        const mssgs = await User.messagesTo(req.params.username)
+        if(mssgs) {
+            const user = await User.get(mssgs.from_username)
+            delete mssgs.from_username
+            return res.json({mssgs, from_user:user})
+        } 
+        return res.json({ messages: `No messages to ${req.params.username}` })
+        
+    } catch (e) {
+        return next(e)
+    }
+})
+
 
 /** GET /:username/from - get messages from user
  *
@@ -55,5 +70,19 @@ router.get('/', async (req, res, next) => {
  *                 to_user: {username, first_name, last_name, phone}}, ...]}
  *
  **/
+ router.get('/:username/from', ensureLoggedIn,  async (req, res, next) => {
+    try {
+        const mssgs = await User.messagesFrom(req.params.username)
+        if(mssgs) {
+            const user = await User.get(mssgs.to_username)
+            delete mssgs.to_username
+            return res.json({mssgs, to_user:user})
+        } 
+        return res.json({ messages: `No messages from ${req.params.username}` })
+        
+        } catch (e) {
+            return next(e)
+        }
+})
 
 module.exports = router
