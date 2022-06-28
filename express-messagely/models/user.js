@@ -3,8 +3,8 @@
 const db = require("../db");
 const ExpressError = require("../expressError");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
+
+const { BCRYPT_WORK_FACTOR } = require("../config");
 
 /** User of the site. */
 
@@ -47,10 +47,15 @@ class User {
 
   static async updateLoginTimestamp(username) { 
     const loginDate = new Date().toISOString()
-    const results = await db.query(
+    const result = await db.query(
       `UPDATE users 
-      SET last_login_at = $1
-      WHERE username = $2`, [loginDate, username])
+      SET last_login_at = $2
+      WHERE username = $1
+      RETURNING username, last_login_at`, [username, loginDate])
+
+      if (!result.rows[0]) {
+        throw new ExpressError(`No such user: ${username}`, 404);
+      }
   }
 
   /** All: basic info on all users:
@@ -59,11 +64,11 @@ class User {
   static async all() { 
       const results = await db.query(
         `SELECT username,
-        first_name AS "firstName", 
-        last_name AS "lastName",
+        first_name,
+        last_name,
         phone
         FROM users 
-        ORDER BY last_name, first_name`
+        ORDER BY username`
       )
       return results.rows
   }
@@ -103,13 +108,32 @@ class User {
    */
 
   static async messagesFrom(username) {
-    console.log('getting ', username)
-    const results = await db.query(
-      `SELECT id, to_username, body, sent_at, read_at
-      FROM messages 
-      WHERE from_username = $1`, [username])
+    const result = await db.query(
+      `SELECT m.id,
+              m.to_username,
+              u.first_name,
+              u.last_name,
+              u.phone,
+              m.body,
+              m.sent_at,
+              m.read_at
+        FROM messages AS m
+          JOIN users AS u ON m.to_username = u.username
+        WHERE from_username = $1`,
+      [username]);
 
-      return results.rows[0]
+  return result.rows.map(m => ({
+      id: m.id,
+      to_user: {
+        username: m.to_username,
+        first_name: m.first_name,
+        last_name: m.last_name,
+        phone: m.phone
+      },
+      body: m.body,
+      sent_at: m.sent_at,
+      read_at: m.read_at
+  }));
   }
 
   /** Return messages to this user.
@@ -121,12 +145,32 @@ class User {
    */
 
   static async messagesTo(username) { 
-    const results = await db.query(
-      `SELECT id, from_username, body, sent_at, read_at
-      FROM messages 
-      WHERE to_username = $1`, [username])
+    const result = await db.query(
+      `SELECT m.id,
+              m.from_username,
+              u.first_name,
+              u.last_name,
+              u.phone,
+              m.body,
+              m.sent_at,
+              m.read_at
+        FROM messages AS m
+         JOIN users AS u ON m.from_username = u.username
+        WHERE to_username = $1`,
+      [username]);
 
-      return results.rows[0]
+    return result.rows.map(m => ({
+      id: m.id,
+      from_user: {
+        username: m.from_username,
+        first_name: m.first_name,
+        last_name: m.last_name,
+        phone: m.phone,
+      },
+      body: m.body,
+      sent_at: m.sent_at,
+      read_at: m.read_at
+    }));
   }
 }
 

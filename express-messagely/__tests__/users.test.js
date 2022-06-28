@@ -49,6 +49,7 @@ describe("Test User class", function () {
   });
 
   test("can get", async function () {
+    User.updateLoginTimestamp("test");
     let u = await User.get("test");
     expect(u).toEqual({
       username: "test",

@@ -73,12 +73,7 @@ router.get('/', ensureLoggedIn, async (req, res, next) => {
  router.get('/:username/from', ensureCorrectUser,  async (req, res, next) => {
     try {
         const mssgs = await User.messagesFrom(req.params.username)
-        if(mssgs) {
-            const user = await User.get(mssgs.to_username)
-            delete mssgs.to_username
-            return res.json({mssgs, to_user:user})
-        } 
-        return res.json({ messages: `No messages from ${req.params.username}` })
+        return res.json({ mssgs })
         
         } catch (e) {
             return next(e)
