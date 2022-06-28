@@ -2,6 +2,7 @@ const express = require("express");
 const router = new express.Router();
 const ExpressError = require("../expressError");
 const { ensureLoggedIn, ensureCorrectUser, authenticateJWT } = require("../middleware/auth");
+const Message = require('../models.messages')
 
 /** GET /:id - get detail of message.
  *
@@ -16,11 +17,11 @@ const { ensureLoggedIn, ensureCorrectUser, authenticateJWT } = require("../middl
  *
  **/
 
-router.get('/:id', [authenticateJWT, ensureCorrectUser], async (req, res, next) => {
+router.get('/:id', ensureCorrectUser, async (req, res, next) => {
     try {
-        const id  = req.params.id
+        let result = await Message.get(req.params.id)
         console.log('getting mssg', id)
-        return res.status(200)
+        return res.status({message: { result }})
         
     } catch (error) {
         throw new ExpressError(`Error getting message ${id}`, 404);
@@ -35,8 +36,13 @@ router.get('/:id', [authenticateJWT, ensureCorrectUser], async (req, res, next) 
  *
  **/
 
- router.post('/', (req, res, next) => {
-    console.log('in messages')
+ router.post('/', async (req, res, next) => {
+    try {
+        let results = await Message.create(req.body)
+        return res.json({message: {results}})
+    } catch (e) {
+        return next(e)
+    }
 })
 
 /** POST/:id/read - mark message as read:
@@ -46,6 +52,14 @@ router.get('/:id', [authenticateJWT, ensureCorrectUser], async (req, res, next) 
  * Make sure that the only the intended recipient can mark as read.
  *
  **/
+ router.post('/:id/read', ensureCorrectUser, async (req, res, next) => {
+    try {
+        let result = await Message.markRead(req.params.id)
+        res.json({message: result})
+    } catch (e) {
+        return next(e)
+    }
+})
 
 
  module.exports = router
