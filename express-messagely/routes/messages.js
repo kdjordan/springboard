@@ -1,11 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const ExpressError = require("../expressError");
-const db = require("../db");
-const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
-const { BCRYPT_WORK_FACTOR, SECRET_KEY } = require("../config");
-const { ensureLoggedIn, ensureAdmin } = require("../middleware/auth");
+const { ensureLoggedIn, ensureCorrectUser, authenticateJWT } = require("../middleware/auth");
 
 /** GET /:id - get detail of message.
  *
@@ -19,6 +15,17 @@ const { ensureLoggedIn, ensureAdmin } = require("../middleware/auth");
  * Make sure that the currently-logged-in users is either the to or from user.
  *
  **/
+
+router.get('/:id', [authenticateJWT, ensureCorrectUser], async (req, res, next) => {
+    try {
+        const id  = req.params.id
+        console.log('getting mssg', id)
+        return res.status(200)
+        
+    } catch (error) {
+        throw new ExpressError(`Error getting message ${id}`, 404);
+    }
+})
 
 
 /** POST / - post message.

@@ -32,19 +32,15 @@ class User {
   /** Authenticate: is this username/password valid? Returns boolean. */
 
   static async authenticate(username, password) {
-    const results = await db.query(
-      `SELECT username, password 
+    const result = await db.query(
+      `SELECT password
       FROM users
       WHERE username = $1`,
       [username]);
       
-      if(!results) {
-        return false
-      } else if (await bcrypt.compare(password, results.rows[0].password)) {
-        return true
-      } else {
-        return false
-      }
+      let user = result.rows[0];
+
+      return user && await bcrypt.compare(password, user.password);
    }
 
   /** Update last_login_at for user */
@@ -84,20 +80,18 @@ class User {
   static async get(username) {
     const results = await db.query(
       `SELECT username,
-      first_name AS "firstName", 
-      last_name AS "lastName",
-      phone
+              first_name, 
+              last_name,
+              phone,
+              join_at,
+              last_login_at
       FROM users 
       WHERE username = $1`, [username])
 
-      const user = results.rows[0];
-
-      if (user === undefined) {
-        const err = new Error(`No such user: ${username}`);
-        err.status = 404;
-        throw err;
+      if (!results.rows[0]) {
+        throw new ExpressError(`No such user: ${username}`, 404)
       }
-      return user;
+      return results.rows[0]
    }
 
   /** Return messages from this user.
