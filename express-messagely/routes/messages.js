@@ -1,8 +1,8 @@
 const express = require("express");
 const router = new express.Router();
 const ExpressError = require("../expressError");
-const { ensureLoggedIn, ensureCorrectUser, authenticateJWT } = require("../middleware/auth");
-const Message = require('../models.messages')
+const { ensureLoggedIn } = require("../middleware/auth");
+const Message = require('../models/message')
 
 /** GET /:id - get detail of message.
  *
@@ -17,14 +17,19 @@ const Message = require('../models.messages')
  *
  **/
 
-router.get('/:id', ensureCorrectUser, async (req, res, next) => {
+router.get('/:id', ensureLoggedIn, async (req, res, next) => {
+    console.log(req.user)
     try {
-        let result = await Message.get(req.params.id)
-        console.log('getting mssg', id)
-        return res.status({message: { result }})
+        let username  = req.user.username
+        let mssg = await Message.get(req.params.id)
+
+        if (mssg.to_user.username !== username && mssg.from_user.username !== username) {
+            throw new ExpressError("Cannot read this message", 401);
+          }
+        return res.status({message: { mssg }})
         
-    } catch (error) {
-        throw new ExpressError(`Error getting message ${id}`, 404);
+    } catch (e) {
+        return next(e)
     }
 })
 
@@ -36,10 +41,10 @@ router.get('/:id', ensureCorrectUser, async (req, res, next) => {
  *
  **/
 
- router.post('/', async (req, res, next) => {
+ router.post('/', ensureLoggedIn, async (req, res, next) => {
     try {
         let results = await Message.create(req.body)
-        return res.json({message: {results}})
+        return res.json({message: results})
     } catch (e) {
         return next(e)
     }
@@ -52,10 +57,17 @@ router.get('/:id', ensureCorrectUser, async (req, res, next) => {
  * Make sure that the only the intended recipient can mark as read.
  *
  **/
- router.post('/:id/read', ensureCorrectUser, async (req, res, next) => {
+ router.post('/:id/read', ensureLoggedIn, async (req, res, next) => {
+    console.log('runnin')
     try {
-        let result = await Message.markRead(req.params.id)
-        res.json({message: result})
+        let { username } = req.user
+        let mssg = await Message.markRead(req.params.id)
+
+        if (msg.to_user.username !== username) {
+            throw new ExpressError("Cannot set this message to read", 401)
+        }
+
+        res.json({ message })
     } catch (e) {
         return next(e)
     }
