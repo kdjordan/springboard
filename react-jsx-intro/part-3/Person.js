@@ -8,7 +8,6 @@ const Person = (props) => {
             <h3><i>{mssg}</i></h3>
             <h3>Hobbies</h3>
             <ul>
-                {/* {props.hobbies.map(el => <li>el</li>) } */}
                 {props.hobbies.map((h, i) => <li key={i}>{h}</li>)}
             </ul>
         </div>
