@@ -10,7 +10,7 @@
     height: 20rem;
     border: 13px solid red;
     border-radius: 50%;
-    background-color: black;
+    /* background-color: black; */
     position: relative;
 }
 
