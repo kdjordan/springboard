@@ -1,5 +1,5 @@
 import React from 'react';
-import {EightBall, Clicker} from './EightBall'
+import EightBall from './EightBall'
 
 
 import './App.css';
@@ -9,7 +9,6 @@ function App() {
     <div className="App">
       <h1>MAGIC 8-BALL</h1>
       <EightBall />
-      <Clicker />
     </div>
   );
 }

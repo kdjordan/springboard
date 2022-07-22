@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './EightBall.css'
 import data from './EightBallData'
 
 const EightBall = () => {
-    let mssg = 'Think of a question...'
-   
+    const [mssg, setMssg] = useState('Think of a question...')
+    let index = Math.floor(Math.random() * data.length)
+    let newMssg = data[index]['msg']
+    
     return (
         <div className="EightBall">
             <div className="EightBall-circle">
@@ -12,22 +14,15 @@ const EightBall = () => {
                 {mssg}
                 </div>
             </div>
+            <div>
+                <button id="go-btn" onClick={() => setMssg(newMssg)}>SOLUTION</button>
+            </div>
         </div>
     )
 }
 
-const Clicker = () => {
-    function getAnswer() {
-        let index = Math.floor(Math.random() * data.length)
-        console.log('clickin', data[index]['msg'])
-    }
-    return (
-        <>
-            <button id="go-btn" onClick={getAnswer}>SOLUTION</button>
-        </>
-    )
-}
 
 
 
-export  {EightBall, Clicker}
+
+export default EightBall
