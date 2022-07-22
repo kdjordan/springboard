@@ -4,9 +4,9 @@ import PokeCard from './PokeCard.js'
 
 const PokeDex = ({items}) => {
     return (
-        <div>
+        <div className='poke-container'>
             {items.map(i => (
-                <PokeCard 
+                <PokeCard key={i.id}
                     id={i.id} 
                     name={i.name} 
                     type={i.type}
