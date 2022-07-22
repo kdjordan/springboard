@@ -1,14 +1,10 @@
 ### Eight Ball
-(There is no starter code for this exercise)
-
 In this exercise, you’ll build a simulation of a classic kid’s toy, the Magic Eight Ball.
 
 This should appear as a black ball that initially reads “Think of a Question”, like this:
 
-_images/black.png
 When you click on the ball, it should choose a random answer & the matching color for that answer. For example, after clicking, it might look like this:
 
-_images/green.png
 Step One: EightBall Component
 This application will consist of two components:
 

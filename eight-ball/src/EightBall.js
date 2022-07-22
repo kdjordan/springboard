@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
 import './EightBall.css'
-import data from './EightBallData'
 
-const EightBall = () => {
+
+const EightBall = (props) => {
+    let data  = props.answers
     const [mssg, setMssg] = useState('Think of a question...')
     const [backgroundColor, setColor] = useState('black')
-    const [fontColor, setFontColor] = useState('red')
+    const [fontColor, setFontColor] = useState('white')
 
     let index = Math.floor(Math.random() * data.length)
     let newMssg = data[index]['msg']
@@ -14,7 +15,7 @@ const EightBall = () => {
     function doUpdate() {
         setMssg(newMssg)
         setColor(color)
-        setFontColor('white')
+        setFontColor('lightyellow')
     }
 
     function reset() {
@@ -33,7 +34,6 @@ const EightBall = () => {
                 </div>
             </div>
             <div>
-                {/* <button id="go-btn" onClick={() => setMssg(newMssg)}>SOLUTION</button> */}
                 <button id="go-btn" onClick={doUpdate}>SOLUTION</button>
             </div>
             <div>
