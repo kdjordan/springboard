@@ -6,7 +6,7 @@ const EightBall = () => {
     const [mssg, setMssg] = useState('Think of a question...')
     let index = Math.floor(Math.random() * data.length)
     let newMssg = data[index]['msg']
-    
+
     return (
         <div className="EightBall">
             <div className="EightBall-circle">
@@ -17,12 +17,11 @@ const EightBall = () => {
             <div>
                 <button id="go-btn" onClick={() => setMssg(newMssg)}>SOLUTION</button>
             </div>
+            <div>
+                <button id="go-btn" onClick={() => setMssg('Think of a question...')}>RESET</button>
+            </div>
         </div>
     )
 }
-
-
-
-
 
 export default EightBall
