@@ -88,16 +88,27 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
    )
 
   } else {
-    return (
+    return(
       <div>
         <h1>board</h1>
+        <table>
+          <tbody>
+          {board.map(row => {
+              return (
+                <tr>
+                {row.map(cell => {
+                    return  <td><Cell isLit={cell === '.' ? false : true}/></td>
+                })}
+                </tr>
+              )  
+          })}
+          </tbody>
+        </table>
       </div>
+    
     )
   }
 
-  // make table board
-
-  // TODO
 }
 
 export default Board;
