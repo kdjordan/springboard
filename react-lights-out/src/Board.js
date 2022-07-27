@@ -30,15 +30,33 @@ import "./Board.css";
 function Board({ nrows, ncols, chanceLightStartsOn }) {
   const [board, setBoard] = useState(createBoard());
 
+
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
     let initialBoard = [];
-    // TODO: create array-of-arrays of true/false values
+    for( let i=0; i < nrows; i++) {
+      initialBoard.push([])
+      for (let j=0; j < ncols; j++) {
+        let random_boolean = Math.random() < chanceLightStartsOn
+        if(random_boolean) {
+          initialBoard[i][j] = '0'
+        } else {
+          initialBoard[i][j] = '.'
+        }
+      }
+    }
     return initialBoard;
   }
 
   function hasWon() {
+    const checkWin = (cell) => {return cell === '.' }
+    console.log('checking won', typeof(board))
     // TODO: check the board in state to determine whether the player has won.
+    let won
+    for (const row of board) {
+      won = row.every(checkWin)
+    }
+    return won
   }
 
   function flipCellsAround(coord) {
@@ -62,8 +80,20 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   // if the game is won, just show a winning msg & render nothing else
+  if(hasWon()) {
+   return (
+    <div>
+      <h1>Won</h1>
+    </div>
+   )
 
-  // TODO
+  } else {
+    return (
+      <div>
+        <h1>board</h1>
+      </div>
+    )
+  }
 
   // make table board
 
