@@ -29,16 +29,16 @@ it('left arrow tests', ()=> {
 })
 
 it('right arrow tests', ()=> {
-    const {queryByTestId, queryByAltText, getByTestId} = render(<Carousel />)
+    const {queryByAltText, getByTestId} = render(<Carousel />)
 
     //only one alttest should show
     expect(queryByAltText('Photo by Richard Pasquarella on Unsplash')).toBeInTheDocument()
     expect(queryByAltText('Photo by Pratik Patel on Unsplash')).not.toBeInTheDocument() 
 
-    //click left arrrow should not be since FAIL
-    const lftBtn = getByTestId('left-arrow')
-    fireEvent.click(lftBtn)
+    //click right arrrow should be good
+    const rtBtn = getByTestId('left-arrow')
+    fireEvent.click(rtBtn)
+    expect(queryByAltText('Photo by Pratik Patel on Unsplash')).toBeInTheDocument()
     expect(queryByAltText('Photo by Josh Post on Unsplash')).not.toBeInTheDocument()
-
 })
 
