@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Carousel from "./Carousel";
+import App from "./App";
 
 it("renders without crashing", function() {
-  render(<Carousel />);
+  render(<App />);
 });
