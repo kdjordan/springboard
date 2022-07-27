@@ -30,7 +30,6 @@ import "./Board.css";
 function Board({ nrows, ncols, chanceLightStartsOn }) {
   const [board, setBoard] = useState(createBoard());
 
-
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
     let initialBoard = [];
@@ -50,7 +49,6 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
   function hasWon() {
     const checkWin = (cell) => {return cell === '.' }
-    console.log('checking won', typeof(board))
     // TODO: check the board in state to determine whether the player has won.
     let won
     for (const row of board) {
@@ -60,6 +58,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   function flipCellsAround(coord) {
+    console.log('checking', coord)
     setBoard(oldBoard => {
       const [y, x] = coord.split("-").map(Number);
 
@@ -89,15 +88,19 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
 
   } else {
     return(
-      <div>
-        <h1>board</h1>
+      <div className="Board">
+        <h1 className="Board-heading">Let's Play KnockOut !</h1>
         <table>
           <tbody>
-          {board.map(row => {
+          {board.map((row, indexX) => {
               return (
                 <tr>
-                {row.map(cell => {
-                    return  <td><Cell isLit={cell === '.' ? false : true}/></td>
+                {row.map((cell, indexY) => {
+                    return  (
+                      <td>
+                        <Cell flipCellsAroundMe={() => flipCellsAround(`${indexX}-${indexY}`)} isLit={cell === '.' ? false : true} />
+                      </td>
+                    )
                 })}
                 </tr>
               )  
@@ -108,7 +111,6 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
     
     )
   }
-
 }
 
 export default Board;

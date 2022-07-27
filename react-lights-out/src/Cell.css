@@ -3,6 +3,7 @@
   width: 100px;
   background-color: darkgray;
   cursor: pointer;
+  border-radius: 10px;
 }
 
 .Cell-lit {
