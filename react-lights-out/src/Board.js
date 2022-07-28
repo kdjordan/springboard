@@ -82,39 +82,13 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
       //In the copy, flip this cell and the cells around it
       flipCell(y,x, boardCopy)
       //check left
-      if(x - 1 >= 0) {
-        flipCell(y, x - 1, boardCopy)
-        console.log('flip left')
-        //check top left
-        // if(y - 1 >= 0) {
-        //   flipCell(y - 1, x - 1, boardCopy)
-        //   console.log('flip top left')
-        // }
-        //check bottom left
-        // if(y + 1 < ncols) {
-        //   flipCell(y + 1, x - 1, boardCopy)
-        //   console.log('flip top left')
-        // }
-      }
+      if(x - 1 >= 0) flipCell(y, x - 1, boardCopy)
       //check right
-      if(x + 1 < nrows) {
-        flipCell(y, x + 1, boardCopy)
-        console.log('flip right')
-        // //check top right
-        // if(y - 1 >= 0) {
-        //   flipCell(y - 1, x + 1, boardCopy)
-        //   console.log('flip top right')
-        // }
-        //check bottom right
-        // if(y + 1 < nrows) {
-        //   flipCell(y + 1, x + 1, boardCopy)
-        //   console.log('flip top right')
-        // }
-      }
+      if(x + 1 < nrows) flipCell(y, x + 1, boardCopy)
       // //check top
-      if(y - 1 >= 0){flipCell(y - 1, x, boardCopy); console.log('flip top')}
+      if(y - 1 >= 0) flipCell(y - 1, x, boardCopy)
       // //check bottom
-      if(y + 1 < ncols) {flipCell(y + 1, x, boardCopy); console.log('flip bottom')}
+      if(y + 1 < ncols) flipCell(y + 1, x, boardCopy)
 
       //return the copy
       return boardCopy
