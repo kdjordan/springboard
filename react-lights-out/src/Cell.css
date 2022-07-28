@@ -9,3 +9,13 @@
 .Cell-lit {
   background-color: white;
 }
+
+td {
+  transform: scale(1);
+  transition: all .4s ease;
+}
+
+td:hover {
+  transform: scale(1.05);
+  box-shadow: rgba(0, 0, 0, .5) 0px 8px 24px;
+}

@@ -29,7 +29,7 @@ import "./Board.css";
 
 function Board({ nrows, ncols, chanceLightStartsOn }) {
   const [board, setBoard] = useState(createBoard());
-
+  let key = 0
   /** create a board nrows high/ncols wide, each cell randomly lit or unlit */
   function createBoard() {
     let initialBoard = [];
@@ -38,18 +38,18 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
       for (let j=0; j < ncols; j++) {
         let random_boolean = Math.random() < chanceLightStartsOn
         if(random_boolean) {
-          initialBoard[i][j] = '0'
+          initialBoard[i][j] = true
         } else {
-          initialBoard[i][j] = '.'
+          initialBoard[i][j] = false
         }
       }
     }
     return initialBoard;
   }
-
+  //check the board in state to determine whether the player has won.
   function hasWon() {
     const checkWin = (cell) => {return cell === '.' }
-    // TODO: check the board in state to determine whether the player has won.
+    
     let won
     for (const row of board) {
       won = row.every(checkWin)
@@ -58,23 +58,28 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
 
   function flipCellsAround(coord) {
-    console.log('checking', coord)
     setBoard(oldBoard => {
       const [y, x] = coord.split("-").map(Number);
 
+      //Make a (deep) copy of the oldBoard
+      let boardCopy = []
+      oldBoard.forEach((row, index) => {
+        boardCopy[index] = [...row]
+      }) 
+  
       const flipCell = (y, x, boardCopy) => {
         // if this coord is actually on board, flip it
-
         if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
           boardCopy[y][x] = !boardCopy[y][x];
         }
+
       };
-
-      // TODO: Make a (deep) copy of the oldBoard
-
+      
       // TODO: in the copy, flip this cell and the cells around it
+      flipCell(y,x, boardCopy)
 
-      // TODO: return the copy
+      //return the copy
+      return boardCopy
     });
   }
 
@@ -82,7 +87,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   if(hasWon()) {
    return (
     <div>
-      <h1>Won</h1>
+      <h1>YOU WIN !</h1>
     </div>
    )
 
@@ -90,16 +95,15 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
     return(
       <div className="Board">
         <h1 className="Board-heading">Let's Play KnockOut !</h1>
-        <table>
+        <table cellSpacing="15">
           <tbody>
           {board.map((row, indexX) => {
               return (
                 <tr>
                 {row.map((cell, indexY) => {
+                  key++
                     return  (
-                      <td>
-                        <Cell flipCellsAroundMe={() => flipCellsAround(`${indexX}-${indexY}`)} isLit={cell === '.' ? false : true} />
-                      </td>
+                      <Cell num={key} flipCellsAroundMe={() => flipCellsAround(`${indexX}-${indexY}`)} isLit={cell} />
                     )
                 })}
                 </tr>
@@ -107,6 +111,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
           })}
           </tbody>
         </table>
+        <button className="Board-button">NEW GAME</button>
       </div>
     
     )
