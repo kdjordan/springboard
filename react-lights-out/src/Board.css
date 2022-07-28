@@ -11,6 +11,11 @@
 
 .Board-heading {
   margin-bottom: 4vh;
+  border: 2px solid darkgray;
+  border-radius: 15px;
+  color: grey;
+  padding: 1rem 2rem;
+
 }
 
 .Board-button {
@@ -18,7 +23,7 @@
   padding: 1rem 2rem;
   background-color: darkgray;
   color: white;
-  border: 1px solid white;
+  border: 2px solid white;
   border-radius: 15px;
   transform: scale(1);
   transition: all .4s ease;
@@ -26,6 +31,6 @@
 
 .Board-button:hover {
   transform: scale(1.05);
-  box-shadow: rgba(0, 0, 0, .5) 0px 8px 24px;
+  box-shadow: rgba(0, 0, 0, .5) 0px 8px 12px;
 }
 

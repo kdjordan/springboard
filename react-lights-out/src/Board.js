@@ -27,6 +27,10 @@ import "./Board.css";
  *
  **/
 
+function resetGame() {
+  window.location.reload();
+}
+
 function Board({ nrows, ncols, chanceLightStartsOn }) {
   const [board, setBoard] = useState(createBoard());
   let key = 0
@@ -69,14 +73,48 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   
       const flipCell = (y, x, boardCopy) => {
         // if this coord is actually on board, flip it
+        console.log('flipping ', boardCopy, y,x)
         if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
           boardCopy[y][x] = !boardCopy[y][x];
         }
-
       };
-      
-      // TODO: in the copy, flip this cell and the cells around it
+
+      //In the copy, flip this cell and the cells around it
       flipCell(y,x, boardCopy)
+      //check left
+      if(x - 1 >= 0) {
+        flipCell(y, x - 1, boardCopy)
+        console.log('flip left')
+        //check top left
+        // if(y - 1 >= 0) {
+        //   flipCell(y - 1, x - 1, boardCopy)
+        //   console.log('flip top left')
+        // }
+        //check bottom left
+        // if(y + 1 < ncols) {
+        //   flipCell(y + 1, x - 1, boardCopy)
+        //   console.log('flip top left')
+        // }
+      }
+      //check right
+      if(x + 1 < nrows) {
+        flipCell(y, x + 1, boardCopy)
+        console.log('flip right')
+        // //check top right
+        // if(y - 1 >= 0) {
+        //   flipCell(y - 1, x + 1, boardCopy)
+        //   console.log('flip top right')
+        // }
+        //check bottom right
+        // if(y + 1 < nrows) {
+        //   flipCell(y + 1, x + 1, boardCopy)
+        //   console.log('flip top right')
+        // }
+      }
+      // //check top
+      if(y - 1 >= 0){flipCell(y - 1, x, boardCopy); console.log('flip top')}
+      // //check bottom
+      if(y + 1 < ncols) {flipCell(y + 1, x, boardCopy); console.log('flip bottom')}
 
       //return the copy
       return boardCopy
@@ -111,7 +149,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
           })}
           </tbody>
         </table>
-        <button className="Board-button">NEW GAME</button>
+        <button className="Board-button" onClick={resetGame}>NEW GAME</button>
       </div>
     
     )
