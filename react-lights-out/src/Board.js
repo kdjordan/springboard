@@ -52,13 +52,19 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
   //check the board in state to determine whether the player has won.
   function hasWon() {
-    const checkWin = (cell) => {return cell === false }
+    // const checkWin = (cell) => {
+    //   console.log(cell)
+    //   return cell === false }
     
     let won
-    for (const row of board) {
-      won = row.every(checkWin)
+    for (const [index, row] of board.entries()) {
+      console.log(row, index)
+      won = row.every(cell => {
+        // console.log(cell, index)
+        return cell === true
+      })
     }
-    console.log('return ', won)
+    console.log('won', won)
     return won
   }
 
