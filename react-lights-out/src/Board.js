@@ -52,12 +52,13 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   }
   //check the board in state to determine whether the player has won.
   function hasWon() {
-    const checkWin = (cell) => {return cell === '.' }
+    const checkWin = (cell) => {return cell === false }
     
     let won
     for (const row of board) {
       won = row.every(checkWin)
     }
+    console.log('return ', won)
     return won
   }
 
@@ -73,7 +74,6 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
   
       const flipCell = (y, x, boardCopy) => {
         // if this coord is actually on board, flip it
-        console.log('flipping ', boardCopy, y,x)
         if (x >= 0 && x < ncols && y >= 0 && y < nrows) {
           boardCopy[y][x] = !boardCopy[y][x];
         }
@@ -100,6 +100,7 @@ function Board({ nrows, ncols, chanceLightStartsOn }) {
    return (
     <div>
       <h1>YOU WIN !</h1>
+      <button className="Board-button" onClick={resetGame}>NEW GAME</button>
     </div>
    )
 
