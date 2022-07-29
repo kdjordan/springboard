@@ -1,0 +1,28 @@
+.BoxWrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1vh;
+}
+.Box {
+    display: block;
+    border-radius: 15px;
+}
+
+.BoxButton {
+    color: red;
+    padding: .3rem .6rem;
+    background-color: rgb(255, 255, 255, .7);
+    border-radius: 50%;
+    border: 2px solid red;
+    font-size: 1.2rem;
+    margin-top: 1vh;
+    cursor: pointer;
+    transform: scale(1);
+    transition: all .4s ease;
+}
+
+.BoxButton:hover {
+    transform: scale(1.1);
+}

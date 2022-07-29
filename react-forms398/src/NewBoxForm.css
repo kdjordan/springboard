@@ -1,0 +1,15 @@
+.NewBoxForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 20vh;
+}
+
+.NewBoxFormButton {
+    padding: .3rem .8rem;
+    border-radius: 15px;
+    border: 2px solid white;
+    margin-top: 1vh;
+    cursor: pointer;
+}
