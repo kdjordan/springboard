@@ -4,6 +4,12 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-grey: #f7f3f5;
+  --color-red: #cf5c36;
+  --color-black: #0a0a0a;
+}
+
 .App {
   text-align: center;
   display: flex;
@@ -15,11 +21,12 @@
   font-family: 'Montserrat', sans-serif;
 }
 
-.Container {
+.App-container {
   border: 2px solid white;
   padding: 4rem;
   border-radius: 25px;
   background-color: darkgrey;
+  max-width: 40vw;
 }
 
 

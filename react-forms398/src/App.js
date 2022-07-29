@@ -3,13 +3,16 @@ import React from "react";
 import './App.css';
 import BoxList from './BoxList'
 import NewBoxForm from './NewBoxForm'
-
+import sampleData from './data'
 function App() {
+ 
+  
+  //all state in here
   return (
     <div className="App">
-      <div className="Container">
+      <div className="App-container">
         <NewBoxForm />
-        <BoxList />
+        <BoxList data={sampleData}/>
       </div>
     </div>
   );

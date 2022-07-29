@@ -21,7 +21,7 @@ function NewBoxForm({addBox}) {
         // console.log(uuidv4(), height, width, color)
     }
  return (
-    <div>
+    <div className='NewBox'>
         <h1>Fun With Boxes</h1>
         <form onSubmit={handleSubmit} className='NewBoxForm'>
             <label htmlFor="width">Enter Box Width (px)</label>
@@ -30,7 +30,7 @@ function NewBoxForm({addBox}) {
             <input type="number" name="height" id="height" placeholder="height" value="formData.height" onChange={handleChange}/>
             <label htmlFor="color">Select a Color</label>
             <input type="color" name="color" id="color" value="formData.color" onChange={handleChange}/>
-            <button className="NewBoxFormButton">ADD BOX</button>
+            <button className="NewBoxFormButton">ADD</button>
         </form>
     </div>
  )

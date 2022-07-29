@@ -1,3 +1,11 @@
+.NewBox {
+    margin-top: -2vh;
+}
+.NewBox h1 {
+    margin-bottom: 1vh;
+    font-size: clamp(1.5rem, 3.5vw, 8rem)
+}
+
 .NewBoxForm {
     display: flex;
     flex-direction: column;
@@ -12,4 +20,13 @@
     border: 2px solid white;
     margin-top: 1vh;
     cursor: pointer;
+    width: 10vw;
+}
+
+input {
+    padding: .3rem;
+}
+
+label {
+    font-weight: 700;
 }

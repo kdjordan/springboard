@@ -1,3 +1,13 @@
-.BoxList {
-    margin-top: 2vh;
+.BoxList  h2{
+    margin: 2vh 0;
+}
+
+.BoxList-container {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    gap: 1rem;
+    flex-wrap: wrap;
+    max-width: 
 }
