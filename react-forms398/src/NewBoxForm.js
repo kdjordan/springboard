@@ -26,9 +26,9 @@ function NewBoxForm({addBox}) {
         <h1>Fun With Boxes</h1>
         <form onSubmit={handleSubmit} className='NewBoxForm'>
             <label htmlFor="width">Enter Box Width (px)</label>
-            <input type="number" name="width" id="width" placeholder="width" value={formData.width} onChange={handleChange}/>
+            <input type="number" name="width" id="width" placeholder="max 200 px" value={formData.width} onChange={handleChange} required/>
             <label htmlFor="height">Enter Box Height (px)</label>
-            <input type="number" name="height" id="height" placeholder="height" value={formData.height} onChange={handleChange}/>
+            <input type="number" name="height" id="height" placeholder="max 200 px" value={formData.height} onChange={handleChange} required/>
             <label htmlFor="color">Select a Color</label>
             <input type="color" name="color" id="color" value={formData.color} onChange={handleChange}/>
             <button className="NewBoxFormButton">ADD</button>
