@@ -1,0 +1,15 @@
+.NewTodoForm-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap:1rem;
+}
+
+.NewTodoForm-button {
+    padding: .2rem .5rem;
+    border-radius: 10px;
+    border: 1px solid var(--light-beige);
+    background-color: var(--dark-green);
+    color: var(--light-beige);
+}
