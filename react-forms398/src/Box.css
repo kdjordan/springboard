@@ -8,6 +8,8 @@
 .Box {
     display: block;
     border-radius: 15px;
+    max-width: 200px;
+    max-height: 200px;
 }
 
 .BoxButton {

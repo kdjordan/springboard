@@ -20,7 +20,7 @@ function NewBoxForm({addBox}) {
         addBox(() => e, formData)
         setFormData(INITIAL_STATE)
     }
-    
+
  return (
     <div className='NewBox'>
         <h1>Fun With Boxes</h1>
