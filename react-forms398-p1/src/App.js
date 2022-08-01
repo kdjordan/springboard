@@ -23,6 +23,7 @@ function App() {
       height = '200'
     }
     //create newBox object
+    //add in random id
     let newBox = {
       id: uuidv4(),
       height: `${Number(height)}px`,
