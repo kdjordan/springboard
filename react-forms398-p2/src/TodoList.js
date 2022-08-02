@@ -8,7 +8,7 @@ function TodoList({data, delTodo}) {
     const removeTodo = (e, id) => {
         delTodo(e => e, id)
     }
-    if(data.length == 0) {
+    if(data.length === 0) {
         return(
             <h3 style={{marginTop:'2rem'}}>): You Have no todos yet :(</h3>
         )
