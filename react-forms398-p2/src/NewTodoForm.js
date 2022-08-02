@@ -33,7 +33,7 @@ function NewTodoForm({addTodo}) {
 
   return (
     <div className="NewTodoForm">
-        <h1>Add a New TODO</h1>
+        <h3>Add a New TODO</h3>
         <form className="NewTodoForm-form" onSubmit={handleSubmit} >
             <div>
                 <label htmlFor="todo">New Todo: </label>

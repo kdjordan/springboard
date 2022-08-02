@@ -14,11 +14,19 @@
 }
 
 .Todo-cancel-btn {
+    cursor: pointer;
+    margin-top: .8rem;
     padding: .2rem .5rem;
     border-radius: 10px;
     border: 1px solid var(--light-beige);
     background-color: var(--dark-green);
     color: var(--light-beige);
+    transition: all .4s ease;
+}
+
+.Todo-cancel-btn:hover {
+    background-color: var(--pea-green);
+    color: var(--black);
 }
 
 .done {

@@ -12,7 +12,6 @@ function App() {
   }
 
   function delTodo(e, id) {
-    console.log('top level delete ', id)
     setTodoList(list => {
       return todoList.filter(td => {
         return td.id !== id
@@ -22,8 +21,13 @@ function App() {
   
   return (
     <div className="App">
-      <NewTodoForm  addTodo={addTodo}/>
-      <TodoList data={todoList} delTodo={delTodo}/>
+      <div className="App-container">
+        <div>
+          <h1 style={{marginBottom:'1rem'}}>Super Magic TODO Tracker</h1>
+        </div>
+        <NewTodoForm  addTodo={addTodo}/>
+        <TodoList data={todoList} delTodo={delTodo}/>
+      </div>
     </div>
   );
 }

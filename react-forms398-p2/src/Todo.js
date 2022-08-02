@@ -13,7 +13,7 @@ function Todo({name, completed, id, removeTodo}) {
     }
     return (
         <div className="Todo">
-            <div className={`Todo-block ${completed ? 'done' : 'not-done'}`} style={{marginTop:'1rem'}}>
+            <div className="Todo-block">
                 <h3>{name}</h3>
             </div>
             <button className="Todo-cancel-btn" onClick={e => (handleDelete(e, todo.id))}>X</button>
