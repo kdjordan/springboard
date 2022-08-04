@@ -1,7 +1,21 @@
-.TodoList {
+.TodoList-container {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column;
     align-items: center;
-    gap: 1rem;
-    flex-wrap :wrap;
-}
+    justify-content: flex-start;
+    max-width: 40rem;
+    min-height: 40em;
+    width: 100%;
+    padding: 2rem;
+    border: 1px solid var(--pea-green);
+    border-radius: 10px;
+    background-color: var(--dark-green);
+  }
+
+  .TodoList-wrapper {
+    margin-top: 4vh;
+    display: flex;
+    flex-wrap:wrap;
+    align-items: center;
+    justify-content: space-around;
+  }

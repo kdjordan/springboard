@@ -1,27 +1,55 @@
-import React from 'react'
+import React, { useState} from 'react'
 import Todo from './Todo'
 import './TodoList.css'
+import NewTodoForm from './NewTodoForm';
 
+function TodoList() {
+    const[todoList, setTodoList] = useState([])
 
-function TodoList({data, delTodo}) {
-
-    const removeTodo = (e, id) => {
-        delTodo(e => e, id)
+    function addTodo(e, todo) {
+        setTodoList(todoList => [...todoList, todo])  
     }
-    if(data.length === 0) {
-        return(
-            <h3 style={{marginTop:'2rem'}}>): You Have no todos yet :(</h3>
-        )
+
+    function removeTodo(e, id) {
+        setTodoList(list => {
+            return list.filter(td => {
+                return td.id !== id
+            })
+        })
     }
-    else {
+
+    if(todoList.length === 0) {
         return (
-            <div className="TodoList" style={{marginTop:'2rem'}}>
-                {data.map(d => {
-                    return <Todo key={d.id} id={d.id} name={d.name} completed={d.completed} removeTodo={removeTodo}/>
-                })}
+            <div className="TodoList-container">
+            <div>
+                <h1 style={{marginBottom:'1rem'}}>Super Magic TODO Tracker</h1>
             </div>
+            <div className="TodoList" style={{marginTop:'2rem'}}>
+                <NewTodoForm  addTodo={addTodo}/>
+            </div>
+            <div style={{marginTop:'2vh'}}>
+                <h2>): You have no Todos yet :(</h2>
+            </div>
+        </div>
         )
     }
+
+    return (
+        <div className="TodoList-container">
+             <div>
+                <h1 style={{marginBottom:'1rem'}}>Super Magic TODO Tracker</h1>
+            </div>
+            <div style={{marginTop:'2rem'}}>
+                <NewTodoForm  addTodo={addTodo}/>
+                <div className="TodoList-wrapper">
+                    {todoList.map(d => {
+                        return <Todo key={d.id} id={d.id} name={d.name} completed={d.completed} removeTodo={removeTodo}/>
+                    })}
+                </div>
+            </div>
+        </div>
+    )
+    
 }
 
 export default TodoList

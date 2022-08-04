@@ -2,7 +2,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
+    margin: 1vh 0;
 }
 
 .Todo-block {
@@ -27,12 +28,4 @@
 .Todo-cancel-btn:hover {
     background-color: var(--pea-green);
     color: var(--black);
-}
-
-.done {
-    background-color: green;
-}
-
-.not-done {
-    background-color: red;
 }
