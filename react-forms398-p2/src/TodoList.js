@@ -25,10 +25,10 @@ function TodoList() {
                 <h1 style={{marginBottom:'1rem'}}>Super Magic TODO Tracker</h1>
             </div>
             <div className="TodoList" style={{marginTop:'2rem'}}>
-                <NewTodoForm  addTodo={addTodo}/>
+                <NewTodoForm addTodo={addTodo}/>
             </div>
             <div style={{marginTop:'2vh'}}>
-                <h2>): You have no Todos yet :(</h2>
+                <h2 data-testid="no-todos">): You have no Todos yet :(</h2>
             </div>
         </div>
         )
@@ -43,7 +43,7 @@ function TodoList() {
                 <NewTodoForm  addTodo={addTodo}/>
                 <div className="TodoList-wrapper">
                     {todoList.map(d => {
-                        return <Todo key={d.id} id={d.id} name={d.name} completed={d.completed} removeTodo={removeTodo}/>
+                        return <Todo key={d.id} id={d.id} name={d.name} removeTodo={removeTodo}/>
                     })}
                 </div>
             </div>

@@ -25,7 +25,6 @@ function NewTodoForm({addTodo}) {
             ...formData,
             id
         }
-        console.log('addin', finalData)
         addTodo(()=> e, finalData)
         setFormData(INITIAL_STATE)
     }
@@ -34,7 +33,7 @@ function NewTodoForm({addTodo}) {
   return (
     <div className="NewTodoForm">
         <h3>Add a New TODO</h3>
-        <form className="NewTodoForm-form" onSubmit={handleSubmit} >
+        <form className="NewTodoForm-form" onSubmit={handleSubmit} data-testid="form">
             <div>
                 <label htmlFor="todo">New Todo: </label>
                 <input 

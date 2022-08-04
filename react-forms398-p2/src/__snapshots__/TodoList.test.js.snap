@@ -1,0 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="TodoList-container"
+  >
+    <div>
+      <h1
+        style="margin-bottom: 1rem;"
+      >
+        Super Magic TODO Tracker
+      </h1>
+    </div>
+    <div
+      class="TodoList"
+      style="margin-top: 2rem;"
+    >
+      <div
+        class="NewTodoForm"
+      >
+        <h3>
+          Add a New TODO
+        </h3>
+        <form
+          class="NewTodoForm-form"
+          data-testid="form"
+        >
+          <div>
+            <label
+              for="todo"
+            >
+              New Todo: 
+            </label>
+            <input
+              id="todo"
+              name="name"
+              placeholder="Enter Todo"
+              required=""
+              type="text"
+              value=""
+            />
+          </div>
+          <div>
+            <button
+              class="NewTodoForm-button"
+              type="submit"
+            >
+              ADD
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div
+      style="margin-top: 2vh;"
+    >
+      <h2
+        data-testid="no-todos"
+      >
+        ): You have no Todos yet :(
+      </h2>
+    </div>
+  </div>
+</DocumentFragment>
+`;
