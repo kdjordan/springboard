@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`matches diff snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="BoxList"
+  >
+    <h2>
+      Currrent Boxes
+    </h2>
+    <div
+      class="BoxList-container"
+    >
+      <div
+        class="BoxWrapper"
+      >
+        <div
+          class="Box"
+          style="height: 100px; width: 100px; background-color: rgb(255, 255, 255);"
+        />
+        <button
+          class="BoxButton"
+        >
+          X
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`matches snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="BoxList"
+  >
+    <h2>
+      Currrent Boxes
+    </h2>
+    <div
+      class="BoxList-container"
+    >
+      <div
+        class="BoxWrapper"
+      >
+        <div
+          class="Box"
+          style="height: 100px; width: 100px; background-color: rgb(0, 0, 0);"
+        />
+        <button
+          class="BoxButton"
+        >
+          X
+        </button>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

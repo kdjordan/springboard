@@ -6,6 +6,7 @@
     font-size: clamp(1.5rem, 3.5vw, 8rem)
 }
 
+
 .NewBoxForm {
     display: flex;
     flex-direction: column;

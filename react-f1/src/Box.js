@@ -2,19 +2,18 @@ import React from 'react'
 import './Box.css'
 
 
-function Box({color,height, width, id, deleteBox}) {
-    const boxData = [
+function Box({color,height, width, id, handleDelete}) {
+    const boxData = 
         {
-            id: id,
-            height: height,
-            width: width,
-            color: color
+            id,
+            height,
+            width,
+            color
         }
-    ]
  return (
     <div className='BoxWrapper'>
-    <div className='Box' style={{height:boxData[0].height,  width:boxData[0].width, backgroundColor:boxData[0].color }}></div>
-        <button className='BoxButton' onClick={e => deleteBox(e, boxData[0].id)}>X</button>
+    <div className='Box'  style={{height:boxData.height,  width:boxData.width, backgroundColor:boxData.color }}></div>
+        <button className='BoxButton' onClick={e => handleDelete(e, boxData.id)}>X</button>
     </div>
  )
 

@@ -24,13 +24,16 @@ function NewBoxForm({addBox}) {
  return (
     <div className='NewBox'>
         <h1>Fun With Boxes</h1>
-        <form onSubmit={handleSubmit} className='NewBoxForm'>
-            <label htmlFor="width">Enter Box Width (px)</label>
-            <input type="number" name="width" id="width" placeholder="max 200 px" value={formData.width} onChange={handleChange} required/>
-            <label htmlFor="height">Enter Box Height (px)</label>
-            <input type="number" name="height" id="height" placeholder="max 200 px" value={formData.height} onChange={handleChange} required/>
-            <label htmlFor="color">Select a Color</label>
-            <input type="color" name="color" id="color" value={formData.color} onChange={handleChange}/>
+        <form onSubmit={handleSubmit} className='NewBoxForm' data-testid='form'>
+            <label htmlFor="width">Enter Box Width&nbsp;&nbsp;
+                <input type="number" name="width" id="width" placeholder="max 200px" value={formData.width} onChange={handleChange} required/>
+            </label>
+            <label htmlFor="height">Enter Box Height&nbsp;&nbsp;
+                <input type="number" name="height" id="height" placeholder="max 200px" value={formData.height} onChange={handleChange} required/>
+            </label>
+            <label htmlFor="color">Select a Color&nbsp;&nbsp;
+                <input type="color" name="color" id="color" value={formData.color} onChange={handleChange}/>
+            </label>
             <button className="NewBoxFormButton">ADD</button>
         </form>
     </div>

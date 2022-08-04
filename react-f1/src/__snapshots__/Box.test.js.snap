@@ -1,5 +1,22 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`matches diff color snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="BoxWrapper"
+  >
+    <div
+      class="Box"
+    />
+    <button
+      class="BoxButton"
+    >
+      X
+    </button>
+  </div>
+</DocumentFragment>
+`;
+
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div

@@ -16,44 +16,45 @@ exports[`matches snapshot 1`] = `
         </h1>
         <form
           class="NewBoxForm"
+          data-testid="form"
         >
           <label
             for="width"
           >
-            Enter Box Width (px)
+            Enter Box Width  
+            <input
+              id="width"
+              name="width"
+              placeholder="max 200px"
+              required=""
+              type="number"
+              value=""
+            />
           </label>
-          <input
-            id="width"
-            name="width"
-            placeholder="max 200 px"
-            required=""
-            type="number"
-            value=""
-          />
           <label
             for="height"
           >
-            Enter Box Height (px)
+            Enter Box Height  
+            <input
+              id="height"
+              name="height"
+              placeholder="max 200px"
+              required=""
+              type="number"
+              value=""
+            />
           </label>
-          <input
-            id="height"
-            name="height"
-            placeholder="max 200 px"
-            required=""
-            type="number"
-            value=""
-          />
           <label
             for="color"
           >
-            Select a Color
+            Select a Color  
+            <input
+              id="color"
+              name="color"
+              type="color"
+              value=""
+            />
           </label>
-          <input
-            id="color"
-            name="color"
-            type="color"
-            value=""
-          />
           <button
             class="NewBoxFormButton"
           >
