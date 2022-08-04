@@ -9,67 +9,68 @@ exports[`matches snapshot 1`] = `
       class="App-container"
     >
       <div
-        class="NewBox"
+        class="BoxesList"
       >
-        <h1>
-          Fun With Boxes
-        </h1>
-        <form
-          class="NewBoxForm"
-          data-testid="form"
+        <div
+          class="NewBox"
         >
-          <label
-            for="width"
+          <h1>
+            Fun With Boxes
+          </h1>
+          <form
+            class="NewBoxForm"
+            data-testid="form"
           >
-            Enter Box Width  
-            <input
-              id="width"
-              name="width"
-              placeholder="max 200px"
-              required=""
-              type="number"
-              value=""
-            />
-          </label>
-          <label
-            for="height"
-          >
-            Enter Box Height  
-            <input
-              id="height"
-              name="height"
-              placeholder="max 200px"
-              required=""
-              type="number"
-              value=""
-            />
-          </label>
-          <label
-            for="color"
-          >
-            Select a Color  
-            <input
-              id="color"
-              name="color"
-              type="color"
-              value=""
-            />
-          </label>
-          <button
-            class="NewBoxFormButton"
-          >
-            ADD
-          </button>
-        </form>
-      </div>
-      <div
-        class="BoxList"
-      >
+            <label
+              for="width"
+            >
+              Enter Box Width  
+              <input
+                id="width"
+                name="width"
+                placeholder="max 200px"
+                required=""
+                type="number"
+                value=""
+              />
+            </label>
+            <label
+              for="height"
+            >
+              Enter Box Height  
+              <input
+                id="height"
+                name="height"
+                placeholder="max 200px"
+                required=""
+                type="number"
+                value=""
+              />
+            </label>
+            <label
+              for="color"
+            >
+              Select a Color  
+              <input
+                id="color"
+                name="color"
+                type="color"
+                value=""
+              />
+            </label>
+            <button
+              class="NewBoxFormButton"
+            >
+              ADD
+            </button>
+          </form>
+        </div>
         <h2>
           Currrent Boxes
         </h2>
         <div
           class="BoxList-container"
+          data-test-id="boxlist-container"
         />
       </div>
     </div>

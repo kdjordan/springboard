@@ -11,7 +11,7 @@ function Box({color,height, width, id, handleDelete}) {
             color
         }
  return (
-    <div className='BoxWrapper'>
+    <div className='BoxWrapper' data-testid='box'>
         <div className='Box'  style={{height:boxData.height,  width:boxData.width, backgroundColor:boxData.color }}>
         </div>
         <div>

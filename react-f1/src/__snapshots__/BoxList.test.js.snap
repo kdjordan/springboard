@@ -3,28 +3,69 @@
 exports[`matches diff snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="BoxList"
+    class="BoxesList"
   >
+    <div
+      class="NewBox"
+    >
+      <h1>
+        Fun With Boxes
+      </h1>
+      <form
+        class="NewBoxForm"
+        data-testid="form"
+      >
+        <label
+          for="width"
+        >
+          Enter Box Width  
+          <input
+            id="width"
+            name="width"
+            placeholder="max 200px"
+            required=""
+            type="number"
+            value=""
+          />
+        </label>
+        <label
+          for="height"
+        >
+          Enter Box Height  
+          <input
+            id="height"
+            name="height"
+            placeholder="max 200px"
+            required=""
+            type="number"
+            value=""
+          />
+        </label>
+        <label
+          for="color"
+        >
+          Select a Color  
+          <input
+            id="color"
+            name="color"
+            type="color"
+            value=""
+          />
+        </label>
+        <button
+          class="NewBoxFormButton"
+        >
+          ADD
+        </button>
+      </form>
+    </div>
     <h2>
       Currrent Boxes
     </h2>
     <div
       class="BoxList-container"
-    >
-      <div
-        class="BoxWrapper"
-      >
-        <div
-          class="Box"
-          style="height: 100px; width: 100px; background-color: rgb(255, 255, 255);"
-        />
-        <button
-          class="BoxButton"
-        >
-          X
-        </button>
-      </div>
-    </div>
+      data-testid="boxlist-container"
+    />
   </div>
 </DocumentFragment>
 `;
@@ -32,28 +73,69 @@ exports[`matches diff snapshot 1`] = `
 exports[`matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="BoxList"
+    class="BoxesList"
   >
+    <div
+      class="NewBox"
+    >
+      <h1>
+        Fun With Boxes
+      </h1>
+      <form
+        class="NewBoxForm"
+        data-testid="form"
+      >
+        <label
+          for="width"
+        >
+          Enter Box Width  
+          <input
+            id="width"
+            name="width"
+            placeholder="max 200px"
+            required=""
+            type="number"
+            value=""
+          />
+        </label>
+        <label
+          for="height"
+        >
+          Enter Box Height  
+          <input
+            id="height"
+            name="height"
+            placeholder="max 200px"
+            required=""
+            type="number"
+            value=""
+          />
+        </label>
+        <label
+          for="color"
+        >
+          Select a Color  
+          <input
+            id="color"
+            name="color"
+            type="color"
+            value=""
+          />
+        </label>
+        <button
+          class="NewBoxFormButton"
+        >
+          ADD
+        </button>
+      </form>
+    </div>
     <h2>
       Currrent Boxes
     </h2>
     <div
       class="BoxList-container"
-    >
-      <div
-        class="BoxWrapper"
-      >
-        <div
-          class="Box"
-          style="height: 100px; width: 100px; background-color: rgb(0, 0, 0);"
-        />
-        <button
-          class="BoxButton"
-        >
-          X
-        </button>
-      </div>
-    </div>
+      data-testid="boxlist-container"
+    />
   </div>
 </DocumentFragment>
 `;

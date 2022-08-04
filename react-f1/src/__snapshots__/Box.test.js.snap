@@ -8,11 +8,13 @@ exports[`matches diff color snapshot 1`] = `
     <div
       class="Box"
     />
-    <button
-      class="BoxButton"
-    >
-      X
-    </button>
+    <div>
+      <button
+        class="BoxButton"
+      >
+        X
+      </button>
+    </div>
   </div>
 </DocumentFragment>
 `;
@@ -25,11 +27,13 @@ exports[`matches snapshot 1`] = `
     <div
       class="Box"
     />
-    <button
-      class="BoxButton"
-    >
-      X
-    </button>
+    <div>
+      <button
+        class="BoxButton"
+      >
+        X
+      </button>
+    </div>
   </div>
 </DocumentFragment>
 `;

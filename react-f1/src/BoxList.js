@@ -44,7 +44,7 @@ function BoxList() {
     <div className='BoxesList'>
         <NewBoxForm addBox={addBox} />
         <h2>Currrent Boxes</h2>
-        <div className="BoxList-container" data-test-id='boxlist-container'>
+        <div className="BoxList-container" data-testid='boxlist-container'>
             { allBoxes.map(box =>  {
                 return (
                     <Box 
