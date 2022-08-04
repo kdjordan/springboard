@@ -4,4 +4,4 @@ import App from "./App";
 
 it("renders without crashing", function() {
   render(<App />);
-});
+}); 
