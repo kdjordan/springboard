@@ -23,4 +23,4 @@ function Box({color,height, width, id, handleDelete}) {
 
 }
 
-export default Box
+export default Boxåç
