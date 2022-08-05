@@ -20,7 +20,7 @@ it(('should add update width input'), function() {
 })
 
 it(('should call passed function on form submit'), function() {
-  const addBox = jest.fn();
+  const {addBox} = jest.fn();
   render(<NewBoxForm addBox={addBox}/>)
   const form = screen.getByTestId('form')
   fireEvent.submit(form)
