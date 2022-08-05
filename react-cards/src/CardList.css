@@ -1,0 +1,21 @@
+.CardList-table {
+    width: 50vw;
+    height: 50vh;
+    background-color: var(--color-green);
+    border-radius: 25px;
+}
+
+.CardList-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.CardList-btn {
+    margin-top: 2vh;
+    padding: .3rem .7rem;
+    border-radius: 15px;;
+
+}
