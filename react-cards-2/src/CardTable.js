@@ -1,5 +1,5 @@
 import PlayingCardList from "./PlayingCardList";
-// import PokeDex from "./PokeDex";
+import PokeDex from "./PokeDex";
 import "./CardTable.css";
 
 /* Main component. Renders card lists for
@@ -12,7 +12,7 @@ function CardTable() {
       </header>
       <main>
         <PlayingCardList />
-        {/* <PokeDex /> */}
+        <PokeDex />
       </main>
     </div>
   );
