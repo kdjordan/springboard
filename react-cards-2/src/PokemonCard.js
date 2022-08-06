@@ -1,4 +1,4 @@
-import useFlip from './hooks'
+import {useFlip} from './hooks'
 import "./PokemonCard.css";
 
 /* Renders a single pokemon card. */
