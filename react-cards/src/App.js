@@ -1,11 +1,13 @@
 import './App.css'
-import CardList from './CardList'
+// import CardList from './CardList'
+import CardListAutoDraw from './CardListAutoDraw'
 
 function App() {
   return (
     <div className="App">
       <div className="App-container">
-        <CardList />
+        {/* <CardList /> */}
+        <CardListAutoDraw />
       </div>
     </div>
   );

@@ -24,7 +24,6 @@ function CardList() {
         }
 
         const num = (Math.random() * 45) - 45;
-        console.log('got***', data.cards[0].image)
         setCard(c => {
             return [...c, 
                 {   
