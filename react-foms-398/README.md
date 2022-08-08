@@ -9,7 +9,7 @@
 ### Useage
 
     ```
-    $: git clone https://github.com/kdjordan/springboard/tree/main/react-foms-398
+    $: git clone https://github.com/kdjordan/springboard
     $: cd into react-foms-398
     $: cd into Part1
     $: npm i 
