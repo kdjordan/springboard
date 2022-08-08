@@ -1,6 +1,3 @@
-import { useEffect, useRef } from "react";
-import axios from "axios";
-import { v4 as uuidv4 } from 'uuid';
 import PokemonSelect from "./PokemonSelect";
 import PokemonCard from "./PokemonCard";
 import "./PokeDex.css";
