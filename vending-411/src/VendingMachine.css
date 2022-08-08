@@ -1,0 +1,10 @@
+.VendingMachine {
+    width: 30vw;
+    max-width: 30rem;
+    border: 1px solid red;
+    text-align: center;
+    padding: 25px;
+    border-radius: 24px;
+    background-color: red;
+    color: white
+}
