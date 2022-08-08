@@ -19,7 +19,6 @@ function PokeDex() {
     <div className="PokeDex">
       <div className="PokeDex-buttons">
         <h3>Please select your pokemon:</h3>
-        {/* <PokemonSelect add={addPokemon} /> */}
         <PokemonSelect add={addPokemon} />
       </div>
       <div className="PokeDex-card-area">
