@@ -1,25 +1,76 @@
-import logo from './logo.svg';
 import './App.css';
+import { v4 as uuidv4 } from 'uuid';
+import {
+  Routes,
+  Route,
+} from "react-router-dom";
+import Nav from './components/Nav'
+import Dogs from './Dogs'
+import Dog from './Dog'
 
-function App() {
+function App(props) {
+  const { dogs } = props
+  
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Nav data={dogs}/>
+      <div className="main">
+        <Routes>
+          <Route path="/" element={<Dogs dogs={dogs}/>}></Route>
+          {/* <Route path="/:name" element={<Dog />}></Route> */}
+        </Routes> 
+        </div>
     </div>
   );
+}
+// public/images/whiskey.jpg
+App.defaultProps = {
+  dogs: [
+    {
+      id: uuidv4(),
+      name: "Whiskey",
+      age: 5,
+      src: './images/whiskey.jpg',
+      facts: [
+        "Whiskey loves eating popcorn.",
+        "Whiskey is a terrible guard dog.",
+        "Whiskey wants to cuddle with you!"
+      ]
+    },
+    {
+      id: uuidv4(),
+      name: "Duke",
+      age: 3,
+      src: './images/duke.jpg',
+      facts: [
+        "Duke believes that ball is life.",
+        "Duke likes snow.",
+        "Duke enjoys pawing other dogs."
+      ]
+    },
+    {
+      id: uuidv4(),
+      name: "Perry",
+      age: 4,
+      src: './images/perry.jpg',
+      facts: [
+        "Perry loves all humans.",
+        "Perry demolishes all snacks.",
+        "Perry hates the rain."
+      ]
+    },
+    {
+      id: uuidv4(),
+      name: "Tubby",
+      age: 4,
+      src: './images/tubby.jpg',
+      facts: [
+        "Tubby is really stupid.",
+        "Tubby does not like walks.",
+        "Angelina used to hate Tubby, but claims not to anymore."
+      ]
+    }
+  ]
 }
 
 export default App;

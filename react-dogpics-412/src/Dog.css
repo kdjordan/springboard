@@ -1,0 +1,35 @@
+.Dog-link {
+    text-decoration: none;
+    color: rgb(37, 120, 44);
+}
+
+.Dog-header {
+    margin: 1vh 0;
+}
+
+.Dog-header h3 {
+    background-color: blanchedalmond;
+    width: 50%;
+    padding: .2rem .5rem;
+    border-radius: 15px;
+    border: 1px solid red;
+    margin: 0 auto;
+
+}
+
+h1 {
+    margin: 1vh 0;
+}
+img {
+    cursor: pointer;
+    height: 250px;
+    width: 250px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    transform : scale(1);
+    transition: all .4s ease;
+}
+
+img:hover {
+    transform : scale(1.1);
+}
