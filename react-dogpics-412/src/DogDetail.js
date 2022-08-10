@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import './DogDetail.css'
 
+
 function DogDetail({doggo}) {
     let linkStr = `/${doggo.name}`
     return (

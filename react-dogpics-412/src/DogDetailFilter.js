@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import './DogDetail.css'
+import { useNavigate } from 'react-router-dom';
+
 
 function DogDetailWithFilter({dogs}) {
+    const navigate = useNavigate()
     const { name } = useParams()
     let theDog = dogs.filter(d => d.name === name)[0]
-    // theDog = theDog
+    if(!theDog) {
+        navigate('/no/notfound')
+    }
     console.log('thDog ', theDog)
     let linkStr = `/${theDog.name}`
     return (

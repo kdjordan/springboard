@@ -1,7 +1,8 @@
 function NotFound() {
+    console.log('hittin')
     return (
         <div>
-            <h1>BNot Found</h1>
+            <h1>Not Found - Sorry !</h1>
         </div>
     )
 }

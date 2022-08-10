@@ -1,5 +1,4 @@
 import './App.css';
-import { v4 as uuidv4 } from 'uuid';
 import {
   Routes,
   Route,
@@ -7,10 +6,11 @@ import {
 import Nav from './components/Nav'
 import DogList from './DogList'
 import DogDetailFilter from './DogDetailFilter'
+import NotFound from './pages/NotFound'
+import { v4 as uuidv4 } from 'uuid';
 
 function App(props) {
   const { dogs } = props
-
   return (
     <div className="App">
       <Nav data={dogs}/>
@@ -18,6 +18,7 @@ function App(props) {
         <Routes>
           <Route path="/" element={<DogList dogs={dogs}/>}></Route>
           <Route path="/:name" element={<DogDetailFilter dogs={dogs}/>}></Route>
+          <Route path="*" element={<NotFound />}></Route>
         </Routes> 
         </div>
     </div>

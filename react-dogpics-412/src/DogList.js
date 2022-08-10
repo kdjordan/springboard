@@ -1,5 +1,6 @@
 import DogDetail from './DogDetail'
 import './DogList.css'
+
 function DogList({dogs}) {
     return( 
         <div className='Dogs'>
