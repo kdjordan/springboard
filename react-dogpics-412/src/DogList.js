@@ -6,7 +6,7 @@ function DogList({dogs}) {
         <div className='Dogs'>
             <h1>Meet Our Dags</h1>
             <div className="Dogs-wrapper">
-                {dogs.map(d =>  (<DogDetail doggo={d} />))}
+                {dogs.map(d =>  (<DogDetail key={d.id} doggo={d} />))}
             </div>
         </div>
     )
