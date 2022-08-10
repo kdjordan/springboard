@@ -12,7 +12,7 @@ function DogDetailWithFilter({dogs}) {
         <div className='Dog'>
             <Link to={linkStr} className='Dog-link'>
                 <div className='Dog-header'>
-                    <h3>{theDog.name}</h3>
+                    <h2>{theDog.name}</h2>
                 </div>
                 <img src={theDog.src} alt="" />
                 <ul>

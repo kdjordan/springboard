@@ -4,7 +4,9 @@ import './Nav.css'
 function Nav({data}) {
     return (
         <nav className="Nav">
-            <h2>You Like Dags ?!?</h2>
+            <Link to="/">
+                <h2>You Like Dags ?!?</h2>
+            </Link>
             <ul className="Nav-list">
                 {data.map(dog => (
                     <Link key={dog.id} to={`/${dog.name}`}>{dog.name}</Link>

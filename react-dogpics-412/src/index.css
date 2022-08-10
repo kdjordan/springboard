@@ -17,3 +17,7 @@ body {
 .main {
   margin-top: 5vh;
 }
+
+a {
+  text-decoration: none;
+}
