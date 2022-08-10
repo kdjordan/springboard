@@ -6,7 +6,7 @@ import {
 } from "react-router-dom";
 import Nav from './components/Nav'
 import DogList from './DogList'
-import DogDetail from './DogDetail'
+import DogDetailFilter from './DogDetailFilter'
 
 function App(props) {
   const { dogs } = props
@@ -17,7 +17,7 @@ function App(props) {
       <div className="main">
         <Routes>
           <Route path="/" element={<DogList dogs={dogs}/>}></Route>
-          <Route path="/:name" element={<DogDetail />}></Route>
+          <Route path="/:name" element={<DogDetailFilter dogs={dogs}/>}></Route>
         </Routes> 
         </div>
     </div>

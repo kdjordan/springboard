@@ -7,7 +7,7 @@ function Nav({data}) {
             <h2>You Like Dags ?!?</h2>
             <ul className="Nav-list">
                 {data.map(dog => (
-                    <Link key={dog.id} to={dog.src}>{dog.name}</Link>
+                    <Link key={dog.id} to={`/${dog.name}`}>{dog.name}</Link>
                 ))}
             </ul>
         </nav>

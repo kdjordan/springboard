@@ -1,11 +1,7 @@
-import { useParams } from 'react-router-dom'
-import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import './DogDetail.css'
 
 function DogDetail({doggo}) {
-    const name = useParams()
-    console.log('in detail ', name)
     let linkStr = `/${doggo.name}`
     return (
         <div className='Dog'>
