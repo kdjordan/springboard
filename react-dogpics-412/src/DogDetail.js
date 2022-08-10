@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import './Dog.css'
+import './DogDetail.css'
 
-function Dog({doggo}) {
-    let linkStr
-
-        linkStr = `/${doggo.name}`
+function DogDetail({doggo}) {
+    const name = useParams()
+    console.log('in detail ', name)
+    let linkStr = `/${doggo.name}`
     return (
         <div className='Dog'>
             <Link to={linkStr} className='Dog-link'>
@@ -19,4 +19,4 @@ function Dog({doggo}) {
     )
 }
 
-export default Dog
+export default DogDetail

@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import './Nav.css'
 
 function Nav({data}) {
-    console.log(data)
     return (
         <nav className="Nav">
             <h2>You Like Dags ?!?</h2>

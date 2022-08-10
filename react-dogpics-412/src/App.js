@@ -5,19 +5,19 @@ import {
   Route,
 } from "react-router-dom";
 import Nav from './components/Nav'
-import Dogs from './Dogs'
-import Dog from './Dog'
+import DogList from './DogList'
+import DogDetail from './DogDetail'
 
 function App(props) {
   const { dogs } = props
-  
+
   return (
     <div className="App">
       <Nav data={dogs}/>
       <div className="main">
         <Routes>
-          <Route path="/" element={<Dogs dogs={dogs}/>}></Route>
-          {/* <Route path="/:name" element={<Dog />}></Route> */}
+          <Route path="/" element={<DogList dogs={dogs}/>}></Route>
+          <Route path="/:name" element={<DogDetail />}></Route>
         </Routes> 
         </div>
     </div>
