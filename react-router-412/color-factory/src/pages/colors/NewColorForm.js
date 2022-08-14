@@ -1,11 +1,13 @@
 import { useState } from "react"
 import './NewColorForm.css'
+import { Navigate, useNavigate } from 'react-router-dom'
 
-function NewColorForm() {
+function NewColorForm({addColor}) {
     const INTIAL_STATE = {
         name: '',
-        color: ''
+        color: '#000000'
     }
+    const navigate = useNavigate()
     const [form, setForm] = useState(INTIAL_STATE)
 
     function handleChange(e) {
@@ -16,11 +18,15 @@ function NewColorForm() {
         }))
     }
 
-    function handleSubmit() {
-        console.log(form)
+    function handleSubmit(e) {
+        e.preventDefault();
+        addColor(() => e, form)
+        setForm(INTIAL_STATE)
+        navigate('/')
     }
     return (
         <div className="NewColorForm">
+            <h2 style={{marginBottom:'2vh'}}>Add A NEW COLOR</h2>
             <form onSubmit={handleSubmit}>
                 <div>
                     <label htmlFor="name">Name&nbsp;&nbsp;
@@ -31,6 +37,8 @@ function NewColorForm() {
                             id="name" 
                             value={form.name}
                             onChange={handleChange}
+                            autoFocus
+                            required
                         />
                     </label>
                 </div>
@@ -45,6 +53,7 @@ function NewColorForm() {
                         />
                     </label>
                 </div>
+                <button>GO !</button>
             </form>
         </div>
     )

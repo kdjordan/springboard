@@ -1,7 +1,7 @@
 .NewColorForm {
-    border: 1px solid red;
     padding: 25px;
-    
+    background-color: lightgray;
+    border-radius: 25px;
 }
 
 form {
@@ -10,4 +10,11 @@ form {
     justify-content: center;
     align-items: center;
     gap: 1rem;
+}
+
+button {
+    padding: .2rem .3rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    cursor: pointer;
 }
