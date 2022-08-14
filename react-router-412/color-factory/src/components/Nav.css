@@ -1,0 +1,13 @@
+.Nav {
+    background: black;
+    color: whitesmoke;
+    padding: 1rem .8rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.Nav-logo {
+    font-size: 1.3rem;
+}
+
