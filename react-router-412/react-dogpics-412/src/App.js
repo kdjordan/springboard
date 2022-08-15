@@ -13,7 +13,7 @@ function App(props) {
   const { dogs } = props
   return (
     <div className="App">
-      <Nav data={dogs}/>
+      <Nav dogs={dogs}/>
       <div className="main">
         <Routes>
           <Route path="/" element={<DogList dogs={dogs}/>}></Route>
@@ -24,9 +24,8 @@ function App(props) {
     </div>
   );
 }
-// public/images/whiskey.jpg
-App.defaultProps = {
-  dogs: [
+
+export const dogs = [
     {
       id: uuidv4(),
       name: "Whiskey",
@@ -72,6 +71,7 @@ App.defaultProps = {
       ]
     }
   ]
-}
+
+App.defaultProps = { dogs };
 
 export default App;

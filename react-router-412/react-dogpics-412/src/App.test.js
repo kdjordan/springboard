@@ -1,6 +1,9 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
+import Nav from './components/Nav';
+import DogList from './DogList';
 import { BrowserRouter as Router } from 'react-router-dom'
+import { dogs } from './App.js'
 
 test('nav link', () => {
   render(<Router><App /></Router>);
@@ -8,8 +11,21 @@ test('nav link', () => {
   expect(linkElement).toBeInTheDocument();
 });
 
-test('renders dogs links', () => {
-  render(<Router><App /></Router>);
-  const text = screen.getByText('Whiskey');
-  expect(text).toBeInTheDocument();
+test('renders all dogs links', async () => {
+  render(<Router><Nav dogs={dogs} /></Router>);
+  const names = dogs.map(n => n.name)
+  names.forEach(nam => {
+    const text =  screen.getByText(nam);
+    expect(text).toBeInTheDocument();
+  })
 });
+
+test('renders dogs in DogList', async () => {
+  render(<Router><DogList dogs={dogs} /></Router>);
+  const names = dogs.map(n => n.name)
+  names.forEach(nam => {
+    const text =  screen.getByText(nam);
+    expect(text).toBeInTheDocument();
+  })
+});
+
