@@ -1,7 +1,7 @@
 import './Nav.css'
 import { Link } from 'react-router-dom'
 
-function Nav({links}) {
+function Nav() {
     return (
         <div className="Nav">
             <div className="Nav-logo">

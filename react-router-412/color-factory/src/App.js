@@ -6,28 +6,36 @@ import {
 import Nav from './components/Nav';
 import Color from './pages/colors/Color';
 import NewColorForm from './pages/colors/NewColorForm';
+import ColorList from './pages/colors/ColorList';
 import { useState } from 'react';
 
 
 function App() {
-  const [colors, setColors] = useState()
+  let INITIAL_STATE = [
+    {
+      name: 'test', 
+      color: '#ff66aa'
+    },
+    {
+      name: 'test2', 
+      color: '#000000'
+    }
+  ]
+  const [colors, setColors] = useState(INITIAL_STATE)
 
-  function addColor(e, form) {
-    console.log(form)
-    // const {name, color} = form
-    // setColors(f => ({
-    //   ...colors,
-    //   name,
-    //   color
-    // }))
+  function addColor(e, { name, color }) {
+    let newColor = {name, color}
+    setColors(cols => [...cols, newColor])
+    console.log('all colors', colors)
   }
 
   return (
     <div className="App">
         <Nav />
-        {colors}
         <div className="main">
           <Routes>
+            <Route path='/' element={<ColorList data={colors}/>}></Route>
+            <Route path='/colors/*' element={<ColorList data={colors}/>}></Route>
             <Route path='/colors/add' element={<NewColorForm addColor={addColor}/>}></Route>
             <Route path='/colors/:name' element={<Color />}></Route>
           </Routes>

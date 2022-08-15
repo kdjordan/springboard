@@ -22,7 +22,7 @@ function NewColorForm({addColor}) {
         e.preventDefault();
         addColor(() => e, form)
         setForm(INTIAL_STATE)
-        navigate('/')
+        navigate('/colors')
     }
     return (
         <div className="NewColorForm">

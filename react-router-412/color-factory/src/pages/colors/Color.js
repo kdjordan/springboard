@@ -1,11 +1,11 @@
-import { useParams, useNavigate } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 
 function Color() {
-    const color = useParams()
+    const {name} = useParams()
 
     return (
-        <div className='Color'>
-            <h1>Color for : {color}</h1>
+        <div className='Color' style={{backGroundColor: {}}}>
+            <h1>Color for : {name}</h1>
         </div>
     )
 }

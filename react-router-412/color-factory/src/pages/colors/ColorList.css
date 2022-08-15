@@ -1,0 +1,17 @@
+.ColorList {
+    display: flex;
+    align-items: center;
+    flex: row;
+    justify-content: center;
+}
+.ColorList-entry {
+    margin: 1rem;
+}
+
+a {
+    color: black;
+}
+
+p {
+    margin: 2vh 0;
+}
