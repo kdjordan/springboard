@@ -7,15 +7,13 @@ import { useNavigate } from 'react-router-dom';
 function DogDetailWithFilter({dogs}) {
     const navigate = useNavigate()
     const { name } = useParams()
-    let theDog = dogs.filter(d => d.name === name)[0]
+    let theDog = dogs.filter(d => d.name.toLowerCase() === name.toLowerCase())[0]
     if(!theDog) {
         navigate('/no/notfound')
     }
-    console.log('thDog ', theDog)
-    let linkStr = `/${theDog.name}`
     return (
         <div className='Dog'>
-            <Link to={linkStr} className='Dog-link'>
+            <Link to={`/${theDog.name}`} className='Dog-link'>
                 <div className='Dog-header'>
                     <h2>{theDog.name}</h2>
                 </div>

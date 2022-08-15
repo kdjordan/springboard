@@ -2,6 +2,7 @@ import { render, screen } from '@testing-library/react';
 import App from './App';
 import Nav from './components/Nav';
 import DogList from './DogList';
+import DogDetail from './DogDetail';
 import { BrowserRouter as Router } from 'react-router-dom'
 import { dogs } from './App.js'
 
@@ -29,3 +30,9 @@ test('renders dogs in DogList', async () => {
   })
 });
 
+test('renders only Whiskey\'s info', () => {
+  let whiskey = dogs.filter(d => d.name === 'Whiskey')[0]
+  render(<Router><DogDetail doggo={whiskey} /></Router>);
+  const text = screen.getByText('Whiskey')
+  expect(text).toBeInTheDocument()
+});

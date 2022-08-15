@@ -9,7 +9,7 @@ function Nav({dogs}) {
             </Link>
             <ul className="Nav-list">
                 {dogs.map(dog => (
-                    <Link key={dog.id} to={`/${dog.name}`}>{dog.name}</Link>
+                    <Link key={dog.id} to={`/${dog.name.toLowerCase()}`}>{dog.name}</Link>
                 ))}
             </ul>
         </nav>

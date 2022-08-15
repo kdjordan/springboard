@@ -3,10 +3,10 @@ import './DogDetail.css'
 
 
 function DogDetail({doggo}) {
-    let linkStr = `/${doggo.name}`
+    console.log('in detail ', doggo)
     return (
         <div className='Dog'>
-            <Link to={linkStr} className='Dog-link'>
+            <Link to={`/${doggo.name.toLowerCase()}`} className='Dog-link'>
                 <div className='Dog-header'>
                     <h3>{doggo.name}</h3>
                 </div>
