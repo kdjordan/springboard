@@ -1,0 +1,17 @@
+.ColorForm {
+    margin-top: 5vh;
+}
+
+.ColorForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.ColorForm button {
+    padding: .2rem .4rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+}

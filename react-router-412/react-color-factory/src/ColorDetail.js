@@ -1,0 +1,17 @@
+import React from 'react'
+import { useParams } from 'react-router-dom'
+import './ColorDetail.css'
+
+function ColorDetail() {
+    const { color } = useParams()
+    let body = document.querySelector('body')
+    body.style.backgroundColor = color
+
+    return (
+        <div className='ColorDetail'>
+            <h2>Fancy <em>{color}</em> ya got here !</h2>
+        </div>
+    )
+}
+
+export default ColorDetail

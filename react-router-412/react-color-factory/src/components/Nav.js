@@ -7,15 +7,13 @@ function Nav({dogs}) {
         <div className='Nav'>
             <div className="Nav-left">
                 <NavLink to="/" >
-                    YOU LIKE DAGS ??
+                    Fun With Colors !
                 </NavLink>
             </div>
             <div className="Nav-right">
-            {dogs.map(d => (
-                <NavLink key={d.name} to={`/dogs/${d.name.toLowerCase()}`} >
-                    {d.name}
-                </NavLink>
-            ))}
+            <NavLink to='/colors/new'>
+                ADD COLOR
+            </NavLink>
             </div>
         </div>
     )

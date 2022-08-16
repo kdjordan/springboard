@@ -4,21 +4,25 @@ import {
     Redirect,
     Route
 } from 'react-router-dom'
-import DogList from './DogList'
-import DogListFilter from './DogListFilter'
+import ColorForm from './ColorForm'
+import Colors from './Colors'
+import ColorDetail from './ColorDetail'
 
-function Routes({dogs}) {
+function Routes() {
     return (
     <>
         <Switch>
-        <Route exact path='/dogs'>
-            <DogList dogs={dogs}/>
+        <Route exact path='/colors/new'>
+            <ColorForm />
         </Route>
-        <Route path='/dogs/:name'>
-            <DogListFilter dogs={dogs}/>
+        <Route exact path='/colors'>
+            <Colors />
+        </Route>
+        <Route path='/colors/:color'>
+            <ColorDetail />
         </Route>
         <Route>
-            <Redirect to="/dogs"/>
+            <Redirect to="/colors"/>
         </Route>
             
         </Switch>
