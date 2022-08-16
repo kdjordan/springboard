@@ -11,14 +11,14 @@ function Routes({dogs}) {
     return (
     <>
         <Switch>
-        <Route to='/dogs'>
+        <Route exact path='/dogs'>
             <DogList dogs={dogs}/>
         </Route>
-        <Route to='/dogs/:name'>
+        <Route path='/dogs/:name'>
             <DogListFilter dogs={dogs}/>
         </Route>
         <Route>
-            <Redirect to="/notFound"/>
+            <Redirect to="/dogs"/>
         </Route>
             
         </Switch>
