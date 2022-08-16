@@ -3,7 +3,6 @@ import { MemoryRouter } from 'react-router-dom';
 import { render, screen } from '@testing-library/react';
 import Routes from './Routes';
 import { dogs } from './App';
-import DogDetail from './DogDetail';
 
 test('renders all dogs', () => {
     const { getByText }= render(
