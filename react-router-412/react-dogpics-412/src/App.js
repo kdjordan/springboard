@@ -6,7 +6,7 @@ import {
 import Nav from './components/Nav'
 import DogList from './DogList'
 import DogDetailFilter from './DogDetailFilter'
-import NotFound from './pages/NotFound'
+import NotFound from './NotFound'
 import { v4 as uuidv4 } from 'uuid';
 
 function App(props) {
@@ -17,7 +17,8 @@ function App(props) {
       <div className="main">
         <Routes>
           <Route path="/" element={<DogList dogs={dogs}/>}></Route>
-          <Route path="/:name" element={<DogDetailFilter dogs={dogs}/>}></Route>
+          <Route path="/dogs" element={<DogList dogs={dogs}/>}></Route>
+          <Route path="/dogs/:name" element={<DogDetailFilter dogs={dogs}/>}></Route>
           <Route path="*" element={<NotFound />}></Route>
         </Routes> 
         </div>
@@ -30,7 +31,7 @@ export const dogs = [
       id: uuidv4(),
       name: "Whiskey",
       age: 5,
-      src: './images/whiskey.jpg',
+      src: 'whiskey',
       facts: [
         "Whiskey loves eating popcorn.",
         "Whiskey is a terrible guard dog.",
@@ -41,7 +42,7 @@ export const dogs = [
       id: uuidv4(),
       name: "Duke",
       age: 3,
-      src: './images/duke.jpg',
+      src: 'duke',
       facts: [
         "Duke believes that ball is life.",
         "Duke likes snow.",
@@ -52,7 +53,7 @@ export const dogs = [
       id: uuidv4(),
       name: "Perry",
       age: 4,
-      src: './images/perry.jpg',
+      src: 'perry',
       facts: [
         "Perry loves all humans.",
         "Perry demolishes all snacks.",
@@ -63,7 +64,7 @@ export const dogs = [
       id: uuidv4(),
       name: "Tubby",
       age: 4,
-      src: './images/tubby.jpg',
+      src: 'tubby',
       facts: [
         "Tubby is really stupid.",
         "Tubby does not like walks.",

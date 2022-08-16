@@ -1,0 +1,24 @@
+.Nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+    background-color: #f5f5f5;
+}
+
+.Nav-left {
+    font-size: 1.5rem;
+}
+
+.Nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.Nav-right a, .Nav-left a {
+    color: black;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+

@@ -1,15 +1,17 @@
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import './Nav.css'
 
 function Nav({dogs}) {
     return (
         <nav className="Nav">
-            <Link to="/">
+            <NavLink to="/">
                 <h2>You Like Dags ?!?</h2>
-            </Link>
+            </NavLink>
             <ul className="Nav-list">
                 {dogs.map(dog => (
-                    <Link key={dog.id} to={`/${dog.name.toLowerCase()}`}>{dog.name}</Link>
+                    <NavLink key={dog.id} to={`/dogs/${dog.name.toLowerCase()}`}>
+                        {dog.name}
+                    </NavLink>
                 ))}
             </ul>
         </nav>

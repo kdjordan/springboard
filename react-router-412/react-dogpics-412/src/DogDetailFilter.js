@@ -1,31 +1,34 @@
-import { Link } from 'react-router-dom'
-import { useParams } from 'react-router-dom'
+import { useParams, useNavigate } from 'react-router-dom'
 import './DogDetail.css'
-import { useNavigate } from 'react-router-dom';
+
 
 
 function DogDetailWithFilter({dogs}) {
-    const navigate = useNavigate()
     const { name } = useParams()
-    let theDog = dogs.filter(d => d.name.toLowerCase() === name.toLowerCase())[0]
-    if(!theDog) {
-        navigate('/no/notfound')
-    }
-    return (
-        <div className='Dog'>
-            <Link to={`/${theDog.name}`} className='Dog-link'>
+    let navigate = useNavigate()
+
+    let theDog
+    if(name) {
+        theDog = dogs.find(d => d.name.toLowerCase() === name.toLowerCase())
+        if(typeof theDog === 'undefined') {
+            return navigate("/no");
+        }
+        return (
+            <div className='Dog'>
                 <div className='Dog-header'>
                     <h2>{theDog.name}</h2>
+                    <h4>{theDog.age} years old</h4>
                 </div>
-                <img src={theDog.src} alt="" />
+                <img src={`../images/${theDog.src}.jpg`} alt="" />
                 <ul>
-                {theDog.facts.map(f => (
-                    <li>{f}</li>
+                {theDog.facts.map((f, i) => (
+                    <li key={i}>{f}</li>
                 ))}
                 </ul>
-            </Link>
-        </div>
-    )
+            </div>
+        )
+    }
+    return null
 }
 
 export default DogDetailWithFilter
