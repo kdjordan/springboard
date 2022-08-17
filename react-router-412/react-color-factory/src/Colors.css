@@ -1,0 +1,13 @@
+.Colors {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem
+}
+
+.Colors-item {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 10px;
+}

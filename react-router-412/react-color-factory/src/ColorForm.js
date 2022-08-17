@@ -1,8 +1,12 @@
 import React from 'react'
 import { useState } from 'react'
-import './ColorForm.css'
+import { useHistory } from 'react-router-dom'
 
-function ColorForm() {
+import './ColorForm.css'
+import resetBackground from './resetBackground';
+
+function ColorForm({addColor}) {
+    const history = useHistory();
     const INITIAL_STATE = {
         name: '',
         color: ''
@@ -19,7 +23,9 @@ function ColorForm() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        
+        addColor(form)
+        resetBackground()
+        history.push('/colors')
     }
 
     return (

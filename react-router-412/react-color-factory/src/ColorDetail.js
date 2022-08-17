@@ -2,10 +2,11 @@ import React from 'react'
 import { useParams } from 'react-router-dom'
 import './ColorDetail.css'
 
-function ColorDetail() {
+function ColorDetail({colors}) {
     const { color } = useParams()
+    const hex = colors.find(c => c.name === color)
     let body = document.querySelector('body')
-    body.style.backgroundColor = color
+    body.style.backgroundColor = hex.color
 
     return (
         <div className='ColorDetail'>
