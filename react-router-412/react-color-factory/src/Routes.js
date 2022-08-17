@@ -18,7 +18,6 @@ function Routes() {
     const [colors, setColors] = useState(INITIAL_STATE)
 
     function addColor(data) {
-        console.log(data)
         let newColor = {
             name: data.name,
             color: data.color

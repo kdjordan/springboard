@@ -5,6 +5,7 @@ import './ColorDetail.css'
 function ColorDetail({colors}) {
     const { color } = useParams()
     const hex = colors.find(c => c.name === color)
+    console.log(color)
     let body = document.querySelector('body')
     body.style.backgroundColor = hex.color
 
