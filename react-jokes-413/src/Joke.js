@@ -4,7 +4,6 @@ import "./Joke.css";
 class Joke extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.upVote = this.upVote.bind(this)
     this.downVote = this.downVote.bind(this)
   }
@@ -33,7 +32,7 @@ class Joke extends React.Component {
   
         <div className="Joke-text">{this.props.text}</div>
       </div>
-    );
+    )
   }
 
 }
