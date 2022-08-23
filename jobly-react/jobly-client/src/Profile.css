@@ -28,14 +28,6 @@
     margin-top: 1rem;
 }
 
-.Profile button {
-    padding: .2rem .5rem;
-    border-radius: 10px;
-    border: 1px solid transparent;
-    background-color: rgb(116, 91, 138);
-    color: white;
-}
-
 #userName {
     border: none;
 }

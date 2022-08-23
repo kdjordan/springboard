@@ -20,6 +20,8 @@ nav {
   .nav-right a {
     color: #f0f2f5;
     text-decoration: none;
+    opacity: 100%;
+    transition: all .4s ease;
   }
   
   .nav-right a.active {
@@ -36,10 +38,10 @@ nav {
    .nav-right a:hover {
     text-decoration: none;
     color: #f0f2f5;
+    opacity: 50%;
   }
   
   nav a:not(.navbar-brand):hover {
-    font-weight: bold;
   }
   
   
