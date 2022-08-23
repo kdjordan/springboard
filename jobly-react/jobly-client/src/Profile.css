@@ -1,0 +1,36 @@
+.Profile-card {
+    width: 25vw;
+    padding: 25px;
+    background-color: whitesmoke;
+    border-radius: 15px;
+    color: black;
+}
+
+.Profile form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.Profile label {
+    margin: .3rem 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.Profile input {
+    padding: .5rem;
+    font-size: 1.2rem;
+}
+
+.Profile button {
+    margin-top: 1rem;
+}
+
+.Profile button {
+    padding: .2rem .5rem;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    background-color: rgb(116, 91, 138);
+    color: white;
+}
