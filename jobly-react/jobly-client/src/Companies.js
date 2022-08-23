@@ -1,5 +1,4 @@
 import React from "react";
-import { Navlink } from 'react-router-dom'
 import { InputGroup, Button, Input } from "reactstrap";
 import './Companies.css'
 
@@ -8,10 +7,10 @@ export default function CompanyList() {
         <div className="Companies col-md-8">
             <div className="SearchForm mb-3">
                 <InputGroup>
-                    <Input />
-                    <Button>
-                        Submit
-                    </Button>
+                    <Input 
+                        placeholder="Enter search term..."
+                    />
+                    <Button color="primary">Submit</Button>
                 </InputGroup>
             </div>
             <div className="CompaniesList">

@@ -4,13 +4,15 @@ import "./App.css";
 import SnackOrBoozeApi from "./Api";
 import NavBar from "./Navbar";
 import Companies from "./Companies";
+import Home from "./Home";
+import Login from "./Login";
 import Jobs from "./Jobs";
 import Profile from "./Profile";
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
   //state will hold both of or menu item types : drinks and snacks
-  const [menuItems, setMenuItems] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   useEffect(() => {
     // async function getItems(type) {
@@ -27,22 +29,20 @@ function App() {
   }, []);
 
   //function that will update our state when a new Item is added in the AddMenuItem component
-  async function addItem({itemType, id, name, description, recipe, serve}) {
-      //add newItem via API POST call
-      let newItem = await SnackOrBoozeApi.addItem(itemType, {id, name, description, recipe, serve})
-      //update State - we have a state that involves 2 item types : drinks and snacks 
-      //we need to make sure we are updating the correct item type - so we use an Object lookup on the key to grab the right array
-      //we then update that array and useEffect pushes out the updated state to all of our components
-      setMenuItems(cur => 
-        cur.map(obj => {
-          if(Object.keys(obj)[0] === `${itemType}`) {
-            obj[itemType] = [...obj[itemType], newItem]
-            return obj
-          }
-          return obj
-        })
-      )
-  }
+  // async function addItem({itemType, id, name, description, recipe, serve}) {
+      
+  //     let newItem = await SnackOrBoozeApi.addItem(itemType, {id, name, description, recipe, serve})
+      
+  //     setMenuItems(cur => 
+  //       cur.map(obj => {
+  //         if(Object.keys(obj)[0] === `${itemType}`) {
+  //           obj[itemType] = [...obj[itemType], newItem]
+  //           return obj
+  //         }
+  //         return obj
+  //       })
+  //     )
+  // }
   
   if (isLoading) {
     return <p>Loading &hellip;</p>;
@@ -53,9 +53,9 @@ function App() {
         <NavBar />
         <main className="pt-5">
           <Switch>
-            {/* <Route exact path="/">
-              <Home />
-            </Route> */}
+            <Route exact path="/">
+              {<Home status={isLoggedIn}/>}
+            </Route>
             <Route exact path="/companies">
               <Companies />
             </Route>

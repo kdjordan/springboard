@@ -81,6 +81,7 @@ export default function Profile() {
                 
                 />
                 </FormGroup>
+                <Button color="primary" className="btn-block mr-1 mt-1 btn-lg" >Submit</Button>
             </Form>
             </Card>
         </div>
