@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import './Profile.css'
 export default function Profile() {
     const INITIAL_STATE ={
-        userName: '',
+        userName: 'kdjordan',
         firstName: '',
         lastName: '',
         email: '',
@@ -19,20 +19,25 @@ export default function Profile() {
         console.log(form)
     }
 
+    function handleSubmit(e) {
+        e.preventDefault()
+    }
+
 
     return (
         <div className="Profile">
-            <div className="Profile-header">
-                <h2>Profile</h2>
-            </div>
+            <h2>Profile</h2>
             <div className="Profile-card">
-                <div>
-                    Username
-                </div>
-                <div>
-                    kdjordan
-                </div>
-                <form>
+                <form onSubmit={handleSubmit} >
+                    <label htmlFor="userName">Username
+                        <input 
+                            type="text" 
+                            name="userName" 
+                            id="userName" 
+                            value={form.userName}
+                            disabled
+                        />
+                    </label>
                     <label htmlFor="firstName">First Name
                         <input 
                             type="text" 
@@ -42,7 +47,7 @@ export default function Profile() {
                             value={form.firstName}
                         />
                     </label>
-                    <label htmlFor="">Last Name
+                    <label htmlFor="lastName">Last Name
                         <input 
                             type="text" 
                             name="lastName" 
@@ -69,7 +74,7 @@ export default function Profile() {
                             value={form.password}
                         />
                     </label>
-                    <button>Save Changes</button>
+                    <button type="submit">Save Changes</button>
                 </form>
             </div>
         </div>

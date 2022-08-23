@@ -19,6 +19,7 @@
 }
 
 .Profile input {
+    margin-top: .3rem;
     padding: .5rem;
     font-size: 1.2rem;
 }
@@ -33,4 +34,8 @@
     border: 1px solid transparent;
     background-color: rgb(116, 91, 138);
     color: white;
+}
+
+#userName {
+    border: none;
 }
