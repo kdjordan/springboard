@@ -1,33 +1,3 @@
-.Profile-card {
-    width: 25vw;
-    padding: 25px;
-    background-color: whitesmoke;
-    border-radius: 15px;
-    color: black;
-}
-
-.Profile form {
-    display: flex;
-    flex-direction: column;
-
-}
-
-.Profile label {
-    margin: .3rem 0;
-    display: flex;
-    flex-direction: column;
-}
-
-.Profile input {
-    margin-top: .3rem;
-    padding: .5rem;
-    font-size: 1.2rem;
-}
-
-.Profile button {
-    margin-top: 1rem;
-}
-
-#userName {
-    border: none;
+label {
+   color: black;
 }
