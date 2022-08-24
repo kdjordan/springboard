@@ -20,7 +20,7 @@ export default function Home({status}) {
                     <Link to="/login">
                         <button className="btn btn-primary">Login</button>
                     </Link>
-                    <Link to="/login">
+                    <Link to="/signup">
                         <button className="btn btn-primary">Sign up</button>
                     </Link>
                 </div>

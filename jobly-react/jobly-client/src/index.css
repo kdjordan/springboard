@@ -19,4 +19,8 @@ body {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
       monospace;
   }
+
+  span {
+    color: red;
+  }
   
