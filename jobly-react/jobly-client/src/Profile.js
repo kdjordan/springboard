@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import './Profile.css'
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
 
 export default function Profile() {

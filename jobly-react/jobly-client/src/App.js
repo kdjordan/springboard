@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import "./App.css";
-import SnackOrBoozeApi from "./Api";
+import Jobly from "./Api";
 import NavBar from "./Navbar";
 import Companies from "./Companies";
 import Home from "./Home";
 import Login from "./Login";
+import Signup from "./Signup";
 import Jobs from "./Jobs";
 import Profile from "./Profile";
 
@@ -13,6 +14,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   //state will hold both of or menu item types : drinks and snacks
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  Jobly.getCompanies('jobs')
 
   useEffect(() => {
     // async function getItems(type) {
@@ -50,11 +52,17 @@ function App() {
   
   return (
     <div className="App">
-        <NavBar />
+        <NavBar status={isLoggedIn}/>
         <main className="pt-5">
           <Switch>
+            <Route exact path="/login">
+              <Login/>
+            </Route>
+            <Route exact path="/signup">
+              <Signup />
+            </Route>
             <Route exact path="/">
-              {<Home status={isLoggedIn}/>}
+              <Home status={isLoggedIn}/>
             </Route>
             <Route exact path="/companies">
               <Companies />
