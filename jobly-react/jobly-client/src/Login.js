@@ -4,19 +4,6 @@ import Jobly from './Api.js'
 import LocalStorage from "./LocalStorage.js";
 import { useHistory } from 'react-router-dom'
 
-console.log(Jobly)
-// 'testuser',
-//         '$2b$12$AZH7virni5jlTTiGgEg4zu3lSvAw68qVEfSIOjJ3RqtbJbdW/Oi5q',
-//         'Test',
-//         'User',
-//         'joel@joelburton.com',
-//         FALSE),
-//        ('testadmin',
-//         '$2b$12$AZH7virni5jlTTiGgEg4zu3lSvAw68qVEfSIOjJ3RqtbJbdW/Oi5q',
-//         'Test',
-//         'Admin!',
-//         'joel@joelburton.com',
-//         TRUE);
 export default function Login() {
     const INITIAL_STATE ={
         username: '',
@@ -25,6 +12,12 @@ export default function Login() {
     const [form, setForm] = useState(INITIAL_STATE)
     const [error, setError] = useState(false)
     const history = useHistory()
+
+    function checkError() {
+        if(error) {
+            setError(er => (er = false))
+        }
+    }
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -38,9 +31,9 @@ export default function Login() {
         e.preventDefault()
         
         //post credentails to DB
-        console.log(form)
         try {
             let user = await Jobly.login(form)
+            console.log('got user ', user)
             if (!user instanceof Error) {
                 //setLocalStorage
                 LocalStorage.setLocalStorage(user.data)
@@ -48,20 +41,18 @@ export default function Login() {
                 history.push("/profile");
             }
             setError(er => (er = true))
-            console.log('back', user)
             
         } catch (error) {
             console.log('got an error')
             
         }
-        //if not good =>
     }
 
 
     return (
         <div className="col-md-6 col-lg-4">
             <h3>Login</h3>
-            {error ? <span>Invalid credentials</span> : ''}
+            {error ? <span>Error logging in.</span> : ''}
             <Card className="p-4">
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
@@ -72,6 +63,7 @@ export default function Login() {
                     value={form.userName}
                     type="text"
                     onChange={handleChange}
+                    onFocus={checkError}
                     autoFocus
                 />
                 </FormGroup>
@@ -83,6 +75,7 @@ export default function Login() {
                     onChange={handleChange}
                     value={form.password}
                     type="password"
+                    onFocus={checkError}
                 />
                 </FormGroup>
                 <Button color="primary" className="btn-block mr-1 mt-1 btn-lg" >Submit</Button>
