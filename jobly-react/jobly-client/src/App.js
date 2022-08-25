@@ -12,6 +12,7 @@ function App() {
 
   useEffect(() => {
     const user = LocalStorage.getLocalStorage()
+    console.log('user in app ', user)
     //check for logged in user = if so - redirect to profile
     if (user) {
       setUser(u => ([ ...u, user]))

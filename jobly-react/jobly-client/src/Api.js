@@ -25,8 +25,15 @@ class Jobly {
   static async login(user) {
     try {
         const result = await axios.post(`${BASE_API_URL}/auth/token`,user)
-        console.log('got res ', result)
-        console.log(result.data)
+      return result.data;
+    } catch (error) {
+      return error
+    }
+  }
+
+  static async signup(user) {
+    try {
+        const result = await axios.post(`${BASE_API_URL}/auth/register`,user)
       return result.data;
     } catch (error) {
       return error

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
 import Jobly from './Api.js'
-import LocalStorage from "./LocalStorage.js";
+import LocalStorage from "./LocalStorage";
 import { useHistory } from 'react-router-dom'
 
 export default function Login() {
@@ -29,23 +29,16 @@ export default function Login() {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        
         //post credentails to DB
-        try {
-            let user = await Jobly.login(form)
-            console.log('got user ', user)
-            if (!user instanceof Error) {
-                //setLocalStorage
-                LocalStorage.setLocalStorage(user.data)
-                //goto profile
-                history.push("/profile");
-            }
-            setError(er => (er = true))
-            
-        } catch (error) {
-            console.log('got an error')
-            
+        let user = await Jobly.login(form)
+        console.log('got user ', user)
+        if (!user instanceof Error) {
+            //setLocalStorage
+            LocalStorage.setLocalStorage(user.data)
+            //goto profile
+            history.push("/profile");
         }
+        setError(er => (er = true))
     }
 
 

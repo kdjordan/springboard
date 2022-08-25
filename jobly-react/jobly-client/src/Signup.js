@@ -1,43 +1,65 @@
 import React, { useState } from "react";
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
+import Jobly from './Api.js'
+import { useHistory } from "react-router-dom";
+import LocalStorage from "./LocalStorage";
 
 export default function Profile() {
     const INITIAL_STATE ={
-        userName: '',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
+        username: 'kdjordan',
+        firstName: 'Kevin',
+        lastName: 'Jordan',
+        email: 'glasskdj@yaho.com',
+        password: 'password'
     }
     const [form, setForm] = useState(INITIAL_STATE)
+    const history = useHistory()
+    const [error, setError] = useState(false)
 
     function handleChange(e) {
+        console.log('called')
         const { name, value } = e.target
         setForm(f => ({
             ...f,
             [name]: value
         })) 
-        console.log(form)
     }
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault()
+        //post form data to DB
+        let token = await Jobly.signup(form)
+        console.log('got back user ', token)
+        if (!token instanceof Error) {
+            //setLocalStorage
+            LocalStorage.setLocalStorage(token)
+            //goto profile
+            history.push("/companies");
+        }
+        setError(er => (er = true))
+        //set user in localstorage
+        // LocalStorage.setLocalStorage(user)
+        // const localuser = LocalStorage.getLocalStorage()
+        // console.log('from local ', localuser)
+        history.push('/companies')  
     }
 
 
     return (
         <div className="col-md-6 col-lg-4">
             <h3>Sign Up</h3>
+            {error ? <span>Error logging in.</span> : ''}
             <Card className="p-4">
-            <Form>
+            <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                <Label for="userName">Username</Label>
+                <Label for="username">Username</Label>
                 <Input
-                    id="userName"
-                    name="userName"
+                    id="username"
+                    name="username"
                     type="text"
-                    value={form.userName}
+                    value={form.username}
                     onChange={handleChange}
+                    
                 />
                 </FormGroup>
                 <FormGroup>
@@ -45,7 +67,7 @@ export default function Profile() {
                 <Input
                     id="password"
                     name="password"
-                    type="text"
+                    type="password"
                     value={form.password}
                     onChange={handleChange}
                 />
