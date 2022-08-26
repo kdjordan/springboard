@@ -7,7 +7,7 @@ export default function Logout({fn}) {
     fn(true)
     return (
        <div>
-        <h1>Logout</h1>
+        <p>logout</p>
        </div>
     )
 }

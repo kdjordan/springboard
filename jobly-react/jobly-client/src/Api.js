@@ -13,10 +13,9 @@ axios.defaults.headers.common['Authorization'] = `Bearer: ${AUTH_TOKEN}`
 
 class Jobly {
 
-  static async getCompanies(type) {
+  static async getCompanies() {
     try {
-      const result = await axios.get(`${BASE_API_URL}/${type}`);
-      console.log(result.data)
+      const result = await axios.get(`${BASE_API_URL}/companies`);
       return result.data;
     } catch (error) {
       console.log('error getting API ', error)
@@ -35,6 +34,15 @@ class Jobly {
   static async signup(user) {
     try {
         const result = await axios.post(`${BASE_API_URL}/auth/register`,user)
+      return result.data;
+    } catch (error) {
+      return false
+    }
+  }
+
+  static async getUser(username, token) {
+    try {
+        const result = await axios.get(`${BASE_API_URL}/users/${username}`)
       return result.data;
     } catch (error) {
       return false

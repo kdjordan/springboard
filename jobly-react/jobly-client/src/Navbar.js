@@ -66,7 +66,7 @@ function NavBar() {
                 <DropdownMenu right>
                   <DropdownItem>
                     <NavItem>
-                      <NavLink to="/logout">Logout</NavLink>
+                      <NavLink to="/logout">Logout {user.username}</NavLink>
                     </NavItem>
                   </DropdownItem>
                 </DropdownMenu>

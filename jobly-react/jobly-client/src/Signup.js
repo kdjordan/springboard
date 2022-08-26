@@ -6,18 +6,18 @@ import LocalStorage from "./LocalStorage";
 
 export default function Signup({processUser}) {
     const INITIAL_STATE ={
-        username: 'kdjordan',
-        firstName: 'Kevin',
-        lastName: 'Jordan',
-        email: 'glasskdj@yahoo.com',
-        password: 'password'
+        username: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
     }
     const [form, setForm] = useState(INITIAL_STATE)
     const history = useHistory()
     const [error, setError] = useState(false)
+    
 
     function handleChange(e) {
-        console.log('called')
         const { name, value } = e.target
         setForm(f => ({
             ...f,
@@ -32,15 +32,15 @@ export default function Signup({processUser}) {
         if (token) {
             //setLocalStorage
             let tk = token.token
-            console.log('setting user in signup', form.username, token)
             LocalStorage.setLocalStorage({'token': tk, 'username':form.username})
             //send user info up to Parent App
             let username = form.username
             processUser({username, 'token': tk})
             //goto companies
             history.push("/companies");
+        } else {
+            setError(er => (er = true))
         }
-        setError(er => (er = true))
     }
 
     function handleFocus() {

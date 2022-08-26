@@ -11,7 +11,6 @@ class LocalStorage{
         localStorage.setItem('token', JSON.stringify(token))   
     }
     static emptyLocalStorage() {
-        console.log('clearing storage')
         localStorage.clear()
     }
 }

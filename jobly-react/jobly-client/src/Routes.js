@@ -1,17 +1,16 @@
 import { Switch, Route } from "react-router-dom";
-import { useState, useEffect } from "react";
-import Jobly from "./Api";
 import Companies from "./Companies";
 import Home from "./Home";
 import Jobs from "./Jobs";
 import Profile from "./Profile";
 
 
-export default function Routes() {  
+export default function Routes({user}) {  
+  // console.log('user in routes ', user)
     return (
         <Switch>
             <Route exact path="/">
-              <Home />
+              <Home user={user}/>
             </Route>
               <Route exact path="/companies">
             <Companies />

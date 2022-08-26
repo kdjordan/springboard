@@ -2,27 +2,27 @@ import React, { useState } from "react";
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
 
 export default function Profile() {
-    const INITIAL_STATE ={
-        userName: 'kdjordan',
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-    }
-    const [form, setForm] = useState(INITIAL_STATE)
+    // const INITIAL_STATE ={
+    //     userName: '',
+    //     firstName: '',
+    //     lastName: '',
+    //     email: '',
+    //     password: ''
+    // }
+    // const [form, setForm] = useState(INITIAL_STATE)
 
-    function handleChange(e) {
-        const { name, value } = e.target
-        setForm(f => ({
-            ...f,
-            [name]: value
-        })) 
-        console.log(form)
-    }
+    // function handleChange(e) {
+    //     const { name, value } = e.target
+    //     setForm(f => ({
+    //         ...f,
+    //         [name]: value
+    //     })) 
+    //     console.log(form)
+    // }
 
-    function handleSubmit(e) {
-        e.preventDefault()
-    }
+    // function handleSubmit(e) {
+    //     e.preventDefault()
+    // }
 
 
     return (

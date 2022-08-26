@@ -1,11 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import { Switch, Route, useHistory } from "react-router-dom";
+import './App.css'
 import Routes from "./Routes";
 import NavBar from "./Navbar";
-import './App.css'
-import { useState } from 'react'
 import LocalStorage from "./LocalStorage";
 import UserContext from './userContext'
-import { Switch, Route, useHistory } from "react-router-dom";
 import Login from "./Login";
 import Logout from "./Logout";
 import Signup from "./Signup";
@@ -28,9 +27,9 @@ useEffect(() => {
 }, [])
 
 function processUser(user) {
-  console.log('got user in app ', user)
+  // console.log('got user in app ', user)
   setUser(u => (u = user))
-  console.log('the user now is ', user)
+  // console.log('the user now is ', user)
 }
 
 function logOut(bool) {
@@ -49,7 +48,7 @@ if (isLoading) {
     <div className="App">
         <NavBar />
         <main className="pt-5">
-         <Routes />
+         <Routes user={user}/>
          <Switch>
             <Route exact path="/login">
                 <Login processUser={processUser}/>
