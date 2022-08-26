@@ -6,7 +6,7 @@ import Profile from "./Profile";
 
 
 export default function Routes({user}) {  
-  // console.log('user in routes ', user)
+  user = user.token === undefined ? false : user
     return (
         <Switch>
             <Route exact path="/">

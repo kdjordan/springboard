@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
+import LocalStorage from "./LocalStorage";
 import {
   Collapse,
   Navbar,
@@ -16,13 +17,18 @@ import {
   import UserContext from './userContext'
   
 
-function NavBar() {
+function NavBar({logout}) {
   const [ isOpen, setIsOpen ] = useState(true)
   const user = useContext(UserContext)
   const loggedIn = user.token !== undefined ? true : false 
 
   function toggle() {
     setIsOpen(op => (op = !op))
+  }
+
+  function doLogout() {
+    LocalStorage.emptyLocalStorage()
+    logout()
   }
 
   if (!loggedIn) {
@@ -66,7 +72,7 @@ function NavBar() {
                 <DropdownMenu right>
                   <DropdownItem>
                     <NavItem>
-                      <NavLink to="/logout">Logout {user.username}</NavLink>
+                      <NavLink to="/" onClick={doLogout}>Logout {user.username}</NavLink>
                     </NavItem>
                   </DropdownItem>
                 </DropdownMenu>

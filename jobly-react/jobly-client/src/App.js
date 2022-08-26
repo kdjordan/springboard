@@ -6,7 +6,6 @@ import NavBar from "./Navbar";
 import LocalStorage from "./LocalStorage";
 import UserContext from './userContext'
 import Login from "./Login";
-import Logout from "./Logout";
 import Signup from "./Signup";
 
 
@@ -30,6 +29,10 @@ function processUser(user) {
   setUser(u => (u = user))
 }
 
+function logout() {
+  setUser(u => (u = {}))
+}
+
 if (isLoading) {
     return <p>Loading &hellip;</p>;
   }
@@ -37,7 +40,7 @@ if (isLoading) {
   return (
     <UserContext.Provider value={user}>
     <div className="App">
-        <NavBar />
+        <NavBar logout={logout}/>
         <main className="pt-5">
          <Routes user={user}/>
          <Switch>
@@ -46,9 +49,6 @@ if (isLoading) {
             </Route>
             <Route exact path="/signup">
               <Signup processUser={processUser}/>
-            </Route>
-            <Route exact path="/logout">
-              <Logout />
             </Route>
          </Switch>
         </main>
