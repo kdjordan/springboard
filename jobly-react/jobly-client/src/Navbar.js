@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import {
   Collapse,
@@ -13,16 +13,19 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
   import './Navbar.css'
+  import UserContext from './userContext'
+  
 
-function NavBar({status}) {
+function NavBar() {
   const [ isOpen, setIsOpen ] = useState(true)
+  const user = useContext(UserContext)
+  const loggedIn = user.token !== undefined ? true : false 
 
   function toggle() {
-    console.log('calling')
     setIsOpen(op => (op = !op))
   }
 
-  if (!status) {
+  if (!loggedIn) {
     return (
       <div>
         <Navbar className="Navigation navbar navbar-expand-md">

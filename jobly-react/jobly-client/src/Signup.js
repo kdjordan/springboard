@@ -4,12 +4,12 @@ import Jobly from './Api.js'
 import { useHistory } from "react-router-dom";
 import LocalStorage from "./LocalStorage";
 
-export default function Profile() {
+export default function Signup({processUser}) {
     const INITIAL_STATE ={
         username: 'kdjordan',
         firstName: 'Kevin',
         lastName: 'Jordan',
-        email: 'glasskdj@yaho.com',
+        email: 'glasskdj@yahoo.com',
         password: 'password'
     }
     const [form, setForm] = useState(INITIAL_STATE)
@@ -29,26 +29,29 @@ export default function Profile() {
         e.preventDefault()
         //post form data to DB
         let token = await Jobly.signup(form)
-        console.log('got back user ', token)
-        if (!token instanceof Error) {
+        if (token) {
             //setLocalStorage
-            LocalStorage.setLocalStorage(token)
-            //goto profile
+            let tk = token.token
+            console.log('setting user in signup', form.username, token)
+            LocalStorage.setLocalStorage({'token': tk, 'username':form.username})
+            //send user info up to Parent App
+            let username = form.username
+            processUser({username, 'token': tk})
+            //goto companies
             history.push("/companies");
         }
         setError(er => (er = true))
-        //set user in localstorage
-        // LocalStorage.setLocalStorage(user)
-        // const localuser = LocalStorage.getLocalStorage()
-        // console.log('from local ', localuser)
-        history.push('/companies')  
+    }
+
+    function handleFocus() {
+        setError(er => (er = false))
     }
 
 
     return (
         <div className="col-md-6 col-lg-4">
             <h3>Sign Up</h3>
-            {error ? <span>Error logging in.</span> : ''}
+            {error ? <span>Error Signing Up.</span> : ''}
             <Card className="p-4">
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
@@ -59,6 +62,7 @@ export default function Profile() {
                     type="text"
                     value={form.username}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                     
                 />
                 </FormGroup>
@@ -70,6 +74,7 @@ export default function Profile() {
                     type="password"
                     value={form.password}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                 />
                 </FormGroup>
                 <FormGroup>
@@ -80,6 +85,7 @@ export default function Profile() {
                     type="text"
                     value={form.firstName}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                 />
                 </FormGroup>
                 <FormGroup>
@@ -90,6 +96,7 @@ export default function Profile() {
                     type="text" 
                     value={form.lastName}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                 />
                 </FormGroup>
                 <FormGroup>
@@ -100,6 +107,7 @@ export default function Profile() {
                     type="text"
                     value={form.email}
                     onChange={handleChange}
+                    onFocus={handleFocus}
                 />
                 </FormGroup>
                 <Button color="primary" className="btn-block mr-1 mt-1 btn-lg" >Submit</Button>

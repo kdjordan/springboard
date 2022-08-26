@@ -4,7 +4,7 @@ import Jobly from './Api.js'
 import LocalStorage from "./LocalStorage";
 import { useHistory } from 'react-router-dom'
 
-export default function Login() {
+export default function Login({processUser}) {
     const INITIAL_STATE ={
         username: '',
         password: ''
@@ -30,15 +30,20 @@ export default function Login() {
     async function handleSubmit(e) {
         e.preventDefault()
         //post credentails to DB
-        let user = await Jobly.login(form)
-        console.log('got user ', user)
-        if (!user instanceof Error) {
+        let token = await Jobly.login(form)
+        console.log(' got in login ', token)
+        if (token) {
+            let tk = token.token
             //setLocalStorage
-            LocalStorage.setLocalStorage(user.data)
-            //goto profile
-            history.push("/profile");
+            LocalStorage.setLocalStorage({'token':tk, 'username':form.username})
+            //send user info up to Parent App
+            let username = form.username
+            processUser({username, 'token': tk})
+            //goto companies
+            history.push("/companies");
+        } else {
+            setError(er => (er = true))
         }
-        setError(er => (er = true))
     }
 
 
@@ -49,11 +54,11 @@ export default function Login() {
             <Card className="p-4">
             <Form onSubmit={handleSubmit}>
                 <FormGroup>
-                <Label for="userName">Username</Label>
+                <Label for="username">Username</Label>
                 <Input
-                    id="userName"
+                    id="username"
                     name="username"
-                    value={form.userName}
+                    value={form.username}
                     type="text"
                     onChange={handleChange}
                     onFocus={checkError}

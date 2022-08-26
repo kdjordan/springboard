@@ -1,6 +1,5 @@
 class LocalStorage{
     static getLocalStorage() {
-        console.log('getting')
         try {
             const user = JSON.parse(localStorage.getItem('token'));
             return user
@@ -10,6 +9,10 @@ class LocalStorage{
     }
     static setLocalStorage(token) {
         localStorage.setItem('token', JSON.stringify(token))   
+    }
+    static emptyLocalStorage() {
+        console.log('clearing storage')
+        localStorage.clear()
     }
 }
 export default LocalStorage

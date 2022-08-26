@@ -22,12 +22,13 @@ class Jobly {
       console.log('error getting API ', error)
     }
   }
+
   static async login(user) {
     try {
         const result = await axios.post(`${BASE_API_URL}/auth/token`,user)
       return result.data;
     } catch (error) {
-      return error
+      return false
     }
   }
 
@@ -36,7 +37,7 @@ class Jobly {
         const result = await axios.post(`${BASE_API_URL}/auth/register`,user)
       return result.data;
     } catch (error) {
-      return error
+      return false
     }
   }
 
