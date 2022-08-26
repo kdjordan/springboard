@@ -16,9 +16,11 @@ class Jobly {
   static async getCompanies() {
     try {
       const result = await axios.get(`${BASE_API_URL}/companies`);
-      return result.data;
+      let {companies} = result.data
+      return companies
     } catch (error) {
       console.log('error getting API ', error)
+      return false
     }
   }
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route, useHistory } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import './App.css'
 import Routes from "./Routes";
 import NavBar from "./Navbar";
@@ -13,7 +13,7 @@ import Signup from "./Signup";
 function App() { 
 const [isLoading, setIsLoading] = useState(false);
 const [user, setUser] = useState({});
-const history = useHistory()
+
 
 useEffect(() => {
   function checkUser() {
@@ -27,16 +27,7 @@ useEffect(() => {
 }, [])
 
 function processUser(user) {
-  // console.log('got user in app ', user)
   setUser(u => (u = user))
-  // console.log('the user now is ', user)
-}
-
-function logOut(bool) {
-  if(bool) {
-    setUser(u => u = {})
-    history.push('/')
-  }
 }
 
 if (isLoading) {
@@ -57,7 +48,7 @@ if (isLoading) {
               <Signup processUser={processUser}/>
             </Route>
             <Route exact path="/logout">
-              <Logout fn={logOut}/>
+              <Logout />
             </Route>
          </Switch>
         </main>

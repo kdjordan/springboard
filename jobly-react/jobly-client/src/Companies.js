@@ -9,13 +9,12 @@ export default function CompanyList() {
     useEffect(() => {
         async function getCmp() {
             const cmp =  await Jobly.getCompanies()
-            let result = cmp.companies
-            console.log('got ', cmp.companies)
-            setCompanies(c => ([...c, result]))
+            // let result = cmp.companies
+            setCompanies(c => (c = cmp))
         }
         getCmp()
     }, [])
-    console.log(companies)
+    
     return (
         <div className="Companies col-md-8">
             <div className="SearchForm mb-3">
@@ -28,11 +27,11 @@ export default function CompanyList() {
             </div>
             <div className="CompaniesList">
                 {companies.map((c, i) => (
-                    <a href="/" className="CompaniesCard card" key={i}>
+                    <a href={`/companies/${c.handle}`} className="CompaniesCard card" key={i}>
                         <div className="card-body">
-                            <h4 className="cart-title">
+                            <h4 className="card-title">
                                 {c.name}
-                                <img src="test" alt="" />
+                                <img src="{c.logoUrl}" alt="" />
                             </h4>
                             <p><small>{c.description}</small></p>
                         </div>
