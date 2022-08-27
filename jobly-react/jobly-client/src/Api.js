@@ -12,9 +12,9 @@ const BASE_URL = process.env.REACT_APP_BASE_URL || "http://localhost:3001";
 
 class Jobly {
   static token 
-  // static authHeader ={'Authorization' : `Bearer ${this.token}`}
+  
   static async request(endpoint, data = {}, method = "get") {
-    console.log('in request ', Jobly.token)
+    console.log('in request token', Jobly.token)
     console.debug("API Call:", endpoint, data, method);
 
     //there are multiple ways to pass an authorization token, this is how you pass it in the header.
@@ -47,17 +47,18 @@ class Jobly {
     return res.companies;
   }
 
+  static async getJobs() {
+    let res = await this.request('jobs')
+    return res.jobs;
+  }
+
   static async getUser(username) {
-    console.log('getting user')
     let res = await this.request(`users/${username}`)
     return res.user
   }
 
   static async patchUser(username, data) {
-    console.log('api ', username, data)
-    
     let res = await this.request(`users/${username}`, data, 'patch')
-    console.log('got in api ', res)
     return res.user
   }
 
@@ -66,13 +67,10 @@ class Jobly {
   //allows for login and signup -> returns token that is stored in this class
   static async login(user) {
     let res = await this.request(`auth/token`, user, 'POST')
-    this.token = res
-    console.log('signed in and got ', this.token)
     return res.token;
   }
   static async signup(user) {
     let res = await this.request(`auth/register`, user, 'POST')
-    this.token = res.token
     return res.token;
   }
 

@@ -1,15 +1,16 @@
 import { Switch, Route } from "react-router-dom";
+import React from "react";
 import Companies from "./companies/Companies";
 import Home from "./Home";
 import Jobs from "./Jobs";
 import Profile from "./Profile";
 
 
-export default function Routes({user, processUser}) {  
+export default function Routes({ processUser }) {  
     return (
         <Switch>
             <Route exact path="/">
-              <Home user={user}/>
+              <Home />
             </Route>
               <Route exact path="/companies">
             <Companies />

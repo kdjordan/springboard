@@ -1,22 +1,21 @@
-import React, { useState } from "react";
-import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
-import LocalStorage from "./LocalStorage.js";
-import Jobly from "./Api.js";
+import React, { useState, useContext } from "react"
+import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap"
+import Jobly from "./Api.js"
+import UserContext from './userContext'
 
-export default function Profile({processUser}) {
-    const curUser = LocalStorage.getLocalStorage()
-    // console.log('curUser is', curUser.token)
+
+export default function Profile() {
+    const { currentUser, setCurrentUser } = useContext(UserContext)
     const [formData, setFormData] = useState({
-        email: curUser.email,
-        firstName: curUser.firstName,
-        lastName: curUser.lastName,
-        username: curUser.username,
+        email: currentUser.email,
+        firstName: currentUser.firstName,
+        lastName: currentUser.lastName,
+        username: currentUser.username,
         password: ''
     })
-    console.log('jobly tokken ', Jobly.token)
 
     const [error, setError] = useState(false)
-   
+    
     function handleChange(e) {
         const { name, value } = e.target
         setFormData(f => ({
@@ -35,9 +34,8 @@ export default function Profile({processUser}) {
                 email: formData.email,
                 password: formData.password
             }
-            let user = await Jobly.patchUser(formData.username, data)
-            console.log('patched user is ', user)
-            processUser(formData)
+            let user = await Jobly.patchUser(currentUser.username, data)
+            setCurrentUser(user)
         } catch (error) {
             setError(er => (er = [error]))
         }

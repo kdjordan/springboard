@@ -1,13 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react"
+import { Link } from "react-router-dom"
+import UserContext from "./userContext" 
 
-export default function Home({user}) {
-    if(user !== null) {
+export default function Home() {
+    const { currentUser } = useContext(UserContext);
+    if(currentUser) {
         return (
             <div className="col-md-6 col-lg-4 text-center">
                 <h2>Jobly</h2>
                 <p>All the jobs in one, convenient place</p>
-                <h3>Welcome back {user.username} !</h3>
+                <h3>Welcome back {currentUser.username} !</h3>
             </div>
         )
     } else {

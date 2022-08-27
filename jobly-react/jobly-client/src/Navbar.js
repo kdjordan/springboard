@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import LocalStorage from "./LocalStorage";
+import UserContext from './userContext'
 import './Navbar.css'
 import {
   Collapse,
@@ -14,19 +14,19 @@ import {
   DropdownMenu,
   DropdownItem } from 'reactstrap';
 
-function NavBar({logout }) {
+function NavBar({ logout }) {
   const [ isOpen, setIsOpen ] = useState(true)
-  const user = LocalStorage.getLocalStorage()
+  const { currentUser } = useContext(UserContext)
+
   function toggle() {
     setIsOpen(op => (op = !op))
   }
 
   function doLogout() {
-    LocalStorage.emptyLocalStorage()
     logout()
   }
 
-  if (!user) {
+  if (!currentUser) {
     return (
       <div>
         <Navbar className="Navigation navbar navbar-expand-md">
@@ -67,7 +67,7 @@ function NavBar({logout }) {
                 <DropdownMenu right>
                   <DropdownItem>
                     <NavItem>
-                      <NavLink to="/" onClick={doLogout}>Logout {user.username}</NavLink>
+                      <NavLink to="/" onClick={doLogout}>Logout {currentUser.username}</NavLink>
                     </NavItem>
                   </DropdownItem>
                 </DropdownMenu>
@@ -79,23 +79,6 @@ function NavBar({logout }) {
   )
 }
 
-// }
-//     <nav className="nav">
-//       <div className="nav-left">
-//         <NavLink exact to="/">
-//           Jobly
-//         </NavLink>
-//       </div>
-
-//         <div className="nav-right">
-//             <NavLink to="/companies">Companies</NavLink>
-//             <NavLink to="/jobs">Jobs</NavLink>
-//             <NavLink to="/profile">Profile</NavLink>
-//             <NavLink to="/logout">Logout</NavLink>
-//         </div>
-//       </nav>
-//   );
-// }
 }
 
 export default NavBar;

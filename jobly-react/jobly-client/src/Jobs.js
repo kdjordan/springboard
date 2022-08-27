@@ -9,12 +9,10 @@ export default function Jobs() {
     useEffect(() => {
         async function getCmp() {
             const cmp =  await Jobly.getJobs()
-            // let result = cmp.companies
             setJobs(c => (c = cmp))
         }
         getCmp()
     }, [])
-    console.log('jobs ', jobs)
     return (
         <div className="Companies col-md-8">
             <div className="SearchForm mb-3">

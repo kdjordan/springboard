@@ -13,40 +13,40 @@ import jwt from "jsonwebtoken";
 
 function App() { 
 const [isLoading, setIsLoading] = useState(false);
-const [user, setUser] = useState(null);
+const [currentUser, setCurrentUser] = useState(null);
+const [token, setToken] = useState(LocalStorage.getLocalStorage());
+
 
 
 useEffect(() => {
-  function checkUser() {
-    const token = LocalStorage.getLocalStorage()
+  async function getUser() {
     if (token) {
-      const user = jwt.decode(token)
-      console.log('got user from token ', user)
-      setUser(l => (l = user))
+      // console.log('token in stoarge', token )
+      let { username }  = jwt.decode(token)
+      // console.log('decoded username ', username)
+      Jobly.token = token
+      let curUser = await Jobly.getUser(username)
+      setCurrentUser(l => (l = curUser))
     }
     setIsLoading(l => (l = false))
   }
-  checkUser()
-}, [])
+  getUser()
+}, [token])
 
-async function processUser(user, token) {
+async function processUser(token) {
   // got a user logging in or signing up => grab their info and put in localstorage
   // and localstorage
   try {
-    console.log('received ', user, token)
-    Jobly.token = token
-    let curUser = await Jobly.getUser(user)
+    setToken(token)
     LocalStorage.setLocalStorage(token)
-    setUser(u => (u = curUser))
-    console.log('set user to ', Jobly.token)
-    
   } catch (error) {
     console.log(error)
   }
 }
 
 function logout() {
-  setUser(u => (u = null))
+  LocalStorage.setLocalStorage(null)
+  setCurrentUser(u => (u = null))
 }
 
 if (isLoading) {
@@ -54,11 +54,11 @@ if (isLoading) {
   }
 
   return (
-    <UserContext.Provider value={{user}}>
+    <UserContext.Provider value={{currentUser, setCurrentUser}}>
     <div className="App">
-        <NavBar logout={logout} user={user}/>
+        <NavBar logout={logout} />
         <main className="pt-5">
-         <Routes user={user} processUser={processUser}/>
+         <Routes user={currentUser} processUser={processUser}/>
          <Switch>
             <Route exact path="/login">
                 <Login processUser={processUser}/>

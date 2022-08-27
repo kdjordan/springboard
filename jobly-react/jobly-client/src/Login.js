@@ -28,10 +28,9 @@ export default function Login({processUser}) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        let uname = form.username
         try {
             let token = await Jobly.login(form)
-            processUser(uname, token)
+            processUser(token)
             history.push('/companies')
         } catch (error) {
             setError(er => (er = [error]))

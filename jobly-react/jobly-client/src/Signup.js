@@ -26,11 +26,9 @@ export default function Signup({processUser}) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        //post form data to DB
-        let uname = form.username
         try {
             let token = await Jobly.signup(form)
-            processUser(uname, token)
+            processUser(token)
             history.push("/companies");
         } catch (error) {
             setError(er => (er = [error]))

@@ -1,14 +1,14 @@
 class LocalStorage{
     static getLocalStorage() {
         try {
-            const user = JSON.parse(localStorage.getItem('user'));
+            const user = JSON.parse(localStorage.getItem('token'));
             return user
         } catch (error) {
             return false
         }
     }
-    static setLocalStorage(user) {
-        localStorage.setItem('user', JSON.stringify(user))   
+    static setLocalStorage(token) {
+        localStorage.setItem('token', JSON.stringify(token))   
     }
     static emptyLocalStorage() {
         localStorage.clear()
