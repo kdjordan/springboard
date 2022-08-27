@@ -1,20 +1,24 @@
 import React, { useEffect, useState } from "react";
 import { InputGroup, Button, Input } from "reactstrap";
 import './Companies.css'
-import Jobly from './Api.js'
+import Jobly from "../Api";
 
 export default function CompanyList() {
     const [companies, setCompanies] = useState([])
+    const [error, setError] = useState([])
 
     useEffect(() => {
         async function getCmp() {
-            const cmp =  await Jobly.getCompanies()
-            // let result = cmp.companies
-            setCompanies(c => (c = cmp))
+            try {
+                const cmp =  await Jobly.getCompanies()
+                setCompanies(c => (c = cmp))
+            } catch (error) {
+                setError(er => (er = [error]))
+            }
         }
         getCmp()
     }, [])
-    
+
     return (
         <div className="Companies col-md-8">
             <div className="SearchForm mb-3">
@@ -24,15 +28,16 @@ export default function CompanyList() {
                     />
                     <Button color="primary">Submit</Button>
                 </InputGroup>
+                {error.length ? <span>{error}</span> : ''}
             </div>
             <div className="CompaniesList">
                 {companies.map((c, i) => (
                     <a href={`/companies/${c.handle}`} className="CompaniesCard card" key={i}>
-                        <div className="card-body">
-                            <h4 className="card-title">
-                                {c.name}
-                                <img src="{c.logoUrl}" alt="" />
-                            </h4>
+                        <div className="cardBody">
+                            <div className="cardHeader">
+                                <h4>{c.name}</h4> 
+                                <img src={c.logoUrl} alt="" />
+                            </div>
                             <p><small>{c.description}</small></p>
                         </div>
                     </a>

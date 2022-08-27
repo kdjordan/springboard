@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
 import Jobly from './Api.js'
-import LocalStorage from "./LocalStorage";
 import { useHistory } from 'react-router-dom'
 
 export default function Login({processUser}) {
@@ -29,20 +28,13 @@ export default function Login({processUser}) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        //post credentails to DB
-        let token = await Jobly.login(form)
-        console.log(' got in login ', token)
-        if (token) {
-            let tk = token.token
-            //setLocalStorage
-            LocalStorage.setLocalStorage({'token':tk, 'username':form.username})
-            //send user info up to Parent App
-            let username = form.username
-            processUser({username, 'token': tk})
-            //goto companies
-            history.push("/companies");
-        } else {
-            setError(er => (er = true))
+        let uname = form.username
+        try {
+            let token = await Jobly.login(form)
+            processUser(uname, token)
+            history.push('/companies')
+        } catch (error) {
+            setError(er => (er = [error]))
         }
     }
 
@@ -50,7 +42,7 @@ export default function Login({processUser}) {
     return (
         <div className="col-md-6 col-lg-4">
             <h3>Login</h3>
-            {error ? <span>Error logging in.</span> : ''}
+            {error.length ? <span>{error}.</span> : ''}
             <Card className="p-4">
             <Form onSubmit={handleSubmit}>
                 <FormGroup>

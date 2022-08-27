@@ -1,12 +1,11 @@
 import { Switch, Route } from "react-router-dom";
-import Companies from "./Companies";
+import Companies from "./companies/Companies";
 import Home from "./Home";
 import Jobs from "./Jobs";
 import Profile from "./Profile";
 
 
-export default function Routes({user}) {  
-  user = user.token === undefined ? false : user
+export default function Routes({user, processUser}) {  
     return (
         <Switch>
             <Route exact path="/">
@@ -22,7 +21,7 @@ export default function Routes({user}) {
             <Jobs />
             </Route>
               <Route exact path="/profile">
-            <Profile />
+            <Profile processUser={processUser}/>
             </Route>
         </Switch>
     )

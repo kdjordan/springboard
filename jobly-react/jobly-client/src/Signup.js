@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
 import Jobly from './Api.js'
 import { useHistory } from "react-router-dom";
-import LocalStorage from "./LocalStorage";
 
 export default function Signup({processUser}) {
     const INITIAL_STATE ={
@@ -13,8 +12,8 @@ export default function Signup({processUser}) {
         password: ''
     }
     const [form, setForm] = useState(INITIAL_STATE)
-    const history = useHistory()
     const [error, setError] = useState(false)
+    const history = useHistory()
     
 
     function handleChange(e) {
@@ -28,30 +27,25 @@ export default function Signup({processUser}) {
     async function handleSubmit(e) {
         e.preventDefault()
         //post form data to DB
-        let token = await Jobly.signup(form)
-        if (token) {
-            //setLocalStorage
-            let tk = token.token
-            LocalStorage.setLocalStorage({'token': tk, 'username':form.username})
-            //send user info up to Parent App
-            let username = form.username
-            processUser({username, 'token': tk})
-            //goto companies
+        let uname = form.username
+        try {
+            let token = await Jobly.signup(form)
+            processUser(uname, token)
             history.push("/companies");
-        } else {
-            setError(er => (er = true))
+        } catch (error) {
+            setError(er => (er = [error]))
         }
     }
 
     function handleFocus() {
-        setError(er => (er = false))
+        setError(er => (er = []))
     }
 
 
     return (
         <div className="col-md-6 col-lg-4">
             <h3>Sign Up</h3>
-            {error ? <span>Error Signing Up.</span> : ''}
+            {error.length ? <span>{error}</span> : ''}
             <Card className="p-4">
             <Form onSubmit={handleSubmit}>
                 <FormGroup>

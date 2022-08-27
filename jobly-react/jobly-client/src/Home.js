@@ -2,8 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Home({user}) {
-    console.log('user in Home ', user)
-    if(user) {
+    if(user !== null) {
         return (
             <div className="col-md-6 col-lg-4 text-center">
                 <h2>Jobly</h2>

@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import LocalStorage from "./LocalStorage";
+import './Navbar.css'
 import {
   Collapse,
   Navbar,
@@ -8,20 +9,14 @@ import {
   NavbarBrand,
   Nav,
   NavItem,
-  // NavLink,
   UncontrolledDropdown,
   DropdownToggle,
   DropdownMenu,
   DropdownItem } from 'reactstrap';
-  import './Navbar.css'
-  import UserContext from './userContext'
-  
 
-function NavBar({logout}) {
+function NavBar({logout }) {
   const [ isOpen, setIsOpen ] = useState(true)
-  const user = useContext(UserContext)
-  const loggedIn = user.token !== undefined ? true : false 
-
+  const user = LocalStorage.getLocalStorage()
   function toggle() {
     setIsOpen(op => (op = !op))
   }
@@ -31,7 +26,7 @@ function NavBar({logout}) {
     logout()
   }
 
-  if (!loggedIn) {
+  if (!user) {
     return (
       <div>
         <Navbar className="Navigation navbar navbar-expand-md">

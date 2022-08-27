@@ -1,41 +1,66 @@
 import React, { useState } from "react";
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
+import LocalStorage from "./LocalStorage.js";
+import Jobly from "./Api.js";
 
-export default function Profile() {
-    // const INITIAL_STATE ={
-    //     userName: '',
-    //     firstName: '',
-    //     lastName: '',
-    //     email: '',
-    //     password: ''
-    // }
-    // const [form, setForm] = useState(INITIAL_STATE)
+export default function Profile({processUser}) {
+    const curUser = LocalStorage.getLocalStorage()
+    // console.log('curUser is', curUser.token)
+    const [formData, setFormData] = useState({
+        email: curUser.email,
+        firstName: curUser.firstName,
+        lastName: curUser.lastName,
+        username: curUser.username,
+        password: ''
+    })
+    console.log('jobly tokken ', Jobly.token)
 
-    // function handleChange(e) {
-    //     const { name, value } = e.target
-    //     setForm(f => ({
-    //         ...f,
-    //         [name]: value
-    //     })) 
-    //     console.log(form)
-    // }
+    const [error, setError] = useState(false)
+   
+    function handleChange(e) {
+        const { name, value } = e.target
+        setFormData(f => ({
+            ...f,
+            [name]: value
+        })) 
+    }
 
-    // function handleSubmit(e) {
-    //     e.preventDefault()
-    // }
+    async function handleSubmit(e) {
+        e.preventDefault()
+        try {
+            //send patch to users
+            let data = {
+                firstName: formData.firstName,
+                lastName: formData.lastName,
+                email: formData.email,
+                password: formData.password
+            }
+            let user = await Jobly.patchUser(formData.username, data)
+            console.log('patched user is ', user)
+            processUser(formData)
+        } catch (error) {
+            setError(er => (er = [error]))
+        }
+
+    }
+
+    function handleFocus() {
+        setError(er => (er = []))
+    }
 
 
     return (
         <div className="col-md-6 col-lg-4">
             <h3>Profile</h3>
+            {error.length ? <span>{error}</span> : ''}
             <Card className="p-4">
-            <Form>
+            <Form onSubmit={handleSubmit} onFocus={handleFocus}>
                 <FormGroup>
-                <Label for="userName">UserName</Label>
+                <Label for="userName">Username</Label>
                 <Input
                     id="userName"
                     name="userName"
-                    placeholder="kdjordan"
+                    value={formData.username}
                     type="text"
                     disabled
                 />
@@ -45,9 +70,10 @@ export default function Profile() {
                 <Input
                     id="firstName"
                     name="firstName"
-                    placeholder="Kevin"
+                    value={formData.firstName}
                     type="text"
-                
+                    onChange={handleChange}
+                    autoFocus
                 />
                 </FormGroup>
                 <FormGroup>
@@ -55,7 +81,8 @@ export default function Profile() {
                 <Input
                     id="lastName"
                     name="lastName"
-                    placeholder="Jordan"
+                    value={formData.lastName}
+                    onChange={handleChange}
                     type="text"
                 
                 />
@@ -65,7 +92,8 @@ export default function Profile() {
                 <Input
                     id="email"
                     name="email"
-                    placeholder="glasskdj@yahoo.com"
+                    value={formData.email}
+                    onChange={handleChange}
                     type="text"
                 
                 />
@@ -75,9 +103,9 @@ export default function Profile() {
                 <Input
                     id="password"
                     name="password"
-                    
-                    type="text"
-                
+                    value={formData.password}
+                    onChange={handleChange}
+                    type="password"
                 />
                 </FormGroup>
                 <Button color="primary" className="btn-block mr-1 mt-1 btn-lg" >Submit</Button>

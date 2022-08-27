@@ -1,36 +1,52 @@
 import React, { useEffect, useState } from "react";
 import { Switch, Route } from "react-router-dom";
 import './App.css'
+import Jobly from "./Api";
 import Routes from "./Routes";
 import NavBar from "./Navbar";
 import LocalStorage from "./LocalStorage";
 import UserContext from './userContext'
 import Login from "./Login";
 import Signup from "./Signup";
+import jwt from "jsonwebtoken";
 
 
 function App() { 
 const [isLoading, setIsLoading] = useState(false);
-const [user, setUser] = useState({});
+const [user, setUser] = useState(null);
 
 
 useEffect(() => {
   function checkUser() {
-    const status = LocalStorage.getLocalStorage()
-    if (status) {
-      setUser(l => (l = status))
+    const token = LocalStorage.getLocalStorage()
+    if (token) {
+      const user = jwt.decode(token)
+      console.log('got user from token ', user)
+      setUser(l => (l = user))
     }
     setIsLoading(l => (l = false))
   }
   checkUser()
 }, [])
 
-function processUser(user) {
-  setUser(u => (u = user))
+async function processUser(user, token) {
+  // got a user logging in or signing up => grab their info and put in localstorage
+  // and localstorage
+  try {
+    console.log('received ', user, token)
+    Jobly.token = token
+    let curUser = await Jobly.getUser(user)
+    LocalStorage.setLocalStorage(token)
+    setUser(u => (u = curUser))
+    console.log('set user to ', Jobly.token)
+    
+  } catch (error) {
+    console.log(error)
+  }
 }
 
 function logout() {
-  setUser(u => (u = {}))
+  setUser(u => (u = null))
 }
 
 if (isLoading) {
@@ -38,11 +54,11 @@ if (isLoading) {
   }
 
   return (
-    <UserContext.Provider value={user}>
+    <UserContext.Provider value={{user}}>
     <div className="App">
-        <NavBar logout={logout}/>
+        <NavBar logout={logout} user={user}/>
         <main className="pt-5">
-         <Routes user={user}/>
+         <Routes user={user} processUser={processUser}/>
          <Switch>
             <Route exact path="/login">
                 <Login processUser={processUser}/>
