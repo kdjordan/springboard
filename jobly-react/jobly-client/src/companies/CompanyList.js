@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { InputGroup, Button, Input } from "reactstrap";
 import './Companies.css'
 import Jobly from "../Api";
+import CompanyCard from "./CompanyCard";
 
 export default function CompanyList() {
     const [companies, setCompanies] = useState([])
@@ -10,7 +11,7 @@ export default function CompanyList() {
     useEffect(() => {
         async function getCmp() {
             try {
-                const cmp =  await Jobly.getCompanies()
+                const cmp = await Jobly.getCompanies()
                 setCompanies(c => (c = cmp))
             } catch (error) {
                 setError(er => (er = [error]))
@@ -21,7 +22,7 @@ export default function CompanyList() {
 
     return (
         <div className="Companies col-md-8">
-            <div className="SearchForm mb-3">
+            <div className="SearchForm mb-3"> 
                 <InputGroup>
                     <Input 
                         placeholder="Enter search term..."
@@ -31,16 +32,14 @@ export default function CompanyList() {
                 {error.length ? <span>{error}</span> : ''}
             </div>
             <div className="CompaniesList">
-                {companies.map((c, i) => (
-                    <a href={`/companies/${c.handle}`} className="CompaniesCard card" key={i}>
-                        <div className="cardBody">
-                            <div className="cardHeader">
-                                <h4>{c.name}</h4> 
-                                <img src={c.logoUrl} alt="" />
-                            </div>
-                            <p><small>{c.description}</small></p>
-                        </div>
-                    </a>
+                {companies.map(c => (
+                    <CompanyCard 
+                        key={c.handle} 
+                        handle={c.handle}
+                        name={c.name}
+                        logoUrl={c.logoUrl}
+                        description={c.description}
+                    /> 
                 ))}
             </div>
         </div>

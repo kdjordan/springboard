@@ -1,8 +1,9 @@
 import { Switch, Route } from "react-router-dom";
 import React from "react";
-import Companies from "./companies/Companies";
+import CompanyList from "./companies/CompanyList";
+import CompanyDetail from "./companies/CompanyDetail";
 import Home from "./Home";
-import Jobs from "./Jobs";
+import JobList from "./jobs/JobList";
 import Profile from "./Profile";
 
 
@@ -13,13 +14,13 @@ export default function Routes({ processUser }) {
               <Home />
             </Route>
               <Route exact path="/companies">
-            <Companies />
+            <CompanyList />
             </Route>
-              <Route exact path="/companies/:name">
-            <Companies />
+            <Route exact path="/companies/:handle">
+              <CompanyDetail />
             </Route>
               <Route exact path="/jobs">
-            <Jobs />
+            <JobList />
             </Route>
               <Route exact path="/profile">
             <Profile processUser={processUser}/>

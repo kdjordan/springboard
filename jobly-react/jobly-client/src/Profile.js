@@ -1,11 +1,12 @@
 import React, { useState, useContext } from "react"
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap"
 import Jobly from "./Api.js"
-import UserContext from './userContext'
+import UserContext from './UserContext'
 
 
 export default function Profile() {
     const { currentUser, setCurrentUser } = useContext(UserContext)
+
     const [formData, setFormData] = useState({
         email: currentUser.email,
         firstName: currentUser.firstName,
@@ -27,7 +28,6 @@ export default function Profile() {
     async function handleSubmit(e) {
         e.preventDefault()
         try {
-            //send patch to users
             let data = {
                 firstName: formData.firstName,
                 lastName: formData.lastName,
@@ -39,7 +39,6 @@ export default function Profile() {
         } catch (error) {
             setError(er => (er = [error]))
         }
-
     }
 
     function handleFocus() {

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { InputGroup, Button, Input } from "reactstrap";
 import './Jobs.css'
-import Jobly from './Api.js'
+import Jobly from '../Api.js'
 
-export default function Jobs() {
+export default function JobList() {
     const [jobs, setJobs] = useState([])
 
     useEffect(() => {

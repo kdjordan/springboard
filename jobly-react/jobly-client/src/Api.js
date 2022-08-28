@@ -73,64 +73,6 @@ class Jobly {
     let res = await this.request(`auth/register`, user, 'POST')
     return res.token;
   }
-
-
-  
-  // static async getCompanies() {
-  //   try {
-  //     const result = await axios.get(`${BASE_API_URL}/companies`, this.authHeader);
-  //     let {companies} = result.data
-  //     return companies
-  //   } catch (error) {
-  //     console.log('error getting companies ', error)
-  //     return false
-  //   }
-  // }
-
-  // static async getJobs() {
-  //   try {
-  //     const result = await axios.get(`${BASE_API_URL}/jobs`, this.authHeader);
-  //     let {jobs} = result.data
-  //     return jobs
-  //   } catch (error) {
-  //     console.log('error getting jobs ', error)
-  //     return false
-  //   }
-  // }
-
-  // static async login(user) {
-  //   try {
-  //       const result = await axios.post(`${BASE_API_URL}/auth/token`,user)
-  //       console.log('the token is ', result.data.token) 
-  //       this.token = result.data.token
-  //     return result.data;
-  //   } catch (error) {
-  //     console.log('error getting token ', error)
-  //     return false
-  //   }
-  // }
-
-  // static async signup(user) {
-  //   try {
-  //       const result = await axios.post(`${BASE_API_URL}/auth/register`,user)
-  //     return result.data;
-  //   } catch (error) {
-  //     console.log('error signing up user', error)
-  //     return false
-  //   }
-  // }
-
-  // static async getUser(username) {
-  //   console.log('getting ', username, this.token)
-  //   try {
-  //       const result = await axios.get(`${BASE_API_URL}/users/${username}`, this.authHeader)
-  //     return result.data;
-  //   } catch (error) {
-  //     console.log('error getting user', error.response.data.error.message)
-  //     return false
-  //   }
-  // }
-
 }
 
 export default Jobly;

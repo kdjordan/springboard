@@ -1,6 +1,6 @@
 import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
-import UserContext from './userContext'
+import UserContext from './UserContext'
 import './Navbar.css'
 import {
   Collapse,

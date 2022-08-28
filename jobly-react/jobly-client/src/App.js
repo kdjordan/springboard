@@ -5,10 +5,11 @@ import Jobly from "./Api";
 import Routes from "./Routes";
 import NavBar from "./Navbar";
 import LocalStorage from "./LocalStorage";
-import UserContext from './userContext'
+import UserContext from './UserContext'
 import Login from "./Login";
 import Signup from "./Signup";
 import jwt from "jsonwebtoken";
+import Loading from "./common/Loading";
 
 
 function App() { 
@@ -50,7 +51,7 @@ function logout() {
 }
 
 if (isLoading) {
-    return <p>Loading &hellip;</p>;
+    return <Loading />
   }
 
   return (
