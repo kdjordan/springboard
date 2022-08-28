@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
-import Jobly from './Api.js'
 import { useHistory } from "react-router-dom";
 
-export default function Signup({processUser}) {
+export default function Signup({ signup }) {
     const INITIAL_STATE ={
         username: '',
         firstName: '',
@@ -26,17 +25,16 @@ export default function Signup({processUser}) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        try {
-            let token = await Jobly.signup(form)
-            processUser(token)
-            history.push("/companies");
-        } catch (error) {
-            setError(er => (er = [error]))
+        let result = await signup(form)    
+        if(result.success) {
+            history.push('/companies')
+        } else {
+            setError(result.error)
         }
     }
 
     function handleFocus() {
-        setError(er => (er = []))
+        setError([])
     }
 
 
@@ -45,7 +43,7 @@ export default function Signup({processUser}) {
             <h3>Sign Up</h3>
             {error.length ? <span>{error}</span> : ''}
             <Card className="p-4">
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} onFocus={handleFocus}>
                 <FormGroup>
                 <Label for="username">Username</Label>
                 <Input
@@ -54,8 +52,7 @@ export default function Signup({processUser}) {
                     type="text"
                     value={form.username}
                     onChange={handleChange}
-                    onFocus={handleFocus}
-                    
+                    autoFocus
                 />
                 </FormGroup>
                 <FormGroup>
@@ -66,7 +63,6 @@ export default function Signup({processUser}) {
                     type="password"
                     value={form.password}
                     onChange={handleChange}
-                    onFocus={handleFocus}
                 />
                 </FormGroup>
                 <FormGroup>
@@ -77,7 +73,6 @@ export default function Signup({processUser}) {
                     type="text"
                     value={form.firstName}
                     onChange={handleChange}
-                    onFocus={handleFocus}
                 />
                 </FormGroup>
                 <FormGroup>
@@ -88,7 +83,6 @@ export default function Signup({processUser}) {
                     type="text" 
                     value={form.lastName}
                     onChange={handleChange}
-                    onFocus={handleFocus}
                 />
                 </FormGroup>
                 <FormGroup>
@@ -99,7 +93,6 @@ export default function Signup({processUser}) {
                     type="text"
                     value={form.email}
                     onChange={handleChange}
-                    onFocus={handleFocus}
                 />
                 </FormGroup>
                 <Button color="primary" className="btn-block mr-1 mt-1 btn-lg" >Submit</Button>

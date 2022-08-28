@@ -1,43 +1,30 @@
 import React, { useEffect, useState } from "react";
-import { InputGroup, Button, Input } from "reactstrap";
+import Loading from "../common/Loading";
+import SearchForm from "../common/SearchForm";
+import JobCardList from "./JobCardList";
 import './Jobs.css'
 import Jobly from '../Api.js'
 
 export default function JobList() {
-    const [jobs, setJobs] = useState([])
+    const [jobs, setJobs] = useState(null)
 
     useEffect(() => {
-        async function getCmp() {
-            const cmp =  await Jobly.getJobs()
-            setJobs(c => (c = cmp))
-        }
-        getCmp()
+       search()
     }, [])
+
+    async function search(title) {
+        let jobs = await Jobly.getJobs(title)
+        setJobs(jobs)
+    }
+
+    if (!jobs) return <Loading />
+
     return (
-        <div className="Companies col-md-8">
-            <div className="SearchForm mb-3">
-                <InputGroup>
-                    <Input 
-                        placeholder="Enter search term..."
-                    />
-                    <Button color="primary">Submit</Button>
-                </InputGroup>
-            </div>
-            <div className="JobsList">
-                {jobs.map((j, i) => (
-                    <a href="/" className="JobsCard card" key={j.id}>
-                        <div className="card-body">
-                            <h4 className="card-title">
-                                {j.title}
-                            </h4>
-                            <h5>{j.companyName}</h5>
-                            <p><small>SALARY: {j.salary}</small></p>
-                            <p><small>EQUITY: {j.equity}</small></p>
-                            <button className="btn btn-secondary float-right" id={j.id}>APPLY</button>
-                        </div>
-                    </a>
-                ))}
-            </div>
+        <div className="JobList col-md-8">
+            <SearchForm doSearch={search} />
+            {jobs.length ? <JobCardList jobs={jobs} />
+            : <p className="lead">Sorry, no results were found!</p>
+            }
         </div>
     )
 }

@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { Switch, Route } from "react-router-dom";
 import './App.css'
 import Jobly from "./Api";
 import Routes from "./Routes";
 import NavBar from "./Navbar";
 import LocalStorage from "./LocalStorage";
 import UserContext from './UserContext'
-import Login from "./Login";
-import Signup from "./Signup";
+
 import jwt from "jsonwebtoken";
 import Loading from "./common/Loading";
 
@@ -22,9 +20,7 @@ const [token, setToken] = useState(LocalStorage.getLocalStorage());
 useEffect(() => {
   async function getUser() {
     if (token) {
-      // console.log('token in stoarge', token )
       let { username }  = jwt.decode(token)
-      // console.log('decoded username ', username)
       Jobly.token = token
       let curUser = await Jobly.getUser(username)
       setCurrentUser(l => (l = curUser))
@@ -34,14 +30,28 @@ useEffect(() => {
   getUser()
 }, [token])
 
-async function processUser(token) {
-  // got a user logging in or signing up => grab their info and put in localstorage
-  // and localstorage
+async function login(form) {
+  // got a user logging in  => grab their token and put in localstorage
   try {
+    let token = await Jobly.login(form) 
     setToken(token)
     LocalStorage.setLocalStorage(token)
+    return { success: true }
   } catch (error) {
-    console.log(error)
+    return { success: false, error }
+  }
+}
+
+async function signup(form) {
+  // got a user signing up => grab their token and put in localstorage
+  console.log('logging ')
+  try {
+    let token = await Jobly.signup(form) 
+    setToken(token)
+    LocalStorage.setLocalStorage(token)
+    return { success: true }
+  } catch (error) {
+    return { success: false, error }
   }
 }
 
@@ -59,15 +69,7 @@ if (isLoading) {
     <div className="App">
         <NavBar logout={logout} />
         <main className="pt-5">
-         <Routes user={currentUser} processUser={processUser}/>
-         <Switch>
-            <Route exact path="/login">
-                <Login processUser={processUser}/>
-            </Route>
-            <Route exact path="/signup">
-              <Signup processUser={processUser}/>
-            </Route>
-         </Switch>
+         <Routes login={login} signup={signup}/>
         </main>
     </div>
     </UserContext.Provider>

@@ -1,9 +1,7 @@
 import React, { useState } from "react";
 import { Form, Button, Input, FormGroup, Label, Card } from "reactstrap";
-import Jobly from './Api.js'
 import { useHistory } from 'react-router-dom'
-
-export default function Login({processUser}) {
+export default function Login({ login }) {
     const INITIAL_STATE ={
         username: '',
         password: ''
@@ -12,11 +10,10 @@ export default function Login({processUser}) {
     const [error, setError] = useState(false)
     const history = useHistory()
 
-    function checkError() {
-        if(error) {
-            setError(er => (er = false))
-        }
+    function handleFocus() {
+        setError([])
     }
+
 
     function handleChange(e) {
         const { name, value } = e.target
@@ -28,12 +25,11 @@ export default function Login({processUser}) {
 
     async function handleSubmit(e) {
         e.preventDefault()
-        try {
-            let token = await Jobly.login(form)
-            processUser(token)
+        let result = await login(form)    
+        if(result.success) {
             history.push('/companies')
-        } catch (error) {
-            setError(er => (er = [error]))
+        } else {
+            setError(result.error)
         }
     }
 
@@ -43,7 +39,7 @@ export default function Login({processUser}) {
             <h3>Login</h3>
             {error.length ? <span>{error}.</span> : ''}
             <Card className="p-4">
-            <Form onSubmit={handleSubmit}>
+            <Form onSubmit={handleSubmit} onFocus={handleFocus}>
                 <FormGroup>
                 <Label for="username">Username</Label>
                 <Input
@@ -52,7 +48,6 @@ export default function Login({processUser}) {
                     value={form.username}
                     type="text"
                     onChange={handleChange}
-                    onFocus={checkError}
                     autoFocus
                 />
                 </FormGroup>
@@ -64,7 +59,6 @@ export default function Login({processUser}) {
                     onChange={handleChange}
                     value={form.password}
                     type="password"
-                    onFocus={checkError}
                 />
                 </FormGroup>
                 <Button color="primary" className="btn-block mr-1 mt-1 btn-lg" >Submit</Button>

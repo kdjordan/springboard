@@ -1,7 +1,7 @@
 import React from "react"
 
 export default function JobCard({job}) {
-    console.log(job)
+    
     return (
         <a href="/" className="JobsCard card" key={job.id}>
             <div className="card-body">
