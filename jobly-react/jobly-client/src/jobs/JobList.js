@@ -23,7 +23,7 @@ export default function JobList() {
         <div className="JobList col-md-8">
             <SearchForm doSearch={search} />
             {jobs.length ? <JobCardList jobs={jobs} />
-            : <p className="lead">Sorry, no results were found!</p>
+            : <p>Sorry, no results were found!</p>
             }
         </div>
     )

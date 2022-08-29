@@ -61,6 +61,10 @@ class Jobly {
     return res.user
   }
 
+  static async applyToJob(username, id) {
+    await this.request(`users/${username}/jobs/${id}`, {}, "post");
+  }
+
 
   //unauth routes
   //allows for login and signup -> returns token that is stored in this class
