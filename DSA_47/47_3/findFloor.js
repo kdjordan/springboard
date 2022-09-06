@@ -18,10 +18,4 @@ function findFloor(arr, num, left = 0, right = arr.length - 1) {
     return -1
 }
 
-
-console.log(findFloor([1,2,8,10,10,12,19], 9)) // 8
-console.log(findFloor([1,2,8,10,10,12,19], 20)) // 19
-console.log(findFloor([1,2,8,10,10,12,19], 0)) // -1
-
-
 module.exports = findFloor

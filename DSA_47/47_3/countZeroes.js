@@ -28,5 +28,4 @@ function countZeroes(arr) {
     return leftIdx
 } 
 
-
 module.exports = countZeroes
