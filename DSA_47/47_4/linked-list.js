@@ -21,7 +21,13 @@ class LinkedList {
   /** push(val): add new value to end of list. */
 
   push(val) {
-
+    let newNode = new Node(val)
+    if (this.length === 0) {
+      this.head = newNode
+    }
+    this.length++
+    this.tail = newNode
+    return newNode
   }
 
   /** unshift(val): add new value to start of list. */
