@@ -53,7 +53,7 @@ class LinkedList {
   /** unshift(val): add new value to start of list. */
 
   unshift(val) {
-    let newNode = newNode(val)
+    let newNode = new Node(val)
 
     //handle adding first node
     if (this.head === null) {
@@ -72,14 +72,14 @@ class LinkedList {
   /** pop(): return & remove last item. */
 
   pop() {
-   
+   return this.removeAt(this.length - 1)
 
   }
 
   /** shift(): return & remove first item. */
 
   shift() {
-
+    return this.removeAt(0)
   }
 
   /** getAt(idx): get val at idx. */
@@ -87,55 +87,88 @@ class LinkedList {
   getAt(idx) {
     //check for boundary error first = will throw Error if idx out of range
     this._checkIdx(idx)
-      
-    console.log('made it ', idx)
+
+    return this._get(idx).val  
   }
 
   /** setAt(idx, val): set val at idx to val */
 
   setAt(idx, val) {
+    this._checkIdx(idx)
+
+    this._get(idx).val = val
 
   }
 
   /** insertAt(idx, val): add node w/val before idx. */
 
   insertAt(idx, val) {
+    if (idx < 0 || idx > this.length) {
+      throw new Error('Index out of range')
+    }
+    //handle adding to front or end of list
+    if (idx === 0) return this.unshift(val)
+    if (idx === this.length) return this.push(val)
 
+    let prev = this._get(idx - 1)
+
+    let newNode = new Node(val)
+    newNode.next = prev.next
+    prev.next = newNode
+
+    this.length++
   }
 
   /** removeAt(idx): return & remove item at idx, */
 
   removeAt(idx) {
     //check for boundary error
-    if (idx >= this.length || idx < 0) {
-      throw new Error ('Index out of range')
-    }
+    this._checkIdx
 
     //handle index = 0
     if (idx === 0) {
       let val = this.head.val
       this.head = this.head.next
       this.length--
+      if (this.length < 2) this.tail = this.head
       return val
     }
 
+    let prev = this._get(idx - 1)
+
     //handle removing last node
     if (idx === this.length - 1) {
-      let val = this.tail.val
-      return this.tail
+      let val = prev.next.val
+      prev.next = null
+      this.tail = prev
+      this.length--
+      return val
     }
 
+    let val = prev.next.val
+    prev.next = prev.next.next 
+    this.length--
+    return val
   }
 
   /** average(): return an average of all values in the list */
 
   average() {
-    
+    //check for empty list
+    if (this.length === 0) return 0
+
+    let total = 0
+    let count = 0
+    let cur = this.head
+
+    while (count < this.length) {
+      total += cur.val
+      count++
+      cur = cur.next
+    }
+    return total / count 
   }
 }
 
-let theList = new LinkedList([1,2,3])
-console.log(theList)
-// theList.pop()
 
 module.exports = LinkedList;
