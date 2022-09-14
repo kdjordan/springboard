@@ -21,7 +21,7 @@ function longest(words) {
 
 function everyOther(str) {
   //base
-  if (!isNaN(str)) return
+  if (str.length === 1) return ''
   // //standard
   return str[1] + everyOther(str.slice(2))
 
@@ -30,18 +30,38 @@ function everyOther(str) {
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
 function isPalindrome(str) {
+  //base
+  if (str.length === 1) return true
+  //standard
+  if (str[0] === str[str.length - 1]) {
+    return isPalindrome(str.slice(1, str.length - 1))
+  } else {
+    return false
+  }
 
 }
 
 /** findIndex: return the index of val in arr (or -1 if val is not present). */
 
-function findIndex(arr, val) {
-
+function findIndex(arr, val, count=0) {
+  //base
+  if (arr.length === 0) return -1
+  //standard
+  if (arr[0] === val) {
+    return count
+  }
+  else {
+    count++
+    return findIndex(arr.slice(1), val, count)
+  }
 }
 
 /** revString: return a copy of a string, but in reverse. */
 
 function revString(str) {
+  if (str.length === 0) return ''
+
+  return str[str.length - 1] + revString(str.slice(0, str.length - 1))
 
 }
 
@@ -59,7 +79,7 @@ function binarySearch(arr, val) {
 }
 
 
-console.log(everyOther('abababa'))
+console.log(revString('abcde'))
 
 module.exports = {
   product,
