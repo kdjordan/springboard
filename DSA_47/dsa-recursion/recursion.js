@@ -55,8 +55,7 @@ function findIndex(arr, val, count=0) {
     return count
   }
   else {
-    count++
-    return findIndex(arr.slice(1), val, count)
+    return findIndex(arr.slice(1), val, count + 1)
   }
 }
 
@@ -72,13 +71,12 @@ function revString(str) {
 /** gatherStrings: given an object, return an array of all of the string values. */
 
 function gatherStrings(obj, arr=[]) {
-  console.log(obj)
-  //base
-  if (!obj) return 
-  //standard
-  if (Object.values(obj) === 'object') return Object.values(obj)
-  if(Object.values(obj) === 'string') arr.push(obj)
-
+  let strArr = []
+  for (let key in obj) {
+    if (typeof obj[key] === 'string') strArr.push(obj[key])
+    if (typeof obj[key] === 'object') strArr.push(...gatherStrings(obj[key]))
+  }
+  return strArr
 }
 
 /** binarySearch: given a sorted array of numbers, and a value,
