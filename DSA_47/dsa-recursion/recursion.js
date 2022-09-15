@@ -2,42 +2,46 @@
 
 function product(nums) {
   //base
-  if (nums.length === 0) return 0
+  if (nums.length === 0) return 1
   //standard
-  return nums[0] + product(nums.slice(1))
+  return nums[0] * product(nums.slice(1))
 
 }
 
 /** longest: return the length of the longest word in an array of words. */
-//['at','become']
-function longest(words) {
+function longest(words, longestWord = 0) {
   //base
-  if (words.length === 0) return 
-  //standard
-  return words[0] > words[1] ? words[0] : words[1]
+  if (words.length === 0) return longestWord
+  // //standard
+  if (words[0].length > longestWord) {
+    return longest(words.slice(1), words[0].length)
+  } else {
+    return longest(words.slice(1), longestWord)
+  } 
 } 
 
 /** everyOther: return a string with every other letter. */
 
-function everyOther(str) {
+function everyOther(str, idx = 0, retStr = '') {
   //base
-  if (str.length === 1) return ''
+  if (idx >= str.length) return retStr
   // //standard
-  return str[1] + everyOther(str.slice(2))
+  retStr += str[idx]
+  return everyOther(str, idx + 2, retStr)
 
 }
 
 /** isPalindrome: checks whether a string is a palindrome or not. */
 
-function isPalindrome(str) {
+function isPalindrome(str, idx = 0) {
   //base
-  if (str.length === 1) return true
+  let leftIdx = idx
+  let rightIdx = str.length - idx - 1
+  if (leftIdx >= rightIdx) return true
   //standard
-  if (str[0] === str[str.length - 1]) {
-    return isPalindrome(str.slice(1, str.length - 1))
-  } else {
-    return false
-  }
+  if (str[leftIdx] !== str[rightIdx]) return false
+
+  return isPalindrome(str, idx + 1)
 
 }
 
@@ -67,7 +71,13 @@ function revString(str) {
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj) {
+function gatherStrings(obj, arr=[]) {
+  console.log(obj)
+  //base
+  if (!obj) return 
+  //standard
+  if (Object.values(obj) === 'object') return Object.values(obj)
+  if(Object.values(obj) === 'string') arr.push(obj)
 
 }
 
@@ -79,8 +89,25 @@ function binarySearch(arr, val) {
 }
 
 
-console.log(revString('abcde'))
-
+let nestedObj = {
+  firstName: "Lester",
+  favoriteNumber: 22,
+  moreData: {
+    lastName: "Testowitz"
+  },
+  funFacts: {
+    moreStuff: {
+      anotherNumber: 100,
+      deeplyNestedString: {
+        almostThere: {
+          success: "you made it!"
+        }
+      }
+    },
+    favoriteString: "nice!"
+  }
+};
+// console.log(gatherStrings(nestedObj))
 module.exports = {
   product,
   longest,
