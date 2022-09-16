@@ -70,7 +70,7 @@ function revString(str) {
 
 /** gatherStrings: given an object, return an array of all of the string values. */
 
-function gatherStrings(obj, arr=[]) {
+function gatherStrings(obj) {
   let strArr = []
   for (let key in obj) {
     if (typeof obj[key] === 'string') strArr.push(obj[key])
@@ -82,30 +82,17 @@ function gatherStrings(obj, arr=[]) {
 /** binarySearch: given a sorted array of numbers, and a value,
  * return the index of that value (or -1 if val is not present). */
 
-function binarySearch(arr, val) {
+function binarySearch(arr, val, leftIdx = 0, rightIdx = arr.length) {
+  if (leftIdx > rightIdx) return -1
+    
+  let mid = Math.floor((rightIdx + leftIdx) / 2)
 
+  if (arr[mid] === val) return mid
+
+  if(arr[mid] > val) return binarySearch(arr, val, leftIdx, mid - 1)
+  else return binarySearch(arr, val, mid + 1, rightIdx)
 }
 
-
-let nestedObj = {
-  firstName: "Lester",
-  favoriteNumber: 22,
-  moreData: {
-    lastName: "Testowitz"
-  },
-  funFacts: {
-    moreStuff: {
-      anotherNumber: 100,
-      deeplyNestedString: {
-        almostThere: {
-          success: "you made it!"
-        }
-      }
-    },
-    favoriteString: "nice!"
-  }
-};
-// console.log(gatherStrings(nestedObj))
 module.exports = {
   product,
   longest,
