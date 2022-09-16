@@ -51,9 +51,35 @@ function makeBoard(boardString) {
 }
 
 function find(board, word) {
-  /** Can word be found in board? */
-  // TODO
+  for (let y = 0; y < board.length; y++) {
+    for (let x = 0; x < board.length; x++) {
+      if (checkAroundBoard(board, word, y, x, new Set())) return true
+    }
+  }
+ return false
 }
+
+function checkAroundBoard(board, word, y, x, onBoard) {
+  //base case => NOT the letter 
+  if (board[y][x] !== word[0]) return false
+  //base case => the letter has been used
+  if (onBoard.has(`${y} - ${x}`)) return false
+  //base case => we are on the last letter 
+  if (word.length === 1) return true
+
+  onBoard = new Set(onBoard)
+  onBoard.add(`${y} - ${x}`)
+
+  if (y > 0 && checkAroundBoard(board, word.slice(1), y - 1, x, onBoard)) return true
+  if (y < board.length - 1 && checkAroundBoard(board, word.slice(1), y + 1, x, onBoard)) return true
+
+  if (x > 0 && checkAroundBoard(board, word.slice(1), y, x - 1, onBoard)) return true
+  if (x < board.length - 1 && checkAroundBoard(board, word.slice(1), y, x + 1, onBoard)) return true
+
+  return false
+}
+
+
 
 // EXAMPLE TEST
 
