@@ -6,6 +6,8 @@ class BinaryTreeNode {
     this.left = left;
     this.right = right;
   }
+
+
 }
 
 class BinaryTree {
@@ -17,20 +19,51 @@ class BinaryTree {
    * the length of the shortest path from the root to a leaf. */
 
   minDepth() {
+    if (!this.root) return 0
 
+    function minDepthRecursion(node) {
+      if (node.left === null && node.right === null) return 1
+      if (node.left === null) return minDepthRecursion(node.right) + 1
+      if (node.right === null) return minDepthRecursion(node.left) + 1
+
+      return minDepthRecursion(node.left) < minDepthRecursion(node.right) ? minDepthRecursion(node.left) + 1: minDepthRecursion(node.right) + 1
+      }
+      
+      return minDepthRecursion(this.root)
   }
 
   /** maxDepth(): return the maximum depth of the tree -- that is,
    * the length of the longest path from the root to a leaf. */
 
   maxDepth() {
+    if (!this.root) return 0
+    
+    function maxDepthRecursion(node) {
+      if (node.left === null && node.right === null) return 1
+      if (node.left === null) return maxDepthRecursion(node.right) + 1
+      if (node.right === null) return maxDepthRecursion(node.left) + 1 
 
+      return maxDepthRecursion(node.left) > maxDepthRecursion(node.right) ? maxDepthRecursion(node.left) + 1: maxDepthRecursion(node.right) + 1
+    }
+
+    return maxDepthRecursion(this.root)
   }
 
   /** maxSum(): return the maximum sum you can obtain by traveling along a path in the tree.
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
 
   maxSum() {
+    if (!this.root) return 0
+
+    function maxDepthRecursion(node) {
+      if (node.left === null && node.right === null) return 1
+      if (node.left === null) return maxDepthRecursion(node.right) + 1
+      if (node.right === null) return maxDepthRecursion(node.left) + 1 
+
+      return maxDepthRecursion(node.left) > maxDepthRecursion(node.right) ? maxDepthRecursion(node.left) + 1: maxDepthRecursion(node.right) + 1
+    }
+
+
 
   }
 
@@ -72,4 +105,8 @@ class BinaryTree {
   }
 }
 
+
+
+
+  
 module.exports = { BinaryTree, BinaryTreeNode };
