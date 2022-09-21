@@ -53,24 +53,44 @@ class BinaryTree {
    * The path doesn't need to start at the root, but you can't visit a node more than once. */
 
   maxSum() {
-    if (!this.root) return 0
+    let total = 0
 
-    function maxDepthRecursion(node) {
-      if (node.left === null && node.right === null) return 1
-      if (node.left === null) return maxDepthRecursion(node.right) + 1
-      if (node.right === null) return maxDepthRecursion(node.left) + 1 
-
-      return maxDepthRecursion(node.left) > maxDepthRecursion(node.right) ? maxDepthRecursion(node.left) + 1: maxDepthRecursion(node.right) + 1
+    function sumPath(node) {
+      if (node === null) return 0
+      let rightTotal =  sumPath(node.right)
+      let leftTotal =  sumPath(node.left)
+      total = Math.max(total, node.val + rightTotal + leftTotal)
+      return Math.max(0, leftTotal + node.val, rightTotal + node.val)
     }
 
-
-
+    sumPath(this.root)
+    return total
   }
 
   /** nextLarger(lowerBound): return the smallest value in the tree
    * which is larger than lowerBound. Return null if no such value exists. */
 
   nextLarger(lowerBound) {
+    
+    if (!this.root) return null
+    
+    let stack = [this.root]
+    let currSmall = null
+    
+    while (stack.length) {
+      let currNode = stack.pop()
+      let currVal = currNode.val 
+      let higherThanLowerBound = currVal > lowerBound
+      let reassignClosest = currVal < currSmall || currSmall === null
+
+      if (higherThanLowerBound && reassignClosest) {
+        currSmall = currVal
+      }
+      if (currNode.left) stack.push(currNode.left)
+      if (currNode.right) stack.push(currNode.right)
+    }
+
+    return currSmall
 
   }
 
