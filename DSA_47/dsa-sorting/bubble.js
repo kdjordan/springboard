@@ -1,18 +1,15 @@
 function bubbleSort(arr) {
-    let sorted = false
-    while(!sorted) {
-        console.log('going')
-        sorted = true
-        for (let i=0; i<arr.length; i++) {
-            console.log(arr[i])
-            if (arr[i] > arr[i+1]) {
-                let temp = arr[i]
-                arr[i] = arr[i+1]
-                arr[i] = temp
+    for (let i=0; i < arr.length; i++) {
+        for (let j=0; j < arr.length - 1; j++ ) {
+            if (arr[j] > arr[j+1]) {
+                let temp = arr[j]
+                arr[j] = arr[j+1]
+                arr[j+1] = temp
             }
-            sorted = false
         }
     }
+    
+    
     return arr
 }
 
