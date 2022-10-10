@@ -23,7 +23,4 @@ function separatePositive(arr) {
     }
     return arr
 }
-// var arr = [1, 2, 3];
-// var arr = [-1, -2, -3];
-var arr = [2, -1, -3, 6, -8, 10];
-console.log(separatePositive(arr))
+

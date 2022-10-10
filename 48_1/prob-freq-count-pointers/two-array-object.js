@@ -9,5 +9,4 @@ function twoArrayObject(arr1, arr2) {
         }
     }
     return obj
-    
 }
