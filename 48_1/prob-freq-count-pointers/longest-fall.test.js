@@ -12,7 +12,7 @@ describe("longestFall", function() {
   });
 
   it("should not treat ties as decreasing", function() {
-    // expect(longestFall([5, 4, 4, 4, 3, 2])).toBe(3);
+    expect(longestFall([5, 4, 4, 4, 3, 2])).toBe(3);
     expect(longestFall([2, 2, 1])).toBe(1);
   });
   

@@ -17,8 +17,5 @@ function longestFall(arr) {
         else break
         
     }
-    return count + 1
-
-    
+    return count + 1   
 }
-console.log(longestFall([9, 8, 7, 6, 5, 6, 4, 2, 1]))
