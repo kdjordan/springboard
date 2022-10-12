@@ -4,12 +4,10 @@ function guessingGame() {
     let active = true
 
     return function inner( val ) {
-        console.log('*******', num)
         if ( active ) {
             guesses++
             if ( val === num ) {
                 active = false
-                
                 return `You win! You found ${num} in ${guesses} guesses.`
             }
             if ( val < num ) {
